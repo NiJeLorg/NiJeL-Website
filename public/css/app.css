@@ -16,7 +16,7 @@ nav {
   padding: 0 80px;
   box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.5); }
   nav .nav-logo {
-    width: 62px;
+    width: 160px;
     height: auto;
     opacity: 0;
     transition: opacity 1.2s ease-in; }
@@ -73,7 +73,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5% 6%; }
+  padding: 6%; }
   .services-section .service {
     display: flex;
     flex-direction: column;
@@ -88,9 +88,9 @@ nav {
       width: 70%; }
 
 .testimonial-section {
-  background: #F26648;
+  background: #333132;
   color: #fff;
-  padding: 5% 6%;
+  padding: 6%;
   display: flex;
   justify-content: space-between;
   align-items: center; }
@@ -99,7 +99,8 @@ nav {
   .testimonial-section p {
     font-family: 'Avenir-Roman', sans-serif;
     font-size: 28px;
-    margin: 0 auto; }
+    margin: 0 auto;
+    color: #F8F5EF; }
   .testimonial-section .contact {
     margin-top: 20px; }
     .testimonial-section .contact p {
@@ -125,7 +126,7 @@ nav {
 
 .work-section {
   background: #F26648;
-  padding: 2% 0; }
+  padding: 4% 0; }
   .work-section p {
     font-size: 48px;
     font-family: 'La Belle Aurore', cursive;
@@ -151,7 +152,7 @@ nav {
   background: #2D2B2C; }
 
 .content-section {
-  padding: 4% 8%;
+  padding: 6% 8%;
   display: flex;
   justify-content: space-between; }
   .content-section .content-item {
@@ -186,3 +187,44 @@ nav {
         border-radius: 2px;
         font-size: 14px;
         padding: 10px; }
+
+.social-feed-section {
+  padding: 6%;
+  background: #333132;
+  display: flex; }
+  .social-feed-section .feed-item {
+    display: flex;
+    padding: 0 2%; }
+  .social-feed-section .logo {
+    margin-right: 20px; }
+  .social-feed-section .tweet .content {
+    margin-bottom: 40px; }
+  .social-feed-section .tweet p {
+    color: #fff;
+    font-size: 18px;
+    font-family: 'Avenir-Roman'; }
+  .social-feed-section .tweet a {
+    color: #1DA1F2; }
+
+footer {
+  padding: 4% 6%;
+  background: #F8F5EF; }
+  footer .links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px; }
+    footer .links a {
+      color: #454545;
+      margin-right: 40px;
+      font-size: 20px;
+      font-family: 'Avenir-Roman', sans-serif; }
+  footer .social-media {
+    display: flex;
+    justify-content: center; }
+    footer .social-media img {
+      margin-right: 30px; }
+  footer .footer-image {
+    display: flex;
+    justify-content: center; }
+    footer .footer-image img {
+      width: 180px; }

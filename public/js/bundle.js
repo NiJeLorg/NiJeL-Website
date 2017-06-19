@@ -63,7 +63,7 @@
 	            (0, _jquery2.default)('.delimeter-line').css('width', '100%');
 	        }
 	
-	        if (scrollPosY > 900) {
+	        if (scrollPosY > 1200) {
 	            (0, _jquery2.default)('.work-item').css({ 'opacity': '1', 'transform': 'translate(0, 0)' });
 	        }
 	    });
