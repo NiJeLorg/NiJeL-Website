@@ -4,7 +4,7 @@
   "description": "NiJeL's new website!",
   "main": "index.js",
   "scripts": {
-    "test": "npm start"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
