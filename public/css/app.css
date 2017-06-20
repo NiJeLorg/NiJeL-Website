@@ -11,6 +11,9 @@ a {
 button {
   border: none; }
 
+body {
+  font-family: 'Avenir', 'Muli', sans-serif; }
+
 nav {
   align-items: center;
   padding: 0 80px;
@@ -41,7 +44,7 @@ nav {
   box-shadow: none; }
 
 .nav-links a {
-  font-family: 'Avenir-Roman', sans-serif;
+  font-family: 'Open Sans', Helvetica, sans-serif;
   margin-left: 40px;
   color: #fff;
   font-size: 15px; }
@@ -61,7 +64,8 @@ nav {
     position: absolute;
     top: 40%; }
   .splash-section h1 {
-    font-family: 'Avenir-Black', sans-serif;
+    font-family: 'Muli', 'Avenir-Black', sans-serif;
+    font-weight: 900;
     transition-delay: .12s;
     opacity: 0;
     transform: translate(0, 10px);
@@ -82,7 +86,8 @@ nav {
     .services-section .service img {
       margin-bottom: 30px; }
     .services-section .service p {
-      font-family: 'Avenir-Roman', sans-serif;
+      font-family: 'Open Sans', 'Avenir-Roman', sans-serif;
+      font-weight: 300;
       font-size: 18px;
       text-align: center;
       width: 70%; }
@@ -97,7 +102,7 @@ nav {
   .testimonial-section .text {
     width: 75%; }
   .testimonial-section p {
-    font-family: 'Avenir-Roman', sans-serif;
+    font-family: 'Open Sans', 'Avenir-Roman', sans-serif;
     font-size: 28px;
     margin: 0 auto;
     color: #F8F5EF; }
@@ -114,7 +119,7 @@ nav {
   padding: 2% 6%;
   background: url("../assets/hellos-section.png"); }
   .hellos-section p {
-    font-family: 'Avenir-Roman', sans-serif;
+    font-family: 'Open Sans', 'Avenir-Roman', sans-serif;
     font-size: 24px; }
   .hellos-section button {
     font-size: 20px;
@@ -158,15 +163,19 @@ nav {
   .content-section .content-item {
     box-shadow: 2px 2px 10px 0 rgba(119, 119, 119, 0.5);
     border-radius: 4px;
-    width: 360px; }
+    width: 360px;
+    opacity: 0;
+    transform: translate(0, 10px);
+    transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     .content-section .content-item .content-image {
       width: auto;
       height: 240px; }
     .content-section .content-item .content-text {
       padding: 20px; }
       .content-section .content-item .content-text h5 {
-        font-family: 'Avenir-Medium', sans-serif;
+        font-family: 'Muli', 'Avenir-Medium', sans-serif;
         font-size: 18px;
+        font-weight: 400;
         color: #363636; }
       .content-section .content-item .content-text .delimeter {
         height: 2px;
@@ -174,7 +183,7 @@ nav {
         margin-top: 10px;
         margin-bottom: 30px; }
       .content-section .content-item .content-text p {
-        font-family: 'Avenir-Roman', sans-serif;
+        font-family: 'Open Sans', 'Avenir-Roman', sans-serif;
         font-size: 14px;
         color: #666666; }
     .content-section .content-item .button-holder {
@@ -202,7 +211,7 @@ nav {
   .social-feed-section .tweet p {
     color: #fff;
     font-size: 18px;
-    font-family: 'Avenir-Roman'; }
+    font-family: 'Open Sans', 'Avenir-Roman', sans-serif; }
   .social-feed-section .tweet a {
     color: #1DA1F2; }
 
@@ -217,7 +226,7 @@ footer {
       color: #454545;
       margin-right: 40px;
       font-size: 20px;
-      font-family: 'Avenir-Roman', sans-serif; }
+      font-family: 'Open Sans', 'Avenir-Roman', sans-serif; }
   footer .social-media {
     display: flex;
     justify-content: center; }

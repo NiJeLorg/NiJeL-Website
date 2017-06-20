@@ -55,7 +55,9 @@
 	(0, _jquery2.default)(document).ready(function () {
 	    (0, _jquery2.default)(window).scroll(function () {
 	        var scrollPosY = (0, _jquery2.default)(window).scrollTop();
+	
 	        console.log(scrollPosY);
+	
 	        if (scrollPosY > 60) {
 	            (0, _jquery2.default)('.splash-nav').css('display', 'none');
 	            (0, _jquery2.default)('.main-nav').css({ 'display': 'flex', 'height': '100px', 'opacity': '1' });
@@ -65,6 +67,10 @@
 	
 	        if (scrollPosY > 1200) {
 	            (0, _jquery2.default)('.work-item').css({ 'opacity': '1', 'transform': 'translate(0, 0)' });
+	        }
+	
+	        if (scrollPosY > 1900) {
+	            (0, _jquery2.default)('.content-item').css({ 'opacity': '1', 'transform': 'translate(0, 0)' });
 	        }
 	    });
 	    setTimeout(function () {
