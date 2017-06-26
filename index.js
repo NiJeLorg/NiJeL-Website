@@ -9,6 +9,11 @@ nijelApp.use(morgan('dev'));
 
 nijelApp.use(express.static('public'));
 
+nijelApp.get('*', (req, res) => {
+    res.sendFile('index.html', {
+        root: './public'
+    });
+});
 
 nijelApp.listen(port, () => {
     console.log('server running on port ' + port);
