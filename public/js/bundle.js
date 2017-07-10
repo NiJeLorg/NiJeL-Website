@@ -44428,21 +44428,21 @@
 	    }, 500);
 	
 	    $scope.testimonials = [{
-	        testimonial: 'NiJeL gave me step by step guidance on how to grow my business and make money. My first major launch brought in $50,000 in one week',
-	        name: 'Sarah Jenks',
-	        company: 'G.A.H.T.C'
+	        testimonial: 'New York’s housing crisis is made worse by compounding issues of inequality and segregation of neighborhoods. The data will help address issues that disproportionately affect low-income New Yorkers and black and brown communities',
+	        name: 'Jumaane D. Williams',
+	        company: 'Council Member'
 	    }, {
-	        testimonial: 'NiJeL is the best think to ever happen in my life',
-	        name: 'Hannah Koske',
-	        company: 'Andela'
+	        testimonial: 'The DAP Map has already shown us a correlation we\'ve long understood exists around the loss of affordable housing in New York City, that high volumes of renovation and construction often goes hand-in-hand with the depletion of affordable, rent regulated housing, a fact that should inform the city policy discussion.',
+	        name: 'Brandon Kielbas',
+	        company: 'Director of Organizing at Cooper Square Committee'
 	    }, {
-	        testimonial: 'I’m astounded by the creativity and quality of MetaLab’s work.',
-	        name: 'David Karp',
-	        company: 'Tumblr'
+	        testimonial: 'Understanding how we compare to other regions can lead to localized action, and integrating the Opportunity Index and the One D Scorecard allows just that – we can see exactly where we need to foster greater opportunity within metro Detroit.',
+	        name: 'Erica Raleigh',
+	        company: 'Director of D3'
 	    }, {
-	        testimonial: 'The collaboration we had was as good as the final product',
-	        name: 'Andrew Bosworth',
-	        company: 'Facebook'
+	        testimonial: 'It will be easier than ever for our volunteers to see who in their neighborhood needs help right now. The maps are directly linked to our database. When a homebound person requests a service – such as grocery shopping – we can immediately update our database and that change will appear on our maps very quickly.',
+	        name: 'Elizabeth Banta',
+	        company: 'Executive Director, Beatitudes Center DOAR'
 	    }];
 	
 	    var testimonialIndex = 0;
@@ -44450,17 +44450,21 @@
 	    $scope.currentTestimonial = $scope.testimonials[testimonialIndex];
 	
 	    $scope.selectTestimonial = function (typeOfMovement) {
+	        console.log(testimonialIndex);
 	        if (typeOfMovement === 'next') {
-	            if (testimonialIndex < $scope.testimonials.length) {
-	                testimonialIndex++;
-	            } else {
+	            if (testimonialIndex === $scope.testimonials.length - 1) {
 	                testimonialIndex = $scope.testimonials.length - 1;
+	            } else {
+	                testimonialIndex++;
 	            }
-	            $scope.currentTestimonial = $scope.testimonials[testimonialIndex];
-	        } else {
-	            testimonialIndex--;
-	            $scope.currentTestimonial = $scope.testimonials[testimonialIndex];
+	        } else if (typeOfMovement === 'previous') {
+	            if (testimonialIndex === 0) {
+	                testimonialIndex = 0;
+	            } else {
+	                testimonialIndex--;
+	            }
 	        }
+	        $scope.currentTestimonial = $scope.testimonials[testimonialIndex];
 	    };
 	};
 	
