@@ -4,8 +4,10 @@ module.exports = {
     },
     devtool: 'sourcemap',
     module: {
-        loaders: [
-            { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-        ]
+        loaders: [{
+            test: /\.js$/,
+            loader: 'babel-loader',
+            exclude: /node_modules/
+        }, ]
     }
 };

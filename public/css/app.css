@@ -16,7 +16,12 @@ button {
   background: #F8F5EF; }
   .featured-projects-view h1 {
     font-family: 'La Belle Aurore';
-    font-size: 48px; }
+    font-size: 48px;
+    text-align: center;
+    padding: 3% 0; }
+  .featured-projects-view .projects-holder {
+    display: flex;
+    justify-content: center; }
 
 .team-view {
   background: #F8F5EF; }
@@ -142,6 +147,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center; }
+  .testimonial-section img {
+    cursor: pointer; }
   .testimonial-section .text {
     width: 75%; }
   .testimonial-section p {
