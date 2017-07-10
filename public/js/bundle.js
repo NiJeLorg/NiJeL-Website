@@ -44410,7 +44410,7 @@
 	
 	        if (scrollPosY > 60) {
 	            (0, _jquery2.default)('.splash-nav').css('display', 'none');
-	            (0, _jquery2.default)('.main-nav').css({ 'display': 'flex', 'height': '100px', 'opacity': '1' });
+	            (0, _jquery2.default)('.main-nav').css({ 'transform': 'translate(0, 0)', 'height': '100px' });
 	            (0, _jquery2.default)('.nav-logo').css('opacity', '1');
 	        }
 	

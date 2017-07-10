@@ -78,12 +78,13 @@ nav {
     transition: opacity 1.2s ease-in; }
 
 .main-nav {
+  display: flex;
   justify-content: space-between;
+  transform: translate(0, -100px);
   position: fixed;
   z-index: 1;
   width: 100%;
-  height: 0px;
-  opacity: 0;
+  height: 0;
   transition: height .4s;
   background: #fff; }
   .main-nav .nav-links a {
@@ -94,7 +95,8 @@ nav {
   padding: 40px 80px;
   display: flex;
   transition: display 4s;
-  box-shadow: none; }
+  box-shadow: none;
+  z-index: 4; }
 
 .nav-links a {
   font-family: 'Open Sans', Helvetica, sans-serif;
