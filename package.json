@@ -19,10 +19,13 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.3",
     "angular": "^1.6.4",
+    "body-parser": "^1.17.2",
     "d3": "^4.9.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "jquery": "^3.2.1",
+    "jsonwebtoken": "^7.4.1",
+    "method-override": "^2.3.9",
     "mongoose": "^4.11.1",
     "morgan": "^1.8.2"
   },

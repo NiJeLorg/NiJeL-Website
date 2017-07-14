@@ -18,10 +18,23 @@ button {
     font-family: 'La Belle Aurore';
     font-size: 48px;
     text-align: center;
-    padding: 3% 0; }
+    padding: 2% 0; }
   .featured-projects-view .projects-holder {
     display: flex;
     justify-content: center; }
+  .featured-projects-view #toolbar {
+    position: relative;
+    left: 80px; }
+    .featured-projects-view #toolbar a {
+      display: inline-block;
+      background: #17152c;
+      color: #fff;
+      padding: 10px;
+      border-radius: 4px; }
+    .featured-projects-view #toolbar a:nth-child(2) {
+      margin-left: 20px; }
+  .featured-projects-view .bubble {
+    cursor: pointer; }
 
 .team-view {
   background: #F8F5EF; }
@@ -63,6 +76,18 @@ button {
   .bio .description p {
     font-size: 14px;
     line-height: 25px; }
+
+.project-info {
+  padding: 2% 0;
+  text-align: center; }
+  .project-info .project-title {
+    font-size: 36px;
+    margin-bottom: 10px; }
+  .project-info .project-client {
+    font-size: 24px;
+    margin-bottom: 5px; }
+  .project-info a {
+    color: #F26648; }
 
 body {
   font-family: 'Avenir', 'Muli', sans-serif; }
@@ -198,7 +223,6 @@ nav {
       width: 280px;
       height: 280px;
       border-radius: 50%;
-      opacity: 0;
       transform: translate(0, 10px);
       transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       border: 10px solid #fff; }
@@ -215,7 +239,6 @@ nav {
     box-shadow: 0 0 20px rgba(190, 190, 190, 0.5);
     border-radius: 4px;
     width: 360px;
-    opacity: 0;
     transform: translate(0, 10px);
     transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     .content-section .content-item .content-image {
@@ -268,7 +291,8 @@ nav {
 
 footer {
   padding: 4% 6%;
-  background: #F8F5EF; }
+  background: #F8F5EF;
+  border-top: 1px solid #cfcfcf; }
   footer .links {
     display: flex;
     justify-content: center;
@@ -289,6 +313,29 @@ footer {
     footer .footer-image img {
       width: 180px; }
 
-.view {
+main {
   position: relative;
   top: 100px; }
+
+.home-view {
+  position: relative;
+  top: -100px; }
+
+.tooltip {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 2px solid #000;
+  background: #fff;
+  opacity: .9;
+  color: black;
+  padding: 10px;
+  width: 300px;
+  font-size: 12px;
+  z-index: 10; }
+  .tooltip .title {
+    font-size: 13px; }
+  .tooltip .name {
+    font-weight: bold; }
