@@ -25,6 +25,9 @@ let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 
+
+console.log(envVar, 'envVar');
+
 mongoose.connect(envVar.DATABASE_URL, {
     useMongoClient: true
 }).then(() => {
