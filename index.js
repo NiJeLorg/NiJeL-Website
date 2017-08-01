@@ -1,6 +1,14 @@
 'use strict';
+
+let envVar;
+
+if (process.env.NODE_ENV) {
+    envVar = process.env.NODE_ENV;
+} else {
+    envVar = require('dotenv').config().parsed;
+}
+
 const morgan = require('morgan'),
-    envVar = require('dotenv').config().parsed,
     express = require('express'),
     methodOverride = require('method-override'),
     bodyParser = require('body-parser'),
@@ -16,7 +24,7 @@ let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 
-mongoose.connect(envVar.DATABASE_URL || process.env.DATABASE_URL, {
+mongoose.connect(envVar.DATABASE_URL, {
     useMongoClient: true
 }).then(() => {
     console.log('successful connection to the DB');
