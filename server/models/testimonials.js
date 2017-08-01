@@ -3,7 +3,10 @@ const mongoose = require('mongoose'),
     TestimonialSchema = new Schema({
         testimonial: {
             type: String,
-            required: true
+            required: true,
+            index: {
+                unique: true
+            }
         },
         reviewer: {
             type: String,
@@ -11,11 +14,9 @@ const mongoose = require('mongoose'),
         },
         position: {
             type: String,
-            required: true
         },
         company: {
             type: String,
-            required: true
         }
     });
 

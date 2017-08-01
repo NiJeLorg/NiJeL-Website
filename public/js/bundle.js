@@ -66,13 +66,21 @@
 
 	var _team2 = _interopRequireDefault(_team);
 
-	var _featuredProjects = __webpack_require__(92);
+	var _projects = __webpack_require__(92);
 
-	var _featuredProjects2 = _interopRequireDefault(_featuredProjects);
+	var _projects2 = _interopRequireDefault(_projects);
 
 	var _project = __webpack_require__(94);
 
 	var _project2 = _interopRequireDefault(_project);
+
+	var _contacts = __webpack_require__(95);
+
+	var _contacts2 = _interopRequireDefault(_contacts);
+
+	var _projectsService = __webpack_require__(96);
+
+	var _projectsService2 = _interopRequireDefault(_projectsService);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -82,7 +90,7 @@
 	// import controllers
 	var nijelApp = _angular2.default.module('nijelApp', [_angularUiRouter2.default]);
 
-	nijelApp.controller('TeamCtrl', _team2.default).controller('HomeCtrl', _home2.default).controller('FeaturedProjectsCtrl', _featuredProjects2.default).controller('ProjectCtrl', _project2.default);
+	nijelApp.controller('TeamCtrl', _team2.default).controller('HomeCtrl', _home2.default).controller('ProjectsCtrl', _projects2.default).controller('ProjectCtrl', _project2.default).controller('ContactUsCtrl', _contacts2.default).factory('ProjectsService', _projectsService2.default);
 
 	nijelApp.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider, $route) {
 
@@ -97,10 +105,10 @@
 	        url: '/why-nijel',
 	        controller: 'ContactUsCtrl',
 	        templateUrl: 'views/why-nijel.html'
-	    }).state('featured-projects', {
-	        url: '/featured-projects',
-	        controller: 'FeaturedProjectsCtrl',
-	        templateUrl: 'views/featured-projects.html'
+	    }).state('projects', {
+	        url: '/projects',
+	        controller: 'ProjectsCtrl',
+	        templateUrl: 'views/projects.html'
 	    }).state('project', {
 	        url: '/projects/:id',
 	        params: {
@@ -54897,48 +54905,12 @@
 	    };
 	}
 
-	var FeaturedProjectsCtrl = function FeaturedProjectsCtrl($scope, $http, $state) {
+	var ProjectsCtrl = function ProjectsCtrl($scope, $http, $state, ProjectsService) {
 
-	    $http({
-	        method: 'GET',
-	        url: 'https://spreadsheets.google.com/feeds/list/1rVeAQITMrc8Pz49OnIcXC1Gh5hO2p85dk8bGw2_tMuk/1/public/values?alt=json'
-	    }).then(function (res) {
+	    var promise = ProjectsService.fetchProjects();
 
-	        var data = void 0,
-	            projectNames = [];
-
-	        data = res.data.feed.entry;
-
-	        var _iteratorNormalCompletion = true;
-	        var _didIteratorError = false;
-	        var _iteratorError = undefined;
-
-	        try {
-	            for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                var item = _step.value;
-
-	                projectNames.push({
-	                    clientName: item.gsx$client.$t,
-	                    projectName: item.gsx$nameofproject.$t,
-	                    linkToLiveSite: item.gsx$linktolivesite.$t,
-	                    sdgNumber: item.gsx$relevantsdg1.$t,
-	                    projectYear: item.gsx$projectyearroughstartdate.$t
-	                });
-	            }
-	        } catch (err) {
-	            _didIteratorError = true;
-	            _iteratorError = err;
-	        } finally {
-	            try {
-	                if (!_iteratorNormalCompletion && _iterator.return) {
-	                    _iterator.return();
-	                }
-	            } finally {
-	                if (_didIteratorError) {
-	                    throw _iteratorError;
-	                }
-	            }
-	        }
+	    promise.then(function (res) {
+	        var projects = res.data.projects;
 
 	        var sdgColorScale = {
 	            1: '#E5233D',
@@ -55004,8 +54976,8 @@
 	            function createNodes() {
 	                // Use the max total_amount in the data as the max in the scale's domain
 	                // note we have to ensure the total_amount is a number.
-	                var maxAmount = d3.max(projectNames, function (d) {
-	                    return +d.projectName.length;
+	                var maxAmount = d3.max(projects, function (d) {
+	                    return +d.name.length;
 	                });
 
 	                // Sizes bubbles based on area.
@@ -55015,15 +54987,15 @@
 	                // Use map() to convert raw data into node data.
 	                // Checkout http://learnjsdata.com/ for more on
 	                // working with data.
-	                var myNodes = projectNames.map(function (d) {
+	                var myNodes = projects.map(function (d) {
 	                    return {
-	                        radius: radiusScale(+d.projectName.length),
-	                        value: +d.projectName.length,
-	                        sdgNumber: d.sdgNumber,
-	                        clientName: d.clientName,
-	                        projectName: d.projectName,
+	                        radius: radiusScale(+d.name.length),
+	                        value: +d.name.length,
+	                        sdgNumber: d.relevantSDG,
+	                        clientName: d.client,
+	                        projectName: d.name,
 	                        linkToLiveSite: d.linkToLiveSite,
-	                        year: d.projectYear,
+	                        year: d.year,
 	                        x: Math.random() * 900,
 	                        y: Math.random() * 800
 	                    };
@@ -55039,7 +55011,7 @@
 
 	            var chart = function chart() {
 	                // convert raw data into nodes data
-	                nodes = createNodes(projectNames);
+	                nodes = createNodes(projects);
 
 	                // Create a SVG element inside the provided selector
 	                // with desired size.
@@ -55206,7 +55178,7 @@
 	    });
 	};
 
-	exports.default = FeaturedProjectsCtrl;
+	exports.default = ProjectsCtrl;
 
 /***/ }),
 /* 93 */
@@ -72102,6 +72074,44 @@
 	};
 
 	exports.default = ProjectCtrl;
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var ContactUsCtrl = function ContactUsCtrl($scope) {
+	    $scope.title = 'Contact Us';
+	};
+
+	exports.default = ContactUsCtrl;
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var ProjectsService = function ProjectsService($http, $q) {
+
+	    return {
+	        fetchProjects: function fetchProjects() {
+	            return $http({
+	                method: 'GET',
+	                url: '/api/projects'
+	            });
+	        }
+	    };
+	};
+
+	exports.default = ProjectsService;
 
 /***/ })
 /******/ ]);

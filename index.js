@@ -2,7 +2,6 @@
 const morgan = require('morgan'),
     envVar = require('dotenv').config().parsed,
     express = require('express'),
-    mongoose = require('mongoose'),
     methodOverride = require('method-override'),
     bodyParser = require('body-parser'),
     apiRouter = require('./server/apiRouter'),
@@ -13,9 +12,16 @@ const morgan = require('morgan'),
     nijelApp = express(),
     port = process.env.PORT || envVar.PORT;
 
+let mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
-mongoose.connect(envVar.DATABASE_URL || process.env.DATABASE_URL, () => {
-    c.log('successful connection to the db');
+
+mongoose.connect(envVar.DATABASE_URL || process.env.DATABASE_URL, {
+    useMongoClient: true
+}).then(() => {
+    console.log('successful connection to the DB');
+}, (err) => {
+    console.log(err, 'ERR');
 });
 
 // log all reques to the console

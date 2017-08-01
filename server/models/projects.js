@@ -13,7 +13,7 @@ const mongoose = require('mongoose'),
             type: String,
         },
         relevantSDG: {
-            type: Number,
+            type: String,
             required: true
         },
         year: {
