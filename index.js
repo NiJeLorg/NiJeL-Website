@@ -14,7 +14,7 @@ const morgan = require('morgan'),
     port = process.env.PORT || envVar.PORT;
 
 
-mongoose.connect(envVar.DB_URL, () => {
+mongoose.connect(envVar.DATABASE_URL || process.env.DATABASE_URL, () => {
     c.log('successful connection to the db');
 });
 
