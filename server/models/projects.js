@@ -19,6 +19,12 @@ const mongoose = require('mongoose'),
         year: {
             type: String,
             required: true
+        },
+        isFeaturedProject: {
+            type: Boolean
+        },
+        coverPhoto: {
+            type: String
         }
     });
 
