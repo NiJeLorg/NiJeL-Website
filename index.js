@@ -8,6 +8,7 @@ const morgan = require('morgan'),
     express = require('express'),
     methodOverride = require('method-override'),
     bodyParser = require('body-parser'),
+    multer = require('multer'),
     path = require('path'),
     apiRouter = require('./server/apiRouter'),
     publicRoutes = require('./server/routes/public'),
@@ -35,6 +36,10 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+
+nijelApp.use(multer({
+    dest: './uploads/'
+}).single());
 
 // log all reques to the console
 nijelApp.use(morgan('dev'));

@@ -22,6 +22,7 @@ module.exports = {
         project.linkToLiveSite = req.body.linkToLiveSite;
         project.relevantSDG = req.body.relevantSDG;
         project.year = req.body.year;
+        project.isFeaturedProject = req.body.isFeaturedProject;
 
         project.save((err) => {
             if (err) {
