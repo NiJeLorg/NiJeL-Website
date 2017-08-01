@@ -3,6 +3,7 @@
 let envVar;
 
 if (process.env.NODE_ENV) {
+    console.log(process.env.NODE_ENV, true);
     envVar = process.env.NODE_ENV;
 } else {
     envVar = require('dotenv').config().parsed;
