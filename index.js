@@ -1,12 +1,7 @@
 'use strict';
-
-let envVar;
-
-if (process.env.NODE_ENV) {
-    console.log(process.env.NODE_ENV, true);
-    envVar = process.env.NODE_ENV;
-} else {
-    envVar = require('dotenv').config().parsed;
+var env = process.env.NODE_ENV || 'development';
+if (env === 'development') {
+    require('dotenv').load();
 }
 
 const morgan = require('morgan'),
@@ -20,16 +15,13 @@ const morgan = require('morgan'),
     auth = require('./server/controllers/auth'),
     c = console,
     nijelApp = express(),
-    port = process.env.PORT || envVar.PORT;
+    port = process.env.PORT;
 
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 
-
-console.log(envVar, 'envVar');
-
-mongoose.connect(envVar.DATABASE_URL, {
+mongoose.connect(process.env.DATABASE_URL, {
     useMongoClient: true
 }).then(() => {
     console.log('successful connection to the DB');
@@ -74,6 +66,6 @@ nijelApp.get('*', (req, res) => {
 
 
 // start the server
-nijelApp.listen(port, () => {
+nijelApp.listen(port || 3000, () => {
     c.log('server running on port ' + port);
 });
