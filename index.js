@@ -37,10 +37,6 @@ cloudinary.config({
 });
 
 
-nijelApp.use(multer({
-    dest: './uploads/'
-}).single());
-
 // log all reques to the console
 nijelApp.use(morgan('dev'));
 
@@ -49,9 +45,13 @@ nijelApp.use(methodOverride('X-HTTP-Method-Override'));
 
 
 nijelApp.use(bodyParser.urlencoded({
-    extended: true
+    extended: true,
+    limit: '500mb',
+    parameterLimit: 5000
 }));
-nijelApp.use(bodyParser.json());
+nijelApp.use(bodyParser.json({
+    limit: '500mb'
+}));
 
 
 // serve static files

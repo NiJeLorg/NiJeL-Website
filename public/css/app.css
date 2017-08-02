@@ -89,6 +89,95 @@ button {
   .project-info a {
     color: #F26648; }
 
+.form-view {
+  margin-top: -100px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .form-view form {
+    width: 25%;
+    background: #f6f6f6;
+    display: flex;
+    border: 1px solid #e5ecf3;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
+    flex-direction: column;
+    padding: 30px;
+    margin-top: 30px; }
+    .form-view form input {
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      font-size: 14px; }
+    .form-view form input[type='submit'] {
+      border: none;
+      box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1), inset 0 0 3px 0 rgba(0, 0, 0, 0.1);
+      color: #fff;
+      text-transform: uppercase;
+      background: #F26648;
+      font-weight: bold;
+      font-size: 16px; }
+    .form-view form p {
+      font-weight: bold;
+      color: red; }
+
+h2 {
+  color: #333132; }
+
+.dashboard-view {
+  margin-top: -100px;
+  height: 100%;
+  display: flex; }
+  .dashboard-view aside {
+    flex-basis: 15%;
+    background: #323544; }
+  .dashboard-view section {
+    flex-basis: 85%;
+    background: #F6F6F6;
+    padding: 4% 6%;
+    overflow-y: scroll; }
+    .dashboard-view section h1 {
+      text-transform: uppercase;
+      font-size: 32px;
+      text-decoration: underline; }
+
+.user-container {
+  background: #F26648;
+  padding: 25%;
+  margin-bottom: 40px; }
+
+.buttons-container {
+  display: flex;
+  flex-direction: column; }
+  .buttons-container button {
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 30px 40px;
+    font-weight: bold;
+    color: #fff;
+    background: none;
+    text-align: left;
+    border-bottom: 1px solid #939393;
+    cursor: pointer;
+    outline: none; }
+
+.items-container .item {
+  background: #fff;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  padding: 30px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.15), 0 15px 12px rgba(0, 0, 0, 0.08); }
+  .items-container .item form label {
+    text-transform: uppercase;
+    border-bottom: 1px solid #a2a2a2;
+    font-weight: bold;
+    color: #a2a2a2;
+    margin-bottom: 10px; }
+  .items-container .item form p {
+    margin-top: 10px; }
+
 body {
   font-family: 'Avenir', 'Muli', sans-serif; }
 

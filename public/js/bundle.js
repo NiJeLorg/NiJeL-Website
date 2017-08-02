@@ -78,19 +78,39 @@
 
 	var _contacts2 = _interopRequireDefault(_contacts);
 
-	var _projectsService = __webpack_require__(96);
+	var _admin = __webpack_require__(96);
+
+	var _admin2 = _interopRequireDefault(_admin);
+
+	var _adminSignup = __webpack_require__(97);
+
+	var _adminSignup2 = _interopRequireDefault(_adminSignup);
+
+	var _adminLogin = __webpack_require__(98);
+
+	var _adminLogin2 = _interopRequireDefault(_adminLogin);
+
+	var _adminDashboard = __webpack_require__(99);
+
+	var _adminDashboard2 = _interopRequireDefault(_adminDashboard);
+
+	var _projectsService = __webpack_require__(100);
 
 	var _projectsService2 = _interopRequireDefault(_projectsService);
+
+	var _AdminDataService = __webpack_require__(101);
+
+	var _AdminDataService2 = _interopRequireDefault(_AdminDataService);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// import services
-
-
-	// import controllers
 	var nijelApp = _angular2.default.module('nijelApp', [_angularjs2.default]);
 
-	nijelApp.controller('TeamCtrl', _team2.default).controller('HomeCtrl', _home2.default).controller('ProjectsCtrl', _projects2.default).controller('ProjectCtrl', _project2.default).controller('ContactUsCtrl', _contacts2.default).factory('ProjectsService', _projectsService2.default);
+	// import controllers
+
+
+	nijelApp.controller('TeamCtrl', _team2.default).controller('HomeCtrl', _home2.default).controller('ProjectsCtrl', _projects2.default).controller('ProjectCtrl', _project2.default).controller('ContactUsCtrl', _contacts2.default).controller('AdminCtrl', _admin2.default).controller('AdminSignupCtrl', _adminSignup2.default).controller('AdminLoginCtrl', _adminLogin2.default).controller('AdminDashboardCtrl', _adminDashboard2.default).factory('ProjectsService', _projectsService2.default).factory('AdminDataService', _AdminDataService2.default);
 
 	nijelApp.config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider, $route) {
 
@@ -111,9 +131,6 @@
 	        templateUrl: 'views/projects.html'
 	    }).state('project', {
 	        url: '/projects/:id',
-	        params: {
-	            projectInfo: null
-	        },
 	        controller: 'ProjectCtrl',
 	        templateUrl: 'views/project.html'
 	    }).state('team', {
@@ -127,6 +144,22 @@
 	    }).state('404', {
 	        url: '/404',
 	        templateUrl: 'views/404.html'
+	    }).state('admin', {
+	        url: '/admin',
+	        controller: 'AdminCtrl',
+	        templateUrl: 'views/admin.html'
+	    }).state('admin-signup', {
+	        url: '/admin/signup',
+	        controller: 'AdminSignupCtrl',
+	        templateUrl: 'views/admin-signup.html'
+	    }).state('admin-login', {
+	        url: '/admin/login',
+	        controller: 'AdminLoginCtrl',
+	        templateUrl: 'views/admin-login.html'
+	    }).state('admin-dashboard', {
+	        url: '/admin/dashboard',
+	        controller: 'AdminDashboardCtrl',
+	        templateUrl: 'views/admin-dashboard.html'
 	    });
 
 	    $locationProvider.html5Mode(true);
@@ -72102,6 +72135,108 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	var AdminCtrl = function AdminCtrl($scope, $state) {
+	    if (localStorage.token) {
+	        $state.go('admin-dashboard');
+	    } else {
+	        $state.go('admin-signup');
+	    }
+	};
+
+	exports.default = AdminCtrl;
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var AdminSignupCtrl = function AdminSignupCtrl($scope, $state, AdminDataService) {
+	    $scope.user = {};
+	    $scope.errorMessage = '';
+
+	    $scope.signup = function () {
+	        AdminDataService.signup($scope.user).then(function (resp) {
+	            $state.go('admin-login');
+	        }, function (err) {
+	            $scope.errorMessage = err.data.message;
+	        });
+	    };
+	};
+
+	exports.default = AdminSignupCtrl;
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var AdminLoginCtrl = function AdminLoginCtrl($scope, $state, AdminDataService) {
+	    $scope.user = {};
+	    $scope.errorMessage = '';
+
+	    $scope.login = function () {
+	        AdminDataService.login($scope.user).then(function (resp) {
+	            localStorage.token = resp.data.token;
+	            $state.go('admin-dashboard');
+	        }, function (err) {
+	            $scope.errorMessage = err.data.message;
+	        });
+	    };
+	};
+
+	exports.default = AdminLoginCtrl;
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var AdminDashboardCtrl = function AdminDashboardCtrl($scope, $state, AdminDataService) {
+
+	    $scope.sectionTitle = '';
+
+	    $scope.fetchTestimonials = function () {
+	        AdminDataService.fetchTestimonials().then(function (resp) {
+	            $scope.testimonials = resp.data.testimonials;
+	        }, function (err) {
+	            console.log(err, 'ERROR');
+	        });
+	        $scope.sectionTitle = 'Testimonials';
+	    };
+
+	    $scope.fetchProjects = function () {
+	        AdminDataService.fetchProjects().then(function (resp) {
+	            $scope.projects = resp.data.projects;
+	        }, function (err) {
+	            console.log(err, 'ERROR');
+	        });
+	        $scope.sectionTitle = 'All Projects';
+	    };
+	};
+
+	exports.default = AdminDashboardCtrl;
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	var ProjectsService = function ProjectsService($http, $q) {
 
 	    return {
@@ -72115,6 +72250,35 @@
 	};
 
 	exports.default = ProjectsService;
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var AdminDataService = function AdminDataService($http, $q) {
+
+	    return {
+	        signup: function signup(user) {
+	            return $http.post('/api/users', user);
+	        },
+	        login: function login(user) {
+	            return $http.post('/api/login', user);
+	        },
+	        fetchTestimonials: function fetchTestimonials() {
+	            return $http.get('/api/testimonials');
+	        },
+	        fetchProjects: function fetchProjects() {
+	            return $http.get('/api/projects');
+	        }
+	    };
+	};
+
+	exports.default = AdminDataService;
 
 /***/ })
 /******/ ]);

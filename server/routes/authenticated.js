@@ -2,12 +2,16 @@
 
 const apiRouter = require('../apiRouter'),
     testimonialCtrl = require('../controllers/testimonials'),
-    projectCtrl = require('../controllers/projects');
+    projectCtrl = require('../controllers/projects'),
+    multer = require('multer'),
+    upload = multer({
+        dest: './uploads/'
+    });
 
 module.exports = () => {
 
     apiRouter.route('/projects')
-        .post(projectCtrl.addProject);
+        .post(upload.single('photo'), projectCtrl.addProject);
 
     apiRouter.route('/projects/:projectId')
         .put(projectCtrl.updateProject)

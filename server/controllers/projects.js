@@ -1,6 +1,7 @@
 'use strict';
 
-const Project = require('../models/projects');
+const Project = require('../models/projects'),
+    cloudinary = require('cloudinary');
 
 module.exports = {
     getAllProjects: (req, res) => {
@@ -16,23 +17,26 @@ module.exports = {
     },
 
     addProject: (req, res) => {
-        let project = new Project();
-        project.name = req.body.name;
-        project.client = req.body.client;
-        project.linkToLiveSite = req.body.linkToLiveSite;
-        project.relevantSDG = req.body.relevantSDG;
-        project.year = req.body.year;
-        project.isFeaturedProject = req.body.isFeaturedProject;
+        cloudinary.uploader.upload(req.file.path, (result) => {
+            let project = new Project();
+            project.name = req.body.name;
+            project.client = req.body.client;
+            project.linkToLiveSite = req.body.linkToLiveSite;
+            project.relevantSDG = req.body.relevantSDG;
+            project.year = req.body.year;
+            project.isFeaturedProject = req.body.isFeaturedProject;
+            project.coverPhoto = result.secure_url;
 
-        project.save((err) => {
-            if (err) {
-                res.send(err);
-            }
-            res.json({
-                success: true,
-                message: 'Project successfully added',
-                project: project
+            project.save((err) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.json({
+                    success: true,
+                    message: 'Project successfully added',
+                    project: project
 
+                });
             });
         });
     },

@@ -3,22 +3,22 @@ const mongoose = require('mongoose'),
     ProjectSchema = new Schema({
         name: {
             type: String,
-            required: true
+            // required: true
         },
         client: {
             type: String,
-            required: true
+            // required: true
         },
         linkToLiveSite: {
-            type: String,
+            // type: String,
         },
         relevantSDG: {
             type: String,
-            required: true
+            // required: true
         },
         year: {
             type: String,
-            required: true
+            // required: true
         },
         isFeaturedProject: {
             type: Boolean
