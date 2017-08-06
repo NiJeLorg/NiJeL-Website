@@ -2,6 +2,7 @@
 const User = require('../models/user'),
     nijelEmailDomain = 'nijel.org',
     jwt = require('jsonwebtoken'),
+    bcrypt = require('bcrypt-nodejs'),
     envVar = require('dotenv').config().parsed,
     emailCheck = require('email-check');
 
@@ -66,14 +67,24 @@ module.exports = {
                         message: 'Authentication failed, User not found'
                     });
                 } else {
-                    let token = jwt.sign(user, envVar.SUPERSECRET, {
-                        expiresIn: '2d'
+                    bcrypt.compare(req.body.password, user.password, function (err, response) {
+                        if (response) {
+                            let token = jwt.sign(user, envVar.SUPERSECRET, {
+                                expiresIn: '2d'
+                            });
+                            res.status(200).json({
+                                success: true,
+                                user: user,
+                                token: token
+                            });
+                        } else {
+                            res.status(401).json({
+                                success: false,
+                                message: 'Authorization Failed. Wrong Password!'
+                            });
+                        }
                     });
-                    res.status(200).json({
-                        success: true,
-                        user: user,
-                        token: token
-                    });
+
                 }
             } else {
                 throw err;
