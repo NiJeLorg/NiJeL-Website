@@ -27,7 +27,7 @@ module.exports = {
                             if (err.code === 11000) {
                                 res.json({
                                     success: false,
-                                    message: 'A user with that username already exists'
+                                    message: 'A user with that email address already exists'
                                 });
                             } else {
                                 res.json({

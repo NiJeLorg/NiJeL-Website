@@ -72160,7 +72160,12 @@
 
 	    $scope.signup = function () {
 	        AdminDataService.signup($scope.user).then(function (resp) {
-	            $state.go('admin-login');
+	            var result = resp.data.success ? function () {
+	                $state.go('admin-login');
+	            } : function () {
+	                $scope.errorMessage = resp.data.message;
+	            };
+	            result();
 	        }, function (err) {
 	            $scope.errorMessage = err.data.message;
 	        });
