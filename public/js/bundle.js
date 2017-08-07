@@ -72229,6 +72229,14 @@
 	        });
 	        $scope.sectionTitle = 'All Projects';
 	    };
+
+	    $scope.fetchFeaturedProjects = function () {
+	        $scope.sectionTitle = 'Featured Projects';
+	    };
+
+	    $scope.fetchTeam = function () {
+	        $scope.sectionTitle = 'Team';
+	    };
 	};
 
 	exports.default = AdminDashboardCtrl;
