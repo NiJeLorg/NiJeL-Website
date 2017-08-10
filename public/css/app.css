@@ -12,6 +12,24 @@ a {
 button {
   border: none; }
 
+.splash-section {
+  height: 800px;
+  background-image: url("../assets/NYCity.png");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10%; }
+  .splash-section h1 {
+    font-family: 'La Belle Aurore', cursive;
+    font-weight: 900;
+    transition-delay: .12s;
+    opacity: 0;
+    transform: translate(0, 10px);
+    transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: 64px;
+    color: #fff; }
+
 .featured-projects-view {
   background: #F8F5EF; }
   .featured-projects-view h1 {
@@ -182,60 +200,31 @@ body {
   font-family: 'Avenir', 'Muli', sans-serif; }
 
 nav {
-  align-items: center;
+  position: fixed;
+  width: 100%;
   padding: 0 80px;
-  box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.5); }
-  nav .nav-logo {
-    width: 160px;
-    height: auto;
-    opacity: 0;
-    transition: opacity 1.2s ease-in; }
-
-.main-nav {
   display: flex;
   justify-content: space-between;
-  transform: translate(0, -100px);
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  height: 0;
-  transition: height .4s;
-  background: #fff; }
-  .main-nav .nav-links a {
-    color: #808083; }
-
-.splash-nav {
-  justify-content: flex-end;
-  padding: 40px 80px;
-  display: flex;
-  transition: display 4s;
-  box-shadow: none;
-  z-index: 4; }
+  align-items: center;
+  height: 100px;
+  background: #fff;
+  box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.5);
+  z-index: 1; }
+  nav .nav-logo {
+    width: 160px;
+    height: auto; }
 
 .nav-links a {
   font-family: 'Open Sans', Helvetica, sans-serif;
   margin-left: 40px;
-  color: #fff;
-  font-size: 15px; }
+  color: #787976;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase; }
 
-.splash-section {
-  height: 800px;
-  background-image: url("../assets/NYCity.png");
-  background-size: cover;
-  position: relative; }
-  .splash-section .text {
-    padding-left: 10%;
-    position: absolute;
-    top: 40%; }
-  .splash-section h1 {
-    font-family: 'La Belle Aurore', cursive;
-    font-weight: 900;
-    transition-delay: .12s;
-    opacity: 0;
-    transform: translate(0, 10px);
-    transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    font-size: 64px;
-    color: #fff; }
+main {
+  position: relative;
+  top: 100px; }
 
 .services-section {
   display: flex;
@@ -401,14 +390,6 @@ footer {
     justify-content: center; }
     footer .footer-image img {
       width: 180px; }
-
-main {
-  position: relative;
-  top: 100px; }
-
-.home-view {
-  position: relative;
-  top: -100px; }
 
 .tooltip {
   position: absolute;
