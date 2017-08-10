@@ -24,7 +24,6 @@ button {
     font-family: 'La Belle Aurore', cursive;
     font-weight: 900;
     transition-delay: .12s;
-    opacity: 0;
     transform: translate(0, 10px);
     transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     font-size: 64px;
