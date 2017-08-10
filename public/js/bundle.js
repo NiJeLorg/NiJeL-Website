@@ -44481,7 +44481,9 @@
 	    };
 
 	    ClientDataService.fetchLastThreeTweets().then(function (resp) {
-	        console.log(resp, 'RESP');
+	        if (resp.data.success) {
+	            JSON.parse(resp.data.tweets);
+	        }
 	    }, function (err) {
 	        console.log(err, 'ERR');
 	    });
@@ -61932,9 +61934,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	var twitterBearerToken = 'AAAAAAAAAAAAAAAAAAAAAKeM1wAAAAAAcuDLkkZtIxlz2ODVhMGxdn4mneE%3DwOngAueybOvi4Y2EM0g04eg7TWHBAtDRYawOkZxw6ydhO5d1PL',
-	    screenName = 'nijel_mapping';
-
 	var ClientDataService = function ClientDataService($http, $q) {
 
 	    return {
@@ -61948,10 +61947,7 @@
 	        fetchLastThreeTweets: function fetchLastThreeTweets() {
 	            return $http({
 	                method: 'GET',
-	                url: 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=3&screen_name=' + screenName,
-	                headers: {
-	                    'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAKeM1wAAAAAAcuDLkkZtIxlz2ODVhMGxdn4mneE%3DwOngAueybOvi4Y2EM0g04eg7TWHBAtDRYawOkZxw6ydhO5d1PL'
-	                }
+	                url: '/api/nijel-tweets'
 	            });
 	        },
 

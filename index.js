@@ -9,6 +9,7 @@ const morgan = require('morgan'),
     methodOverride = require('method-override'),
     bodyParser = require('body-parser'),
     multer = require('multer'),
+    request = require('request'),
     path = require('path'),
     apiRouter = require('./server/apiRouter'),
     publicRoutes = require('./server/routes/public'),
@@ -60,14 +61,13 @@ nijelApp.use(express.static(path.resolve('./public')));
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
 
+
 // call other routes
 publicRoutes();
-
 
 apiRouter.use(auth.authenticateUser);
 
 authenticatedRoutes();
-
 
 // for all requests other than those listed above send index.html page
 nijelApp.get('*', (req, res) => {
