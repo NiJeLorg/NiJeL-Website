@@ -44622,14 +44622,12 @@
 	    };
 	}
 
-	var ProjectsCtrl = function ProjectsCtrl($scope, $http, $state, ProjectsService) {
+	var ProjectsCtrl = function ProjectsCtrl($scope, $http, $state, ClientDataService) {
 
-	    var promise = ProjectsService.fetchProjects();
+	    var promise = ClientDataService.fetchProjects();
 
 	    promise.then(function (res) {
 	        var projects = res.data.projects;
-
-	        console.log(projects, 'PROJECTS');
 
 	        var sdgColorScale = {
 	            1: '#E5233D',
