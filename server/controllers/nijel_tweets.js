@@ -1,8 +1,6 @@
 const request = require('request'),
     envVar = require('dotenv').load().parsed;
 
-    console.log(envVar);
-
 module.exports = {
     fetchLastThreeTweets: (req, res) => {
 
