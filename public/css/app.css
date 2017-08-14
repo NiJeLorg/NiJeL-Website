@@ -345,10 +345,19 @@ h2 {
     background: #F6F6F6;
     padding: 4% 6%;
     overflow-y: scroll; }
-    .dashboard-view section h1 {
-      text-transform: uppercase;
-      font-size: 32px;
-      text-decoration: underline; }
+
+section header {
+  display: flex;
+  justify-content: space-between; }
+  section header h1 {
+    text-transform: uppercase;
+    text-decoration: underline; }
+  section header button {
+    padding: 15px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    background: #F26648;
+    color: #fff; }
 
 .user-container {
   background: #F26648;
@@ -370,20 +379,22 @@ h2 {
     cursor: pointer;
     outline: none; }
 
-.items-container .item {
-  background: #fff;
-  margin-bottom: 40px;
-  border-radius: 5px;
-  padding: 30px;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.15), 0 15px 12px rgba(0, 0, 0, 0.08); }
-  .items-container .item form label {
-    text-transform: uppercase;
-    border-bottom: 1px solid #a2a2a2;
-    font-weight: bold;
-    color: #a2a2a2;
-    margin-bottom: 10px; }
-  .items-container .item form p {
-    margin-top: 10px; }
+.items-container {
+  margin-top: 40px; }
+  .items-container .item {
+    background: #fff;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.15), 0 15px 12px rgba(0, 0, 0, 0.08); }
+    .items-container .item form label {
+      text-transform: uppercase;
+      border-bottom: 1px solid #a2a2a2;
+      font-weight: bold;
+      color: #a2a2a2;
+      margin-bottom: 10px; }
+    .items-container .item form p {
+      margin-top: 10px; }
 
 body {
   font-family: 'Avenir', 'Muli', sans-serif; }
