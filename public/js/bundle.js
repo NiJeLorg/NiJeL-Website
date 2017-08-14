@@ -171,6 +171,8 @@
 	    });
 
 	    $locationProvider.html5Mode(true);
+
+	    $httpProvider.defaults.headers.post['x-access-token'] = localStorage.token;
 	}]);
 
 /***/ }),
@@ -118341,12 +118343,17 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	var AdminDashboardCtrl = function AdminDashboardCtrl($scope, $state, AdminDataService) {
+	var AdminDashboardCtrl = function AdminDashboardCtrl($scope, $state, AdminDataService, $mdDialog) {
 
 	    $scope.sectionTitle = '';
 
-	    $scope.launchItemModal = function () {
-	        console.log('alright');
+	    $scope.launchItemModal = function (ev) {
+	        $mdDialog.show({
+	            controller: addNewTestimonialDialogController,
+	            templateUrl: 'views/add-project-dialog.html',
+	            parent: angular.element(document.body),
+	            clickOutsideToClose: true
+	        });
 	    };
 
 	    $scope.fetchTestimonials = function () {
@@ -118374,6 +118381,19 @@
 	    $scope.fetchTeam = function () {
 	        $scope.sectionTitle = 'Team';
 	    };
+
+	    // create dialog controllers
+	    function addNewTestimonialDialogController($scope, $mdDialog, $mdToast) {
+
+	        $scope.createNewTestimonial = function () {
+	            AdminDataService.createNewTestimonial($scope.newTestimonial).then(function (resp) {
+	                $mdDialog.hide();
+	                $mdToast.show($mdToast.simple().textContent(resp.data.message).hideDelay(3000));
+	            }, function (err) {
+	                console.log(err, 'ERROR');
+	            });
+	        };
+	    }
 	};
 
 	exports.default = AdminDashboardCtrl;
@@ -118445,6 +118465,9 @@
 	        },
 	        fetchProjects: function fetchProjects() {
 	            return $http.get('/api/projects');
+	        },
+	        createNewTestimonial: function createNewTestimonial(testimonial) {
+	            return $http.post('/api/testimonials', testimonial);
 	        }
 	    };
 	};
