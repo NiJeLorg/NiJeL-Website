@@ -101169,10 +101169,11 @@
 	                    return {
 	                        radius: radiusScale(+d.name.length),
 	                        value: +d.name.length,
-	                        sdgNumber: d.relevantSDG,
+	                        projectId: d._id,
 	                        clientName: d.client,
 	                        projectName: d.name,
 	                        linkToLiveSite: d.linkToLiveSite,
+	                        sdgNumber: d.relevantSDG,
 	                        year: d.year,
 	                        x: Math.random() * 900,
 	                        y: Math.random() * 800
@@ -101210,12 +101211,8 @@
 	                }).attr('stroke', function (d) {
 	                    return d3.rgb(sdgColorScale[d.sdgNumber]).darker();
 	                }).attr('stroke-width', 2).on('mouseover', showDetail).on('mouseout', hideDetail).on('click', function (d) {
-	                    d.projectName = makeProjectNameUrlSafe(d.projectName);
-	                    $state.go('project', { id: d.projectName, projectInfo: d });
+	                    $state.go('project', { id: d.projectId, projectInfo: d });
 	                    document.querySelector('.tooltip').remove();
-	                    // if ($('#gates_tooltip').length) {
-	                    //     $('#gates_tooltip').remove();
-	                    // }
 	                });
 
 	                // @v4 Merge the original empty selection and the enter selection
@@ -101252,10 +101249,6 @@
 	                    return yearCenters[2015].x;
 	                }
 	            }
-
-	            function makeProjectNameUrlSafe(str) {
-	                return str.split(' ').join('_');
-	            };
 
 	            function groupBubbles() {
 
@@ -118240,10 +118233,13 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	var ProjectCtrl = function ProjectCtrl($scope, $stateParams) {
-	    console.log($stateParams, 'STATE PARAMS');
-	    $scope.project = $stateParams.projectInfo;
-	    $scope.project.projectName = $scope.project.projectName.split('_').join(' ');
+	var ProjectCtrl = function ProjectCtrl($scope, $stateParams, ClientDataService) {
+	    ClientDataService.fetchSingleProject($stateParams.id).then(function (resp) {
+	        console.log(resp);
+	        $scope.project = resp.data.project;
+	    }, function (err) {
+	        console.log(err, 'ERR');
+	    });
 	};
 
 	exports.default = ProjectCtrl;
@@ -118398,6 +118394,13 @@
 	            return $http({
 	                method: 'GET',
 	                url: '/api/projects'
+	            });
+	        },
+
+	        fetchSingleProject: function fetchSingleProject(projectId) {
+	            return $http({
+	                method: 'GET',
+	                url: '/api/projects/' + projectId
 	            });
 	        },
 
