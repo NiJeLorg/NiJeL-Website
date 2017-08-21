@@ -18,13 +18,14 @@ module.exports = {
 
     addProject: (req, res) => {
         cloudinary.uploader.upload(req.file.path, (result) => {
+            console.log(result, 'result');
             let project = new Project();
-            project.name = req.body.name;
-            project.client = req.body.client;
-            project.linkToLiveSite = req.body.linkToLiveSite;
-            project.relevantSDG = req.body.relevantSDG;
-            project.year = req.body.year;
-            project.isFeaturedProject = req.body.isFeaturedProject;
+            project.name = req.body.obj.name;
+            project.client = req.body.obj.client;
+            project.linkToLiveSite = req.body.obj.linkToLiveSite;
+            project.relevantSDG = req.body.obj.relevantSDG;
+            project.year = req.body.obj.year;
+            project.isFeaturedProject = req.body.obj.isFeaturedProject;
             project.coverPhoto = result.secure_url;
 
             project.save((err) => {
@@ -35,7 +36,6 @@ module.exports = {
                     success: true,
                     message: 'Project successfully added',
                     project: project
-
                 });
             });
         });

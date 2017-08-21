@@ -35,6 +35,8 @@ module.exports = {
     updateTestimonial: (req, res) => {
         Testimonial.findById(req.params.testimonialId, (err, testimonial) => {
             if (!err) {
+                console.log(req.body, 'REQUEST BODY');
+
                 if (req.body.testimonial) {
                     testimonial.testimonial = req.body.testimonial;
                 }
