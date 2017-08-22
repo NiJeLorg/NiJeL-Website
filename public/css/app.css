@@ -12,14 +12,9 @@ a {
 button {
   border: none; }
 
-.splash-section {
-  height: 800px;
-  background-image: url("../assets/NYCity.png");
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 10%; }
+.splash-image {
+  width: 100%;
+  height: auto; }
 
 .services-section {
   display: flex;
@@ -417,31 +412,30 @@ body {
   font-family: 'Avenir', 'Muli', sans-serif; }
 
 nav {
-  position: fixed;
+  position: absolute;
   width: 100%;
   padding: 0 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
-  background: #fff;
-  box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.5);
+  height: 0px;
+  margin-top: 40px;
+  background: transparent;
+  transition: height 400ms;
+  -webkit-transition: height 400ms;
   z-index: 1; }
   nav .nav-logo {
     width: 160px;
-    height: auto; }
+    height: auto;
+    display: none; }
 
 .nav-links a {
   font-family: 'Open Sans', Helvetica, sans-serif;
   margin-left: 40px;
-  color: #787976;
+  color: #fff;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase; }
-
-main {
-  position: relative;
-  top: 100px; }
 
 md-dialog {
   width: 40%;
