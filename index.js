@@ -10,6 +10,7 @@ const morgan = require('morgan'),
     bodyParser = require('body-parser'),
     multer = require('multer'),
     request = require('request'),
+    favicon = require('serve-favicon'),
     path = require('path'),
     apiRouter = require('./server/apiRouter'),
     publicRoutes = require('./server/routes/public'),
@@ -58,9 +59,11 @@ nijelApp.use(bodyParser.json({
 // serve static files
 nijelApp.use(express.static(path.resolve('./public')));
 
+// serve favicon
+nijelApp.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')));
+
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
-
 
 // call other routes
 publicRoutes();
