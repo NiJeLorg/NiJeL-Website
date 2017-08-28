@@ -76,7 +76,6 @@ nijelApp.get('*', (req, res) => {
     });
 });
 
-
 // start the server
 nijelApp.listen(port || 3000, () => {
     c.log('server running on port ' + port);

@@ -16,24 +16,35 @@ button {
   width: 100%;
   height: auto; }
 
-.services-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6%; }
-  .services-section .service {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; }
-    .services-section .service img {
-      margin-bottom: 30px; }
-    .services-section .service p {
-      font-family: 'Open Sans', 'Avenir-Roman', sans-serif;
-      font-weight: 300;
-      font-size: 18px;
-      text-align: center;
-      width: 70%; }
+.title {
+  font-size: 48px;
+  font-family: 'La Belle Aurore', cursive; }
+
+.section {
+  padding: 60px; }
+
+.process-section {
+  background: url("../assets/section-bg.png");
+  padding: 60px;
+  display: flex; }
+  .process-section .description {
+    background: #d3d3d2;
+    width: 50%;
+    padding: 30px;
+    margin-right: 150px; }
+    .process-section .description p {
+      font-size: 24px;
+      color: #4d4d4c;
+      font-weight: bold; }
+    .process-section .description .read-more-container {
+      display: flex;
+      justify-content: flex-end; }
+    .process-section .description .read-more {
+      background: #dc4d3c;
+      color: #fff;
+      padding: 15px 20px;
+      font-weight: bold;
+      border-radius: 5px; }
 
 .testimonial-section {
   background: #333132;
@@ -75,8 +86,9 @@ button {
     border-radius: 25px; }
 
 .work-section {
-  background: #F26648;
-  padding: 4% 0; }
+  background: #F26648; }
+  .work-section h2 {
+    color: #fff; }
   .work-section p {
     font-size: 48px;
     font-family: 'La Belle Aurore', cursive;
@@ -97,13 +109,34 @@ button {
       background-size: cover !important; }
 
 .partners-section {
-  background: #2D2B2C;
-  padding: 3% 0; }
+  background: url("../assets/section-bg.png"); }
   .partners-section .container {
-    width: 80%;
-    display: flex;
-    margin: 0 auto;
-    justify-content: space-between; }
+    background: #d3d3d2;
+    padding: 30px; }
+    .partners-section .container .content {
+      display: flex; }
+    .partners-section .container .partners {
+      flex-basis: 40%; }
+    .partners-section .container .testimonials {
+      flex-basis: 60%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      .partners-section .container .testimonials img {
+        cursor: pointer;
+        outline: none; }
+      .partners-section .container .testimonials .text {
+        width: 75%; }
+      .partners-section .container .testimonials p {
+        font-size: 28px;
+        margin: 0 auto;
+        color: #4d4d4c;
+        font-weight: bold; }
+      .partners-section .container .testimonials .contact {
+        margin-top: 20px; }
+        .partners-section .container .testimonials .contact p {
+          font-size: 24px;
+          text-align: right; }
 
 .content-section {
   padding: 6% 8%;
@@ -231,45 +264,36 @@ footer {
     cursor: pointer; }
 
 .team-view {
-  background: #F8F5EF; }
-  .team-view h1 {
+  background: #fff; }
+  .team-view .view-title {
     font-family: 'La Belle Aurore';
-    text-align: center;
     font-size: 48px;
-    padding: 3% 0; }
-  .team-view ul {
-    padding-left: 6%; }
-    .team-view ul li {
-      padding: 6px 0;
-      list-style: none;
-      cursor: pointer; }
-
-.team-grouping {
-  display: flex; }
-  .team-grouping .team-names {
-    flex-basis: 20%;
-    text-align: right; }
-  .team-grouping .team-member-profile {
+    text-align: center;
+    padding: 2%; }
+  .team-view main {
+    width: 80%;
+    margin: 0 auto;
     display: flex;
-    flex-basis: 80%; }
-
-.bio {
-  flex-basis: 40%;
-  margin-top: 20px; }
-  .bio .name p {
-    font-family: 'La Belle Aurore';
-    font-size: 40px;
-    font-weight: 900; }
-  .bio .position p {
-    font-size: 20px;
-    color: #939598;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-top: 10px;
-    margin-bottom: 30px; }
-  .bio .description p {
-    font-size: 14px;
-    line-height: 25px; }
+    flex-wrap: wrap;
+    box-shadow: 0 0.9375rem 3.75rem rgba(2, 2, 22, 0.1); }
+  .team-view .team-member {
+    width: 33.33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    outline: none;
+    cursor: pointer; }
+    .team-view .team-member img {
+      width: 350px;
+      height: auto; }
+    .team-view .team-member .details {
+      width: 100%;
+      padding: 20px; }
+  .team-view .team-member:nth-child(2), .team-view .team-member:nth-child(3), .team-view .team-member:nth-child(5), .team-view .team-member:nth-child(6) {
+    border-left: 1px solid #edf0f2; }
+  .team-view .team-member:nth-child(1), .team-view .team-member:nth-child(2), .team-view .team-member:nth-child(3) {
+    border-bottom: 1px solid #edf0f2; }
 
 .project-info {
   padding: 2% 0;
@@ -282,6 +306,20 @@ footer {
     margin-bottom: 5px; }
   .project-info a {
     color: #F26648; }
+
+.why-nijel-view {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 30px; }
+  .why-nijel-view md-tabs md-ink-bar {
+    background: #f2654e; }
+  .why-nijel-view md-content h1 {
+    font-family: 'La Belle Aurore', cursive; }
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; }
 
 .form-view {
   margin-top: -100px;
@@ -411,7 +449,10 @@ section header {
 body {
   font-family: 'Avenir', 'Muli', sans-serif; }
 
-nav {
+p {
+  margin-bottom: 20px; }
+
+.main-nav {
   position: absolute;
   width: 100%;
   padding: 0 80px;
@@ -424,7 +465,7 @@ nav {
   transition: height 400ms;
   -webkit-transition: height 400ms;
   z-index: 1; }
-  nav .nav-logo {
+  .main-nav .nav-logo {
     width: 160px;
     height: auto;
     display: none; }
@@ -436,6 +477,10 @@ nav {
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase; }
+
+.view {
+  position: relative;
+  top: 100px; }
 
 md-dialog {
   width: 40%;
