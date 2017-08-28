@@ -469,6 +469,12 @@ p {
     width: 160px;
     height: auto;
     display: none; }
+  .main-nav .open-nav-logo {
+    width: 80px;
+    height: auto;
+    opacity: 1;
+    transition: opacity 400ms;
+    -webkit-transition: opacity 400ms; }
 
 .nav-links a {
   font-family: 'Open Sans', Helvetica, sans-serif;
