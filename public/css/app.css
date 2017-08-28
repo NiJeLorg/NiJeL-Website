@@ -28,7 +28,7 @@ button {
   padding: 60px;
   display: flex; }
   .process-section .description {
-    background: #d3d3d2;
+    background: rgba(211, 211, 210, 0.8);
     width: 50%;
     padding: 30px;
     margin-right: 150px; }
@@ -89,7 +89,7 @@ button {
 .partners-section {
   background: url("../assets/section-bg.png"); }
   .partners-section .container {
-    background: #d3d3d2;
+    background: rgba(211, 211, 210, 0.8);
     padding: 30px; }
     .partners-section .container .content {
       display: flex; }
@@ -167,7 +167,7 @@ button {
         padding: 10px; }
 
 .social-feed-section {
-  padding: 6%;
+  padding: 60px;
   background: #333132;
   display: flex; }
   .social-feed-section .feed-item {
