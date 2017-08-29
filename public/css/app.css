@@ -188,7 +188,7 @@ footer {
   padding: 70px 0;
   background: #F8F5EF;
   border-top: 1px solid #cfcfcf; }
-  footer main {
+  footer section {
     width: 80%;
     margin: 0 auto; }
   footer .footer-info {
@@ -267,7 +267,7 @@ footer {
     font-size: 48px;
     text-align: center;
     padding: 2%; }
-  .team-view main {
+  .team-view section {
     width: 80%;
     margin: 0 auto;
     display: flex;
@@ -499,7 +499,7 @@ p {
   font-weight: bold;
   text-transform: uppercase; }
 
-.view {
+main {
   position: relative;
   top: 100px; }
 
