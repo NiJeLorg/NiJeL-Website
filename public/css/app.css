@@ -185,28 +185,39 @@ button {
     color: #1DA1F2; }
 
 footer {
-  padding: 4% 6%;
+  padding: 70px 0;
   background: #F8F5EF;
   border-top: 1px solid #cfcfcf; }
-  footer .links {
+  footer section {
+    width: 80%;
+    margin: 0 auto; }
+  footer .footer-info {
     display: flex;
-    justify-content: center;
-    margin-bottom: 30px; }
-    footer .links a {
-      color: #454545;
-      margin-right: 40px;
-      font-size: 20px;
-      font-family: 'Open Sans', 'Avenir-Roman', sans-serif; }
-  footer .social-media {
-    display: flex;
-    justify-content: center; }
-    footer .social-media img {
-      margin-right: 30px; }
-  footer .footer-image {
-    display: flex;
-    justify-content: center; }
-    footer .footer-image img {
-      width: 180px; }
+    margin-bottom: 40px; }
+  footer .footer-info > * {
+    flex-basis: 25%; }
+  footer h4 {
+    font-weight: bold;
+    font-size: 21px;
+    text-transform: uppercase;
+    margin-bottom: 10px; }
+  footer a {
+    color: #000; }
+  footer ul {
+    list-style: none;
+    padding: 0; }
+    footer ul li {
+      margin-bottom: 6px; }
+  footer .address img {
+    width: 150px;
+    margin-bottom: 10px; }
+  footer .address p {
+    margin-bottom: 8px; }
+  footer .social-icons a {
+    margin-right: 20px; }
+  footer .footer-terms span {
+    display: block;
+    text-align: center; }
 
 .tooltip {
   position: absolute;
@@ -237,6 +248,18 @@ footer {
   .featured-projects-view .projects-holder {
     display: flex;
     justify-content: center; }
+  .featured-projects-view .list-projects {
+    border-top: 1px solid #cfcfcf;
+    padding: 40px 0; }
+    .featured-projects-view .list-projects section {
+      display: flex;
+      width: 80%;
+      margin: 0 auto; }
+      .featured-projects-view .list-projects section .projects-container {
+        flex-basis: 33.33%; }
+    .featured-projects-view .list-projects h2 {
+      margin-bottom: 10px;
+      text-decoration: underline; }
   .featured-projects-view #toolbar {
     position: relative;
     left: 80px; }
@@ -258,12 +281,13 @@ footer {
     font-size: 48px;
     text-align: center;
     padding: 2%; }
-  .team-view main {
+  .team-view section {
     width: 80%;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    box-shadow: 0 0.9375rem 3.75rem rgba(2, 2, 22, 0.1); }
+    box-shadow: 0 0.9375rem 3.75rem rgba(2, 2, 22, 0.1);
+    margin-bottom: 4%; }
   .team-view .team-member {
     width: 33.33%;
     display: flex;
@@ -278,10 +302,38 @@ footer {
     .team-view .team-member .details {
       width: 100%;
       padding: 20px; }
-  .team-view .team-member:nth-child(2), .team-view .team-member:nth-child(3), .team-view .team-member:nth-child(5), .team-view .team-member:nth-child(6) {
+  .team-view .team-member:nth-child(2),
+  .team-view .team-member:nth-child(3),
+  .team-view .team-member:nth-child(5),
+  .team-view .team-member:nth-child(6) {
     border-left: 1px solid #edf0f2; }
-  .team-view .team-member:nth-child(1), .team-view .team-member:nth-child(2), .team-view .team-member:nth-child(3) {
+  .team-view .team-member:nth-child(1),
+  .team-view .team-member:nth-child(2),
+  .team-view .team-member:nth-child(3) {
     border-bottom: 1px solid #edf0f2; }
+
+.team-member-dialog {
+  display: flex; }
+  .team-member-dialog .photo {
+    padding-top: 30px;
+    flex-basis: 30%; }
+    .team-member-dialog .photo img {
+      width: 100%; }
+  .team-member-dialog .details {
+    flex-basis: 70%;
+    padding: 30px 50px; }
+    .team-member-dialog .details .intro {
+      padding: 20px;
+      background: #f26648; }
+      .team-member-dialog .details .intro span {
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        display: block; }
+    .team-member-dialog .details .description {
+      padding-top: 20px; }
+      .team-member-dialog .details .description p {
+        font-size: 18px; }
 
 .project-info {
   padding: 2% 0;
@@ -308,6 +360,44 @@ footer {
   display: flex;
   justify-content: center;
   margin: 20px 0; }
+
+.contact-us-view {
+  padding: 100px 0;
+  background: #fafafa; }
+  .contact-us-view .container {
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: rgba(177, 177, 177, 0.5) 1px 1px 20px 0px;
+    padding: 30px 60px; }
+    .contact-us-view .container h1 {
+      text-align: center;
+      font-family: 'La Belle Aurore', cursive;
+      font-size: 48px; }
+    .contact-us-view .container span {
+      display: block;
+      font-size: 24px;
+      text-align: center;
+      font-family: 'La Belle Aurore', cursive;
+      margin-top: -20px;
+      text-decoration: underline; }
+    .contact-us-view .container article {
+      padding: 30px 0;
+      border-bottom: 1px solid #d4d4d4; }
+      .contact-us-view .container article p {
+        font-size: 18px; }
+      .contact-us-view .container article a {
+        font-weight: bold;
+        color: #f26648; }
+    .contact-us-view .container .mailing-address {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+      margin: 0 auto; }
+    .contact-us-view .container .mailing-address > div .image-container {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      border: 5px solid #f26648; }
 
 .form-view {
   margin-top: -100px;
@@ -352,7 +442,6 @@ h2 {
   color: #333132; }
 
 .dashboard-view {
-  margin-top: -100px;
   height: 100%;
   display: flex; }
   .dashboard-view aside {
@@ -472,12 +561,11 @@ p {
   font-weight: bold;
   text-transform: uppercase; }
 
-.view {
+main {
   position: relative;
   top: 100px; }
 
 md-dialog {
-  width: 40%;
-  padding: 2%; }
+  width: 60%; }
   md-dialog form {
     width: 100%; }
