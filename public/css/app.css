@@ -311,20 +311,29 @@ footer {
   .team-view .team-member:nth-child(2),
   .team-view .team-member:nth-child(3) {
     border-bottom: 1px solid #edf0f2; }
-  .team-view .md-dialog {
-    width: 55%; }
 
 .team-member-dialog {
   display: flex; }
   .team-member-dialog .photo {
-    flex-basis: 40%; }
+    padding-top: 30px;
+    flex-basis: 30%; }
     .team-member-dialog .photo img {
       width: 100%; }
   .team-member-dialog .details {
     flex-basis: 70%;
-    background: grey; }
-    .team-member-dialog .details span {
-      display: block; }
+    padding: 30px 50px; }
+    .team-member-dialog .details .intro {
+      padding: 20px;
+      background: #f26648; }
+      .team-member-dialog .details .intro span {
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        display: block; }
+    .team-member-dialog .details .description {
+      padding-top: 20px; }
+      .team-member-dialog .details .description p {
+        font-size: 18px; }
 
 .project-info {
   padding: 2% 0;
@@ -557,7 +566,6 @@ main {
   top: 100px; }
 
 md-dialog {
-  width: 40%;
-  padding: 2%; }
+  width: 60%; }
   md-dialog form {
     width: 100%; }
