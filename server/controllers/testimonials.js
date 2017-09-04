@@ -6,11 +6,12 @@ module.exports = {
         Testimonial.find((err, testimonials) => {
             if (err) {
                 res.send(err);
+            } else {
+                res.json({
+                    success: true,
+                    testimonials: testimonials
+                });
             }
-            res.json({
-                success: true,
-                testimonials: testimonials
-            });
         });
     },
     addTestimonial: (req, res) => {
@@ -23,20 +24,19 @@ module.exports = {
         testimonial.save((err) => {
             if (err) {
                 res.send(err);
-            }
-            res.json({
-                success: true,
-                message: 'Testimonial successfully added',
-                testimonial: testimonial
+            } else {
+                res.json({
+                    success: true,
+                    message: 'Testimonial successfully added',
+                    testimonial: testimonial
 
-            });
+                });
+            }
         });
     },
     updateTestimonial: (req, res) => {
         Testimonial.findById(req.params.testimonialId, (err, testimonial) => {
             if (!err) {
-                console.log(req.body, 'REQUEST BODY');
-
                 if (req.body.testimonial) {
                     testimonial.testimonial = req.body.testimonial;
                 }

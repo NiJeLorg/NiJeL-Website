@@ -327,7 +327,7 @@ footer {
       background: #f26648; }
       .team-member-dialog .details .intro span {
         color: #fff;
-        font-size: 24px;
+        font-size: 24   px;
         font-weight: bold;
         display: block; }
     .team-member-dialog .details .description {

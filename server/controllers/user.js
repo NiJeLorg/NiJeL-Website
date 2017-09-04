@@ -69,9 +69,7 @@ module.exports = {
                 } else {
                     bcrypt.compare(req.body.password, user.password, function (err, response) {
                         if (response) {
-                            let token = jwt.sign(user, envVar.SUPERSECRET, {
-                                expiresIn: '2d'
-                            });
+                            let token = jwt.sign(user, envVar.SUPERSECRET);
                             res.status(200).json({
                                 success: true,
                                 user: user,
