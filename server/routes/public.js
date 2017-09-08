@@ -3,6 +3,7 @@
 const apiRouter = require('../apiRouter'),
     testimonialCtrl = require('../controllers/testimonials'),
     projectCtrl = require('../controllers/projects'),
+    teamCtrl = require('../controllers/team'),
     nijelTweets = require('../controllers/nijel_tweets'),
     userCtrl = require('../controllers/user');
 
@@ -25,6 +26,7 @@ module.exports = () => {
     apiRouter.route('/login')
         .post(userCtrl.login);
 
-
+    apiRouter.route('/team')
+        .get(teamCtrl.getAllTeamMembers);
 
 };

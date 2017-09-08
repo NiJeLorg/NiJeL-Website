@@ -523,6 +523,9 @@ section header {
   .action-on-items .delete {
     background: #eb4c37; }
 
+.dialog-view {
+  padding: 4%; }
+
 body {
   font-family: 'Avenir', 'Muli', sans-serif; }
 
