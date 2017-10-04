@@ -4,6 +4,8 @@ const apiRouter = require('../apiRouter'),
     testimonialCtrl = require('../controllers/testimonials'),
     projectCtrl = require('../controllers/projects'),
     teamCtrl = require('../controllers/team'),
+    whyNijelCtrl = require('../controllers/why-nijel'),
+    processesCtrl = require('../controllers/processes'),
     multer = require('multer'),
     upload = multer({
         dest: './uploads/'
@@ -15,7 +17,7 @@ module.exports = () => {
         .post(upload.single('photo'), projectCtrl.addProject);
 
     apiRouter.route('/projects/:projectId')
-        .put(projectCtrl.updateProject)
+        .put(upload.single('photo'), projectCtrl.updateProject)
         .delete(projectCtrl.deleteProject);
 
     apiRouter.route('/testimonials')
@@ -30,4 +32,16 @@ module.exports = () => {
 
     apiRouter.route('/team/:teamMemberId')
         .delete(teamCtrl.deleteTeamMember);
+
+    apiRouter.route('/whynijel')
+        .post(upload.single('photo'), whyNijelCtrl.addWhyNijelSection);
+
+    apiRouter.route('/whynijel/:sectionId')
+        .delete(whyNijelCtrl.deleteWhyNijelSection);
+
+    apiRouter.route('/processes')
+        .post(upload.single('photo'), processesCtrl.addProcessSection);
+
+    apiRouter.route('/processes/:sectionId')
+        .delete(processesCtrl.deleteProcessSection);
 };

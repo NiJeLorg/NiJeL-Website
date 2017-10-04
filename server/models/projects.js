@@ -3,29 +3,33 @@ const mongoose = require('mongoose'),
     ProjectSchema = new Schema({
         name: {
             type: String,
-            // required: true
+            required: true
         },
         client: {
             type: String,
-            // required: true
+            required: true
+        },
+        description: {
+            type: String
+        },
+        coverPhoto: {
+            type: String
+        },
+        coverPhotoId: {
+            type: String
         },
         linkToLiveSite: {
-            // type: String,
+            type: String,
         },
         relevantSDG: {
             type: String,
-            // required: true
         },
         year: {
             type: String,
-            // required: true
         },
         isFeaturedProject: {
             type: Boolean
         },
-        coverPhoto: {
-            type: String
-        }
     });
 
 module.exports = mongoose.model('Project', ProjectSchema);

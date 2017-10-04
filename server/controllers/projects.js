@@ -17,17 +17,23 @@ module.exports = {
     },
 
     addProject: (req, res) => {
-        cloudinary.uploader.upload(req.file.path, (result) => {
-            console.log(result, 'result');
-            let project = new Project();
-            project.name = req.body.obj.name;
-            project.client = req.body.obj.client;
-            project.linkToLiveSite = req.body.obj.linkToLiveSite;
-            project.relevantSDG = req.body.obj.relevantSDG;
-            project.year = req.body.obj.year;
-            project.isFeaturedProject = req.body.obj.isFeaturedProject;
-            project.coverPhoto = result.secure_url;
-
+        let project = new Project((req.body.obj || req.body));
+        if (req.file) {
+            cloudinary.uploader.upload(req.file.path, (result) => {
+                project.coverPhoto = result.secure_url;
+                project.coverPhotoId = result.public_id;
+                project.save((err) => {
+                    if (err) {
+                        res.send(err);
+                    }
+                    res.json({
+                        success: true,
+                        message: 'Project successfully added',
+                        project: project
+                    });
+                });
+            });
+        } else {
             project.save((err) => {
                 if (err) {
                     res.send(err);
@@ -38,7 +44,7 @@ module.exports = {
                     project: project
                 });
             });
-        });
+        }
     },
 
     getProject: (req, res) => {
@@ -53,42 +59,52 @@ module.exports = {
     },
 
     updateProject: (req, res) => {
-        Project.findById(req.params.projectId, (err, project) => {
+        Project.findByIdAndUpdate(req.params.projectId, (req.body.obj || req.body), (err, project) => {
             if (!err) {
-                if (req.body.name) {
-                    project.name = req.body.name;
-                }
-                if (req.body.client) {
-                    project.client = req.body.client;
-                }
-                if (req.body.relevantSDG) {
-                    project.relevantSDG = req.body.relevantSDG;
-                }
-                if (req.body.linkToLiveSite) {
-                    project.linkToLiveSite = req.body.linkToLiveSite;
-                }
-                if (req.body.year) {
-                    project.year = req.body.year;
-                }
-
-                project.save((err) => {
-                    if (err) {
-                        res.send(err);
-                    }
-                    res.json({
-                        success: true,
-                        message: 'Project successfully updated',
-                        project: project
+                if (req.file) {
+                    cloudinary.uploader.upload(req.file.path, (result) => {
+                        project.coverPhoto = result.secure_url;
+                        project.save((err) => {
+                            if (err) {
+                                res.send(err);
+                            }
+                            res.json({
+                                success: true,
+                                message: 'Project successfully updated',
+                                project: project
+                            });
+                        });
+                        if (req.body.obj.coverPhotoId) {
+                            cloudinary.uploader.destroy(req.body.obj.coverPhotoId, (err, result) => {
+                                if (!err) {
+                                    console.log('previous image deleted');
+                                } else {
+                                    console.log('err', err);
+                                }
+                            });
+                        }
                     });
-                });
+
+                } else {
+                    project.save((err) => {
+                        if (err) {
+                            res.send(err);
+                        }
+                        res.json({
+                            success: true,
+                            message: 'Project successfully updated',
+                            project: project
+                        });
+                    });
+                }
             } else {
                 res.send(err);
             }
         });
-
     },
 
     deleteProject: (req, res) => {
+        console.log(req.body);
         Project.remove({
             _id: req.params.projectId
         }, (err) => {

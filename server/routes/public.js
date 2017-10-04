@@ -4,6 +4,8 @@ const apiRouter = require('../apiRouter'),
     testimonialCtrl = require('../controllers/testimonials'),
     projectCtrl = require('../controllers/projects'),
     teamCtrl = require('../controllers/team'),
+    whyNijelCtrl = require('../controllers/why-nijel'),
+    processesCtrl = require('../controllers/processes'),
     nijelTweets = require('../controllers/nijel_tweets'),
     userCtrl = require('../controllers/user');
 
@@ -29,4 +31,9 @@ module.exports = () => {
     apiRouter.route('/team')
         .get(teamCtrl.getAllTeamMembers);
 
+    apiRouter.route('/whynijel')
+        .get(whyNijelCtrl.getAllWhyNijelSections);
+    
+    apiRouter.route('/processes')
+        .get(processesCtrl.getAllProcessesSections);
 };
