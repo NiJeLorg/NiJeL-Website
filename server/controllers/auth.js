@@ -5,7 +5,7 @@ module.exports = {
     authenticateUser: (req, res, next) => {
         let token = req.headers['x-access-token'] || req.body.token;
         if (token) {
-            jwt.verify(token, envVar.SUPERSECRET, (err, decoded) => {
+            jwt.verify(token, process.env.SUPERSECRET, (err, decoded) => {
                 if (!err) {
                     req.decoded = decoded;
                     next();

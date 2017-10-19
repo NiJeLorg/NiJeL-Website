@@ -69,7 +69,7 @@ module.exports = {
                 } else {
                     bcrypt.compare(req.body.password, user.password, function (err, response) {
                         if (response) {
-                            let token = jwt.sign(user, envVar.SUPERSECRET);
+                            let token = jwt.sign(user, process.env.SUPERSECRET);
                             res.status(200).json({
                                 success: true,
                                 user: user,
