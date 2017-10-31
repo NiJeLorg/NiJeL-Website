@@ -14,8 +14,18 @@ Client-facing website to display our work and describe who we are as a company, 
 
 Run gulp on your terminal. Navigate to http://localhost:3000 on your browser.
 
+### Frontend
+
+The frontend framework for this project is [**Angular 1**](https://angularjs.org/), we've also used [**D3.js**](https://d3js.org/) for edge case situations of visualizing data, as well as leveraged [**Angular Material**](https://material.angularjs.org/latest/) as the CSS framework in conjuctions with vanilla/plain CSS styles
+
+
+### Backend
+
+The backend framework for this project is Node as our runtime, and [**Express**](https://expressjs.com/) as our webserver framework. MongoDB is our primary database engine.
+
 ### Hosting
 
 The projects is hosted [**here**](https://nijel-website.herokuapp.com/)
+
 
 
