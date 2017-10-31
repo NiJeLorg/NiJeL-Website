@@ -1,6 +1,6 @@
 # Nijel-Website
 
-Client-faceing website to display our work and describe who we are as a company, goals, mission and objectives. As well as highlight the different partners we have worked with and the projects we have undertaken.
+Client-facing website to display our work and describe who we are as a company, goals, mission and objectives. As well as highlight the different partners we have worked with and the projects we have undertaken.
 
 ## Getting Started
 
