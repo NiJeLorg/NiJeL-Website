@@ -21,7 +21,7 @@ The frontend framework for this project is [**Angular 1**](https://angularjs.org
 
 ### Backend
 
-The backend framework for this project is Node as our runtime, and [**Express**](https://expressjs.com/) as our webserver framework. MongoDB is our primary database engine.
+The backend for this project is built with Node as our runtime, and [**Express**](https://expressjs.com/) as our webserver framework. MongoDB is our primary database engine.
 
 ### Hosting
 
