@@ -1,0 +1,24 @@
+nav.main-nav
+  a(ui-sref='home')
+    img.nav-logo(src='assets/NijelLogo.svg')
+    img.open-nav-logo(src='assets/Nijel_TwitterIcon2.png')
+  .nav-links()
+    md-menu(md-offset='0 -7')
+      a(ng-click='$mdMenu.open($event)') Why NiJeL
+      md-menu-content(flex)
+        md-menu-item
+          md-button(ui-sref='why-nijel') Our Mission, Vision and Values
+        md-menu-item
+          md-button(ui-sref='why-nijel') Our Process
+        md-menu-item
+          md-button(ui-sref='why-nijel') Technology
+        md-menu-item
+          md-button(ui-sref='why-nijel') Partner with NiJeL
+        md-menu-item
+          md-button(ui-sref='why-nijel') About NiJeL
+
+
+    //- a(ui-sref='why-nijel') Why NiJeL
+    a(ui-sref='projects') Our Projects
+    a(ui-sref='team') Team
+    a(ui-sref='contact-us') Contact Us

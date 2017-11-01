@@ -1,0 +1,9 @@
+html
+  include shared-views/head
+  body(ng-app='nijelApp')
+    include shared-views/nav
+    main
+      ui-view(class='main-view' ng-cloak)
+      include shared-views/footer
+
+

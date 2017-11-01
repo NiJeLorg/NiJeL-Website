@@ -1,0 +1,69 @@
+.home-view
+  img(src='assets/splash.jpg' class='splash-image')
+  .process-section.section
+    .description
+      h2.title Our Process...
+      p  starts with a thorough assessment of how your organization works and communicates. We listen to our partners, working directly with organizational staff to get a deep understanding of their current data situation and future data and application needs. We call this process "data therapy," and it is critical to determining what technologies would be useful and appropriate for your organization.
+      .read-more-container
+        button.read-more(ui-sref='why-nijel') Read More
+    img(src="assets/NIJEL_CORE_AREAS.svg", alt="NiJeL Core Areas")
+  .work-section.section
+    h2.title Our Work...
+    .group
+      .work-item(style='background: url("assets/busturnaround.png")')
+      .work-item(style='background: url("assets/saveharlemnow.png")')
+      .work-item(style='background: url("assets/chord.png")')
+  .partners-section.section
+    .container
+      h2.title Our Partners...
+      .content
+        .partners
+          .partner
+            img(src='assets/partner-logos/Carto_logo.svg')
+          .partner
+            img(src='assets/partner-logos/MIT_logo.svg')
+          .partner
+            img(src='assets/partner-logos/UNFPA_logo.svg')
+          .partner
+            img(src='assets/partner-logos/DNA-INFO_logo.svg')
+
+        .testimonials
+          img(src='assets/scroll-left.png' width='40px' height='50px' ng-click='selectTestimonial("previous")')
+          .text
+            p {{currentTestimonial.testimonial}}
+            .contact
+              p ~ {{currentTestimonial.reviewer}}
+              p
+                span {{currentTestimonial.position}}
+                | &nbsp; {{currentTestimonial.company}}
+          img(src='assets/scroll-right.png' width='40px' height='50px' ng-click='selectTestimonial("next")')
+
+  //- .content-section
+  //-   .content-item
+  //-     .content-image
+  //-     .content-text
+  //-       h5 Learn how to make sense of data to increase your margin
+  //-       div.delimeter
+  //-       p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book...
+  //-       .button-holder
+  //-         button Read More
+
+  //-   .content-item
+  //-     .content-image
+  //-     .content-text
+  //-       h5
+  //-       p
+  //-   .content-item
+  //-     .content-image
+  //-     .content-text
+  //-       h5
+  //-       p
+  .social-feed-section
+    .feed-item(ng-repeat='tweet in tweets track by $index')
+      .logo
+        img(src='assets/twitter-icon.png')
+      .tweet
+        .content
+          p {{tweet.text}}
+        .date-posted
+          p {{tweet.created_at}}

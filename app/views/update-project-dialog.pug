@@ -1,0 +1,10 @@
+.dialog-view
+    h2 Update Project
+    form(ng-submit='updateProject(coverPhoto)')
+        input(type='text' placeholder='Name of Project' ng-model='project.name' required)
+        input(type='text' placeholder='Client Name' ng-model='project.client' required)
+        input(type='text' placeholder='Hosted URL' ng-model='project.linkToLiveSite' required)
+        input(type='text' placeholder='SDG' ng-model='project.relevantSDG' required)
+        input(type='text' placeholder='Year' ng-model='project.year' required)
+        input(type='file' ngf-select ng-model='coverPhoto' name='file' accept='image/*' ngf-max-size='2MB')
+        input(type='submit')

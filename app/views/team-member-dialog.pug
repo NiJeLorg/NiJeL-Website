@@ -1,0 +1,9 @@
+.team-member-dialog
+  .photo
+    img(src='assets/man_ex.png')
+  .details
+    .intro
+        span {{member.fullname}}
+        span {{member.position}}
+    .description
+      p(ng-bind-html='trustAsHtml(member.bio)')

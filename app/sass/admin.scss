@@ -1,0 +1,21 @@
+.admin-view {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    .sub-view {
+        flex-basis: 50%;
+        .form-container {
+            width: 65%;
+            margin: 0 auto;
+        }
+    }
+    .sub-view:first-of-type {
+        border-right: 2px solid #858585;
+    }
+    h2 {
+        text-align: center;
+    }
+    form {
+        width: 100%;
+    }
+}

@@ -1,0 +1,8 @@
+.team-view
+  h1.view-title Meet the Team
+  section
+    .team-member(ng-repeat='teamMember in teamMembers' ng-click='launchTeamMemberModal($event, teamMember)')
+      img(src='assets/man_ex.png')
+      .details
+        h3 {{teamMember.fullname}}
+        p {{teamMember.position}}

@@ -1,0 +1,88 @@
+.dashboard-view
+  aside
+    .user-container
+      img(src='assets/NijelLogo.svg')
+
+    .buttons-container
+      button(ng-click='fetchTestimonials()') Testimonials
+      button(ng-click='fetchProjects()') All Projects
+      button(ng-click='fetchFeaturedProjects()') Featured Projects
+      button(ng-click='fetchTeam()') Team
+      button(ng-click='fetchWhyNijel()') Why NiJeL
+      button(ng-click='fetchProcesses()') Processes
+  section
+    header
+      h1(ng-model='sectionTitle') {{sectionTitle}}
+      button(class='launchItemModal' ng-click='launchAddTestimonialModal($event)' ng-if='sectionTitle=="Testimonials"') Add Testimonial
+      button(class='launchItemModal' ng-click='launchAddProjectModal($event)' ng-if='sectionTitle=="All Projects"') Add Project
+      button(class='launchItemModal' ng-click='launchAddTeamMemberModal($event)' ng-if='sectionTitle=="Team"') Add Team Member
+      button(class='launchItemModal' ng-click='launchAddWhyNijelSectionModal($event)' ng-if='sectionTitle=="Why NiJeL"') Add Why-Nijel Section
+      button(class='launchItemModal' ng-click='launchAddProcessSectionModal($event)' ng-if='sectionTitle=="Processes"') Add Process Section
+    .items-container.testimonials
+      .item(ng-repeat='item in items track by $index')
+        .testimonials-container(ng-if='sectionTitle=="Testimonials"')
+          .item-group
+            h3 Reviewer
+            p {{item.reviewer}}
+          .item-group
+            h3 Company
+            p {{item.company}}
+          .item-group
+            h3 Position
+            p {{item.position}}
+          .item-group
+            h3 Testimonial
+            p {{item.testimonial}}
+        .projects-container(ng-if='sectionTitle=="All Projects"')
+          .item-group
+            h3 Project Name
+            p {{item.name}}
+          .item-group
+            h3 Client
+            p {{item.client}}
+          .item-group
+            h3 Link to Live Site
+            a(href='{{item.linkToLiveSite}}' target='_blank' style='font-weight: bold; color: #f26648') {{item.linkToLiveSite}}
+          .item-group
+            h3 Relevant SDG
+            p {{item.relevantSDG}}
+          .item-group
+            h3 Year
+            p {{item.year}}
+          .item-group
+            h3 Cover Photo
+            .cover-photo(style='background:url("{{item.coverPhoto}}")' ng-if='item.coverPhoto')
+        .team-container(ng-if='sectionTitle=="Team"')
+          .item-group
+            h3 Full Names
+            p {{item.fullname}}
+          .item-group
+            h3 Position
+            p {{item.position}}
+          .item-group
+            h3 Bio
+            p(ng-bind-html="trustAsHtml(item.bio)")
+        .why-nijel-container(ng-if='sectionTitle=="Why NiJeL"')
+          .item-group
+            h3 Title
+            p {{item.title}}
+          .item-group
+            h3 Body Text
+            p(ng-bind-html="trustAsHtml(item.text)")
+          .item-group
+            h3 Section Cover Photo
+            .cover-photo(style='background:url("{{item.coverPhoto}}")' ng-if='item.coverPhoto')
+        .processes-container(ng-if='sectionTitle=="Processes"')
+          .item-group
+            h3 Title
+            p {{item.title}}
+          .item-group
+            h3 Body Text
+            p(ng-bind-html="trustAsHtml(item.text)")
+          .item-group
+             h3 Section Cover Photo
+             .cover-photo(style='background:url("{{item.coverPhoto}}")' ng-if='item.coverPhoto')
+
+        .action-on-items
+          button(class='update' ng-click='updateItem(item)') Update Item
+          button(class='delete' ng-click='deleteItem($event, item, $index)') Delete Item

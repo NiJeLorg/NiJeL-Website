@@ -1,0 +1,14 @@
+.dialog-view
+    h2 Add New Project
+    form(ng-submit='createNewProject(coverPhoto)')
+        input(type='text' placeholder='Name of Project' ng-model='newProject.name' required)
+        input(type='text' placeholder='Client Name' ng-model='newProject.client' required)
+        input(type='text' placeholder='Hosted URL' ng-model='newProject.linkToLiveSite')
+        input(type='text' placeholder='SDG' ng-model='newProject.relevantSDG')
+        //- select(ng-model='newProject.isFeaturedProject')
+        //-     //- option(value='' disabled selected hidden) Is Project a Featured Project
+        //-     option(ng-repeat='option in isFeaturedProjectOptions' value='{{isFeaturedProjectOptions[option]}}') {{option}}
+        p {{newProject.isFeaturedProject}}
+        input(type='text' placeholder='Year' ng-model='newProject.year')
+        input(type='file' ngf-select ng-model='coverPhoto' name='file' accept='image/*' ngf-max-size='2MB')
+        input(type='submit')

@@ -1,0 +1,7 @@
+.form-view
+  h2 SIGN-UP
+  form(ng-submit='signup()')
+    input(type="text" placeholder='E-mail' ng-model='user.email' required)
+    input(type='password' ng-model='user.password' placeholder='Password' required)
+    input(type="submit")
+    p(ng-model='errorMessage' ng-show='errorMessage') {{errorMessage}}

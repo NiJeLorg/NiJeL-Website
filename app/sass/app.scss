@@ -1,0 +1,84 @@
+@import 'reset';
+@import 'home';
+@import 'featured-projects';
+@import 'team';
+@import 'project';
+@import 'why-nijel';
+@import 'contact-us';
+@import 'form-view';
+@import 'admin-dashboard';
+@import 'admin';
+
+
+// body//
+body {
+    font-family: 'Avenir', 'Muli', sans-serif;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.main-nav {
+    position: absolute;
+    width: 100%;
+    padding: 0 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 0px;
+    margin-top: 50px;
+    background: transparent;
+    transition: height 400ms;
+    -webkit-transition: height 400ms;
+    z-index: 1;
+    .nav-logo {
+        width: 160px;
+        height: auto;
+        display: none;
+    }
+    .open-nav-logo {
+        width: 80px;
+        height: auto;
+        opacity: 1;
+        transition: opacity 400ms;
+        -webkit-transition: opacity 400ms;
+    }
+}
+
+.nav-links {
+    a {
+        font-family: 'Open Sans', Helvetica, sans-serif;
+        margin-left: 40px;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+
+main {
+    position: relative;
+    top: 100px;
+}
+
+md-dialog {
+    width: 60%;
+    form {
+        width: 100%;
+    }
+}
+
+input[type='submit'] {
+    margin-top: 16px;
+    z-index: 1;
+}
+
+ng-quill-editor {
+    display: block;
+    height: 400px;
+}
+
+.ql-editor {
+    background: #fff;
+}
