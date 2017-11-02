@@ -124,5 +124,3 @@ if (localStorage.navbarToggle) {
     });
 
 }
-
-$('.')
