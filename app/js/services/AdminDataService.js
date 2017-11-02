@@ -1,6 +1,6 @@
 'use strict';
 
-const AdminDataService = ($http, $q) => {
+const AdminDataService = function ($http, $q)  {
 
     return {
         signup(user) {

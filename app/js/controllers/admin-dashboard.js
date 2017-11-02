@@ -1,4 +1,4 @@
-const AdminDashboardCtrl = ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) => {
+const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
     $scope.sectionTitle = '';
 

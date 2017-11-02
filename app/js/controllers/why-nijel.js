@@ -1,4 +1,4 @@
-const WhyNijelCtrl = ($scope, ClientDataService, $sce) => {
+const WhyNijelCtrl = function ($scope, ClientDataService, $sce) {
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);
     };

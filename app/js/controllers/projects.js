@@ -89,7 +89,7 @@ function floatingTooltip(tooltipId, width) {
 
 
 
-const ProjectsCtrl = ($scope, $http, $state, ClientDataService) => {
+const ProjectsCtrl = function ($scope, $http, $state, ClientDataService) {
 
     let promise = ClientDataService.fetchProjects();
 

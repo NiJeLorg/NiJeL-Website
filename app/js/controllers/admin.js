@@ -1,4 +1,4 @@
-const AdminCtrl = ($scope, $state, AdminDataService) => {
+const AdminCtrl = function ($scope, $state, AdminDataService) {
     $scope.loginErrorMessage = '';
     $scope.signupErrorMessage = '';
 
