@@ -2,13 +2,13 @@
 const mongoose = require('mongoose');
 
 
-const connect = function(){
+/**
+ *  Creates a connection to a mongoose db
+ * @param dbUrl - String representing connection url
+ */
+const connect = function (dbUrl) {
     mongoose.Promise = global.Promise;
-    var env = process.env.NODE_ENV || 'development';
-    if (env === 'development') {
-        require('dotenv').load();
-    }
-    mongoose.connect(process.env.DATABASE_URL, {
+    mongoose.connect(dbUrl, {
         useMongoClient: true
     }).then(() => {
         console.info('successful connection to the DB');
@@ -18,13 +18,15 @@ const connect = function(){
 
 }
 
-const close = function() {
+/**
+ * Closes connection to mongoose db
+ */
+const close = function () {
     mongoose.connection.close(function () {
         console.info('Mongoose default connection with DB  is disconnected through app termination');
         process.exit(0);
     });
 }
-
 
 module.exports = {
     connect: connect,
