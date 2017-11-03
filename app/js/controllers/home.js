@@ -2,7 +2,7 @@ import moment from 'moment';
 import $ from 'jquery';
 
 
-const HomeCtrl = ($scope, ClientDataService, $document) => {
+const HomeCtrl = function($scope, ClientDataService, $document) {
 
     let testimonialIndex;
     $scope.tweets = [];

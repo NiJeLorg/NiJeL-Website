@@ -1,4 +1,4 @@
-const ContactUsCtrl = ($scope) => {
+const ContactUsCtrl = function ($scope) {
     $scope.title = 'Contact Us';
 };
 

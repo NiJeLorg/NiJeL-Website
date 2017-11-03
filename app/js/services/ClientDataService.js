@@ -1,6 +1,6 @@
 'use strict';
 
-const ClientDataService = ($http, $q) => {
+const ClientDataService = function ($http, $q) {
 
     return {
         fetchProjects: () => {

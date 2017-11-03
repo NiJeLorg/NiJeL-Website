@@ -1,4 +1,4 @@
-const TeamCtrl = ($scope, $mdDialog, ClientDataService) => {
+const TeamCtrl = function ($scope, $mdDialog, ClientDataService)  {
 
     $scope.activeMember = {};
 

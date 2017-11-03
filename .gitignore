@@ -33,7 +33,8 @@ bower_components
 build/Release
 
 # Dependency directories
-public/!assets
+public/*
+!public/assets/
 node_modules/
 jspm_packages/
 
