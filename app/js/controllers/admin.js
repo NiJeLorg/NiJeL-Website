@@ -1,6 +1,8 @@
 const AdminCtrl = function ($scope, $state, AdminDataService) {
     $scope.loginErrorMessage = '';
     $scope.signupErrorMessage = '';
+    $scope.$parent.isAdminState = $state.is('admin');
+
 
     $scope.login = (obj) => {
         AdminDataService.login(obj)
