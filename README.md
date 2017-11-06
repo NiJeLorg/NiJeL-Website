@@ -10,6 +10,13 @@ Client-facing website to display our work and describe who we are as a company, 
 1. Check that you are on the master branch using `git status`.
 1. Run `npm install` to install project dependencies.
 
+### Data Importation
+
+To import the data run the following command.
+
+    gulp import_data
+
+**NB: Running the above command will delete all collections and reinsert them from the master csv located in server/data folder**
 ### Usage
 
 Run gulp on your terminal. Navigate to http://localhost:3000 on your browser.
