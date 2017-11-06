@@ -57,7 +57,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
                 templateUrl: 'views/home.html'
             })
             .state('why-nijel', {
-                url: '/why-nijel',
+                url: '/why-nijel/{tab}',
                 controller: 'WhyNijelCtrl',
                 templateUrl: 'views/why-nijel.html'
             })

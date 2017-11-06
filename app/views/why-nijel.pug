@@ -1,14 +1,8 @@
 .why-nijel-view
-  md-content
-    md-nav-bar
-      md-nav-item(name='page1') Page One
-      md-nav-item Page Two
-      md-nav-item Page Three
-
-    //- md-tabs(md-dynamic-height md-border-bottom)
-    //-   md-tab(label='{{section.title}}' ng-repeat='section in sections')
-    //-     md-content.md-padding
-    //-       h1.md-display-2 {{section.title}}
-    //-       //- .image-container
-    //-       //-   img(src='assets/mapdots.png')
-    //-       p(ng-bind-html='trustAsHtml(section.text)')
+  md-tabs(md-dynamic-height md-border-bottom)
+     md-tab(label='{{section.title}}' ng-repeat='section in sections')
+       md-content.md-padding
+         h1.md-display-2 {{section.title}}
+         .image-container
+            img(src='assets/mapdots.png')
+         p(ng-bind-html='trustAsHtml(section.text)')
