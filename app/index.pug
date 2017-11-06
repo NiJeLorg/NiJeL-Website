@@ -1,9 +1,11 @@
 html
   include shared-views/head
   body(ng-app='nijelApp')
-    include shared-views/nav
+    div(ng-if ="!isAdminState")
+      include shared-views/nav
     main
       ui-view(class='main-view' ng-cloak)
-      include shared-views/footer
+        div(ngif="!isAdminState")
+        include shared-views/footer
 
 

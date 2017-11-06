@@ -4,6 +4,8 @@ import $ from 'jquery';
 
 const HomeCtrl = function($scope, ClientDataService, $document) {
 
+    $scope.isAdminState = false;
+
     let testimonialIndex;
     $scope.tweets = [];
 
