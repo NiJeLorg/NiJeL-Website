@@ -1,18 +1,16 @@
-const NavCtrl = function ($scope, ClientDataService, $sce, $stateParams) {
+const NavCtrl = function ($scope, ClientDataService, $sce) {
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);
     };
-    console.log($stateParams);
 
     ClientDataService.fetchWhyNijelSections()
         .then((resp) => {
             $scope.titles = [];
-            resp.data.sections.forEach(function(section){
+            resp.data.sections.forEach(function (section) {
                 $scope.titles.push(section.title);
             });
-            console.log($scope.titles)
         }, (err) => {
-            console.log(err, 'ERROR');
+            console.error(err, 'ERROR');
         });
 };
 
