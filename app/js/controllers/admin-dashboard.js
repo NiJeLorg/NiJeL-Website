@@ -12,17 +12,6 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
     // fetch respective resources
 
 
-
-    $scope.fetchWhyNijel = () => {
-        ClientDataService.fetchWhyNijelSections()
-            .then((resp) => {
-                $scope.items = resp.data.sections;
-            }, (err) => {
-                console.log(err, 'ERROR');
-            });
-        $scope.sectionTitle = 'Why NiJeL';
-    };
-
     $scope.fetchProcesses = () => {
         ClientDataService.fetchProcessesSections()
             .then((resp) => {
@@ -33,20 +22,6 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
         $scope.sectionTitle = 'Processes';
     };
 
-    // run actions on respective resources
-    $scope.updateItem = (item) => {
-        if ($scope.sectionTitle === 'Testimonials') {
-            $mdDialog.show({
-                locals: {
-                    dataToPass: item
-                },
-                controller: updateTestimonialDialogController,
-                templateUrl: 'views/update-testimonial-dialog.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
-            });
-        }
-    };
 
     $scope.deleteItem = (ev, item, $index, $mdToast) => {
         var confirm = $mdDialog.confirm()
@@ -56,20 +31,7 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
             .ok('YES')
             .cancel('NO');
         $mdDialog.show(confirm).then(() => {
-            if ($scope.sectionTitle === 'Why NiJeL') {
-                AdminDataService.deleteWhyNijelSection(item)
-                    .then((resp) => {
-                        if (resp.data.success) {
-                            $scope.items.forEach((elem) => {
-                                if (elem._id === item._id) {
-                                    $scope.items.splice($index, 1);
-                                }
-                            });
-                        }
-                    }, (err) => {
-                        console.log(err, 'ERROR')
-                    });
-            } else if ($scope.sectionTitle === 'Processes') {
+            if ($scope.sectionTitle === 'Processes') {
                 AdminDataService.deleteProcessSection(item)
                     .then((resp) => {
                         if (resp.data.success) {
@@ -93,15 +55,6 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
 
 
 
-    $scope.launchAddWhyNijelSectionModal = (ev) => {
-        $mdDialog.show({
-            controller: addWhyNijelSectionDialogController,
-            templateUrl: 'views/add-whyNijelSection-dialog.html',
-            parent: angular.element(document.body),
-            clickOutsideToClose: true,
-        });
-    };
-
     $scope.launchAddProcessSectionModal = (ev) => {
         $mdDialog.show({
             controller: addProcessesSectionDialogController,
@@ -118,30 +71,6 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
 
 
 
-    function addWhyNijelSectionDialogController($scope, $mdDialog, $mdToast, Upload) {
-        $scope.createNewWhyNijelSection = (file) => {
-            file.upload = Upload.upload({
-                url: '/api/whynijel',
-                data: {
-                    photo: file,
-                    obj: $scope.section
-                }
-            });
-
-            file.upload.then((resp) => {
-                if (resp.data.success) {
-                    $mdDialog.hide();
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent('Why Nijel Section successfully added!')
-                            .hideDelay(3000)
-                    );
-                }
-            }, (err) => {
-                console.log(err, 'ERR');
-            });
-        };
-    }
 
 
     function addProcessesSectionDialogController($scope, $mdDialog, $mdToast, Upload) {
