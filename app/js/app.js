@@ -122,7 +122,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
             })
             .state('admin.dashboard.processes', {
                 url: '/processes',
-                controller: 'AdminProcessesCtrl',
+                controller: 'AdminProcessCtrl',
                 templateUrl: 'views/admin/processes.html',
             })
             .state('admin.dashboard.why-nijel', {

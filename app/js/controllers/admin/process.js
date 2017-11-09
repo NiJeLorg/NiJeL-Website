@@ -1,29 +1,19 @@
 const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
-    $scope.projects = getProjects();
+    $scope.processes = getProcesses();
     $scope.selected = [];
     //utlility methods
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);
     };
 
-    $scope.fetchProjects = () => {
-        getProjects();
+    $scope.fetchProcesses = () => {
+        getProcesses();
     };
 
 
     // run actions on respective resources
-    $scope.updateProject = (event, project) => {
-            $mdDialog.show({
-                locals: {
-                    dataToPass: project
-                },
-                controller: updateProjectDialogController,
-                templateUrl: 'views/update-project-dialog.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
-            });
-    };
+    // TODO implement update process dialog show
 
     $scope.deleteItem = (ev, item, $index, $mdToast) => {
         let confirm = $mdDialog.confirm()
@@ -33,132 +23,67 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
             .ok('YES')
             .cancel('NO');
         $mdDialog.show(confirm).then(() => {
-                AdminDataService.deleteProject(item)
-                    .then((resp) => {
-                        if (resp.data.success) {
-                            $scope.items.forEach((elem) => {
-                                if (elem._id === item._id) {
-                                    $scope.items.splice($index, 1);
-                                }
-                            });
-                        }
-                    }, (err) => {
-                        console.log(err, 'ERR');
-                    });
+            AdminDataService.deleteProcessSection(item)
+                .then((resp) => {
+                    if (resp.data.success) {
+                        $scope.items.forEach((elem) => {
+                            if (elem._id === item._id) {
+                                $scope.items.splice($index, 1);
+                            }
+                        });
+                    }
+                }, (err) => {
+                    console.log(err, 'ERROR')
+                });
         }, () => {
             console.log('Item not deleted!');
         });
     };
 
-    function getProjects(){
-        ClientDataService.fetchProjects()
+    function getProcesses(){
+        ClientDataService.fetchProcessesSections()
             .then((resp) => {
-                console.log("Finished fetching");
-                $scope.projects = resp.data.projects;
+                $scope.items = resp.data.sections;
             }, (err) => {
                 console.log(err, 'ERROR');
             });
     }
-    function addProjectDialogController($scope, $mdDialog, $mdToast, Upload) {
-        $scope.createNewProject = (file) => {
-            $scope.newProject.isFeaturedProject = null;
-            $scope.isFeaturedProjectOptions = {
-                yes: true,
-                no: false
-            };
-            if (file) {
-                file.upload = Upload.upload({
-                    url: '/api/projects',
-                    data: {
-                        photo: file,
-                        obj: $scope.newProject
-                    }
-                });
 
-                file.upload.then((resp) => {
-                    if (resp.data.success) {
-                        $mdDialog.hide();
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .textContent('Project Successfully added!')
-                                .hideDelay(3000)
-                        );
-                    }
-                }, (err) => {
-                    console.log(err, 'ERROR');
-                });
-            } else {
-                AdminDataService.createNewProject($scope.newProject)
-                    .then((resp) => {
-                        if (resp.data.success) {
-                            $mdDialog.hide();
-                            $mdToast.show(
-                                $mdToast.simple()
-                                    .textContent('Project Successfully added!')
-                                    .hideDelay(3000)
-                            );
-                        }
-                    }, (err) => {
-                        console.log(err, 'ERROR')
-                    });
-            }
+    function addProcessesSectionDialogController($scope, $mdDialog, $mdToast, Upload) {
+        $scope.createNewProcessesSection = (file) => {
+            file.upload = Upload.upload({
+                url: '/api/processes',
+                data: {
+                    photo: file,
+                    obj: $scope.section
+                }
+            });
+
+            file.upload.then((resp) => {
+                if (resp.data.success) {
+                    $mdDialog.hide();
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Process Section successfully added!')
+                            .hideDelay(3000)
+                    );
+                }
+            }, (err) => {
+                console.log(err, 'ERR');
+            });
         };
     }
 
-    function updateProjectDialogController($scope, $mdDialog, $mdToast, dataToPass, Upload) {
-        $scope.project = dataToPass;
-        console.log($scope.project, 'scope.project');
 
-        $scope.updateProject = (file) => {
-            if (file) {
-                file.upload = Upload.upload({
-                    url: ('/api/projects/' + $scope.project._id),
-                    method: 'PUT',
-                    data: {
-                        photo: file,
-                        obj: $scope.project
-                    }
-                });
-
-                file.upload.then((resp) => {
-                    if (resp.data.success) {
-                        $mdDialog.hide();
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .textContent('Project Successfully updated!')
-                                .hideDelay(3000)
-                        );
-                    }
-                }, (err) => {
-                    console.log(err, 'ERR');
-                });
-            } else {
-                AdminDataService.updateProject($scope.project)
-                    .then((resp) => {
-                        if (resp.data.success) {
-                            $mdDialog.hide();
-                            $mdToast.show(
-                                $mdToast.simple()
-                                    .textContent('Project Successfully updated!')
-                                    .hideDelay(3000)
-                            );
-                        }
-                    }, (err) => {
-                        console.log(err, 'ERR');
-                    });
-            }
-        };
-
-    }
-
-    $scope.launchAddProjectModal = (ev) => {
+    $scope.launchAddProcessSectionModal = (ev) => {
         $mdDialog.show({
-            controller: addProjectDialogController,
-            templateUrl: 'views/add-project-dialog.html',
+            controller: addProcessesSectionDialogController,
+            templateUrl: 'views/add-processSection-dialog.html',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
         });
     };
+
 }
 
 export default AdminProcessCtrl;
