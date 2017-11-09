@@ -108,7 +108,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
             .state('admin.dashboard', {
                 url: '/dashboard',
                 controller: 'AdminDashboardCtrl',
-                templateUrl: 'views/admin-dashboard.html'
+                templateUrl: 'views/admin/dashboard.html'
             })
             .state('admin.dashboard.projects', {
                 url: '/projects',
