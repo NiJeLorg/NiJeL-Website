@@ -1,0 +1,9 @@
+.item-group
+    h3 Full Names
+    p {{item.fullname}}
+.item-group
+    h3 Position
+    p {{item.position}}
+.item-group
+    h3 Bio
+    p(ng-bind-html="trustAsHtml(item.bio)")

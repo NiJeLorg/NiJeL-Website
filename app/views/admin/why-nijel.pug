@@ -1,0 +1,9 @@
+.item-group
+    h3 Title
+    p {{item.title}}
+.item-group
+    h3 Body Text
+    p(ng-bind-html="trustAsHtml(item.text)")
+.item-group
+    h3 Section Cover Photo
+    .cover-photo(style='background:url("{{item.coverPhoto}}")' ng-if='item.coverPhoto')

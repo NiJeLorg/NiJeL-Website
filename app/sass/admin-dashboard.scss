@@ -8,7 +8,7 @@
     section {
         flex-basis: 85%;
         background: #F6F6F6;
-        padding: 4% 6%;
+        padding: 2% 2%;
         overflow-y: scroll;
     }
 }
@@ -103,4 +103,19 @@ section {
 
 .dialog-view {
     padding: 40px;
+}
+
+
+.toolbar-search-bx {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+form {
+    &.toolbar-search-bx{
+        input:focus{
+            outline: none;
+        }
+    }
 }
