@@ -6,7 +6,7 @@ const NavCtrl = function ($scope, ClientDataService, $sce) {
     ClientDataService.fetchWhyNijelSections()
         .then((resp) => {
             $scope.titles = [];
-            resp.data.sections.forEach(function (section) {
+            resp.data.sections.forEach( (section) => {
                 $scope.titles.push(section.title);
             });
         }, (err) => {
