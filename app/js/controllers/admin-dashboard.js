@@ -11,15 +11,7 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
 
     // fetch respective resources
 
-    $scope.fetchTeam = () => {
-        ClientDataService.fetchTeamMembers()
-            .then((resp) => {
-                $scope.items = resp.data.teamMembers;
-            }, (err) => {
-                console.log(err, 'ERROR');
-            });
-        $scope.sectionTitle = 'Team';
-    };
+
 
     $scope.fetchWhyNijel = () => {
         ClientDataService.fetchWhyNijelSections()
@@ -64,33 +56,7 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
             .ok('YES')
             .cancel('NO');
         $mdDialog.show(confirm).then(() => {
-            if ($scope.sectionTitle === 'Testimonials') {
-                AdminDataService.deleteTestimonial(item)
-                    .then((resp) => {
-                        if (resp.data.success) {
-                            $scope.items.forEach((elem) => {
-                                if (elem._id === item._id) {
-                                    $scope.items.splice($index, 1);
-                                }
-                            });
-                        }
-                    }, (err) => {
-                        console.log(err, 'ERR');
-                    });
-            } else if ($scope.sectionTitle === 'Team') {
-                AdminDataService.deleteTeamMember(item)
-                    .then((resp) => {
-                        if (resp.data.success) {
-                            $scope.items.forEach((elem) => {
-                                if (elem._id === item._id) {
-                                    $scope.items.splice($index, 1);
-                                }
-                            });
-                        }
-                    }, (err) => {
-                        console.log(err, 'ERROR')
-                    });
-            } else if ($scope.sectionTitle === 'Why NiJeL') {
+            if ($scope.sectionTitle === 'Why NiJeL') {
                 AdminDataService.deleteWhyNijelSection(item)
                     .then((resp) => {
                         if (resp.data.success) {
@@ -126,14 +92,6 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
     // event handlers for launching specific resource dialogs
 
 
-    $scope.launchAddTeamMemberModal = (ev) => {
-        $mdDialog.show({
-            controller: addTeamMemberDialogController,
-            templateUrl: 'views/add-teamMember-dialog.html',
-            parent: angular.element(document.body),
-            clickOutsideToClose: true,
-        });
-    };
 
     $scope.launchAddWhyNijelSectionModal = (ev) => {
         $mdDialog.show({
@@ -159,21 +117,6 @@ const AdminDashboardCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminD
 
 
 
-    function addTeamMemberDialogController($scope, $mdDialog, $mdToast) {
-        $scope.createNewTeamMember = () => {
-            AdminDataService.createNewTeamMember($scope.teamMember)
-                .then((resp) => {
-                    $mdDialog.hide();
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent(resp.data.message)
-                            .hideDelay(3000)
-                    );
-                }, (err) => {
-                    console.log(err, 'ERROR');
-                });
-        };
-    }
 
     function addWhyNijelSectionDialogController($scope, $mdDialog, $mdToast, Upload) {
         $scope.createNewWhyNijelSection = (file) => {
