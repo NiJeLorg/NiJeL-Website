@@ -11,7 +11,32 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         getProjects();
     };
 
+    $scope.filter = {
+        options: {
+            debounce: 500
+        }
+    };
 
+    $scope.query = {
+        filter: '',
+        // limit: '5',
+        order: 'nameToLower'
+        // page: 1
+    };
+
+    $scope.removeFilter = function () {
+        $scope.filter.show = false;
+        $scope.query.filter = '';
+
+        if($scope.filter.form.$dirty) {
+            $scope.filter.form.$setPristine();
+        }
+    };
+
+    $scope.$watch('query.filter', function (newValue, oldValue) {
+
+        $scope.fetchProjects();
+    });
     // run actions on respective resources
     $scope.updateProject = (event, project) => {
             $mdDialog.show({

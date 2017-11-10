@@ -51,7 +51,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
     '$urlRouterProvider', '$locationProvider', '$mdThemingProvider',
 
     function ($stateProvider, $httpProvider, $urlRouterProvider,
-        $locationProvider, $mdThemingProvider) {
+              $locationProvider, $mdThemingProvider) {
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/');
@@ -98,12 +98,16 @@ nijelApp.config(['$stateProvider', '$httpProvider',
             })
             .state('admin', {
                 url: '/admin',
-                templateUrl: 'views/layout.html'
+                templateUrl: 'views/layout.html',
+                data: {
+                    'isAdmin': true
+                },
+                redirectTo: 'admin.authenticate'
             })
-            .state('admin.login', {
-                url: '/login',
+            .state('admin.authenticate', {
+                url: '/authenticate',
                 controller: 'AdminCtrl',
-                templateUrl: 'views/admin.html'
+                templateUrl: 'views/admin/auth.html'
             })
             .state('admin.dashboard', {
                 url: '/dashboard',
@@ -141,7 +145,17 @@ nijelApp.config(['$stateProvider', '$httpProvider',
         $httpProvider.defaults.headers.common['x-access-token'] = localStorage.token;
 
     }
-]);
+]).run(['$state', '$transitions', '$rootScope', ($state, $transitions, $rootScope) => {
+    $transitions.onStart({}, function ($transition) {
+        if ($transition.$to().data) {
+            let data = $transition.$to().data;
+            $rootScope.isAdminState = data.isAdmin;
+        } else {
+            $rootScope.isAdminState = false;
+        }
+    });
+    ;
+}]);
 
 if (localStorage.navbarToggle) {
     $(document).ready(() => {

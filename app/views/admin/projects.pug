@@ -14,7 +14,7 @@ md-card
             md-icon.material-icons search
             form.ng-pristine.ng-valid.flex(flex='', name='filter.form' class='toolbar-search-bx')
                 input.ng-pristine.ng-valid.ng-touched(type='text', ng-model='query.filter', ng-model-options='filter.options', placeholder='search', aria-invalid='false', style='')
-            button.md-icon-button.md-button.md-ink-ripple(type='button', ng-click='filter.show = false', aria-label='close')
+            button.md-icon-button.md-button.md-ink-ripple(type='button', ng-click='removeFilter()', aria-label='close')
                 md-icon.material-icons close
                 .md-ripple-container
 
