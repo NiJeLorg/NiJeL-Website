@@ -28,7 +28,7 @@ md-card
                     th(md-column='') Year
                     th(md-column='') Actions
             tbody(md-body='')
-                tr(md-row='',  md-select-id='name', md-auto-select='', ng-repeat='project in projects')
+                tr(md-row='',  md-select-id='name', md-auto-select='', ng-repeat='project in filteredProjects')
                     td(md-cell='')
                         a(ng-click='edit($event, item)') {{project.name}}
                     td(md-cell='') {{project.client}}

@@ -1,14 +1,15 @@
+
+import _ from 'lodash';
+
 const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
-    $scope.projects = getProjects();
-    $scope.selected = [];
+
+    // Fetch Projects and set scope variables
+    getProjects();
+
     //utlility methods
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);
-    };
-
-    $scope.fetchProjects = () => {
-        getProjects();
     };
 
     $scope.filter = {
@@ -19,10 +20,18 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
 
     $scope.query = {
         filter: '',
-        // limit: '5',
         order: 'nameToLower'
-        // page: 1
     };
+
+    function getProjects(){
+        ClientDataService.fetchProjects()
+            .then((resp) => {
+                $scope.projects = resp.data.projects;
+                $scope.filteredProjects = resp.data.projects;
+            }, (err) => {
+                console.log(err, 'ERROR');
+            });
+    }
 
     $scope.removeFilter = function () {
         $scope.filter.show = false;
@@ -31,12 +40,27 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         if($scope.filter.form.$dirty) {
             $scope.filter.form.$setPristine();
         }
+        $scope.filteredProjects =  $scope.projects;
     };
 
-    $scope.$watch('query.filter', function (newValue, oldValue) {
+    $scope.filterProjects = () => {
+      $scope.filteredProjects= _.filter($scope.projects, (project) => {
 
-        $scope.fetchProjects();
+          let regex = '.*';
+          if($scope.query.filter){
+              regex = '^.*('+$scope.query.filter +').*$';
+          }
+          console.log(regex);
+          let reg = new RegExp(regex, 'i');
+          console.log(reg);
+          return project.name.match(reg);
+      });
+    };
+
+    $scope.$watch('query.filter', () =>{
+        $scope.filterProjects();
     });
+    
     // run actions on respective resources
     $scope.updateProject = (event, project) => {
             $mdDialog.show({
@@ -75,15 +99,6 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         });
     };
 
-    function getProjects(){
-        ClientDataService.fetchProjects()
-            .then((resp) => {
-                console.log("Finished fetching");
-                $scope.projects = resp.data.projects;
-            }, (err) => {
-                console.log(err, 'ERROR');
-            });
-    }
     function addProjectDialogController($scope, $mdDialog, $mdToast, Upload) {
         $scope.createNewProject = (file) => {
             $scope.newProject.isFeaturedProject = null;
