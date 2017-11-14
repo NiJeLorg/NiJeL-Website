@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
-
+    // TODO Replace the action icos with android style action menu
     // Fetch Projects and set scope variables
     getProjects();
 
@@ -11,6 +11,9 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);
     };
+
+    $scope.selected = [];
+    $scope.selectBulkAction = '';
 
     $scope.filter = {
         options: {
@@ -20,8 +23,19 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
 
     $scope.query = {
         filter: '',
+        typeFilter: 'all',
         order: 'nameToLower'
     };
+
+    $scope.favorite = (action) => {
+        // Validate that the total number of featured projects is not more than 3
+        // Get currrent total number of feature projects
+        // Add to current selection and check that it is not greater than limit
+        // If it is greater than the limit then show a warning dialog
+        // IF it is less than equal then feature those projects
+        // See if we can attach an icon to identify also featured projects easily
+        alert("You request "+ action);
+    }
 
     function getProjects(){
         ClientDataService.fetchProjects()

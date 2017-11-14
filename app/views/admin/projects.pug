@@ -4,7 +4,7 @@ md-button.md-fab(aria-label='Eat cake', class='md-fab-bottom-right launchItemMod
 md-card
     md-toolbar.md-table-toolbar.md-default(ng-hide='selected.length || filter.show', aria-hidden='false', style='')
         .md-toolbar-tools
-            h2.md-title Projects
+            h2.md-title Projects              
             .flex(flex='')
             button.md-icon-button.md-button.md-ink-ripple(type='button', ng-click='filter.show = true', aria-label='filter_list')
                 md-icon.material-icons filter_list
@@ -17,9 +17,23 @@ md-card
             button.md-icon-button.md-button.md-ink-ripple(type='button', ng-click='removeFilter()', aria-label='close')
                 md-icon.material-icons close
                 .md-ripple-container
+    
+    md-toolbar.md-table-toolbar.md-default
+        .md-toolbar-tools        
+            md-input-container.table-filter-toolbar
+                label Actions                
+                md-select(ng-model='selectBulkAction', ng-change="favorite(selectBulkAction)")
+                    md-option(ng-value="0") Feature
+                    md-option(ng-value="1") Un Feature
+
+            md-input-container.table-filter-toolbar
+                label Type                
+                md-select(ng-model='query.typeFilter')
+                    md-option(ng-value="0") All
+                    md-option(ng-value="1") Featured Projects
 
     md-table-container
-        table(md-table='',  ng-model='selected', md-progress='promise')
+        table(md-table='' md-row-select='' multiple=''  ng-model='selected' md-progress='promise')
             thead(md-head='')
                 tr(md-row='')
                     th(md-column='') Project
@@ -28,7 +42,7 @@ md-card
                     th(md-column='') Year
                     th(md-column='') Actions
             tbody(md-body='')
-                tr(md-row='',  md-select-id='name', md-auto-select='', ng-repeat='project in filteredProjects')
+                tr(md-row='' md-select="project"  md-select-id='name' md-auto-select='' ng-repeat='project in filteredProjects')
                     td(md-cell='')
                         a(ng-click='edit($event, item)') {{project.name}}
                     td(md-cell='') {{project.client}}
