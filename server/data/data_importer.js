@@ -5,7 +5,7 @@ const project = require('../models/projects'),
     fast_csv = require('fast-csv'),
     mongoose = require('mongoose'),
     TEAM_HEADERS = ['bio', 'fullname', 'position'],
-    PROJECTS_HEADERS = ['client', 'coverPhoto', 'linkToLiveSite', 'name', 'relevantSDG', 'year'],
+    PROJECTS_HEADERS = ['client', 'coverPhoto', 'linkToLiveSite', 'name', 'relevantSDG', 'year', 'isFeaturedProject', 'description'],
     TESTIMONIAL_HEADERS = ['company', 'position', 'reviewer', 'testimonial'],
     WHYNIJEL_HEADERS = ['coverPhoto', 'text', 'title'],
     configs = require('../../common/config_loader'),
@@ -42,11 +42,11 @@ function import_csv_data(local_file_path, headers, model, model_label) {
 function run_data_import() {
     console.log(configs.DATABASE_URL);
     mongoose_connector.connect(configs.DATABASE_URL);
-    import_csv_data("teams.csv", TEAM_HEADERS, team, 'Teams');
+    // import_csv_data("teams.csv", TEAM_HEADERS, team, 'Teams');
     import_csv_data("projects.csv", PROJECTS_HEADERS, project, 'Projects');
-    import_csv_data("whynijels.csv", WHYNIJEL_HEADERS, why_nijel, 'Why Nijel');
-    import_csv_data("testimonials.csv", TESTIMONIAL_HEADERS, testimonials, 'Testimonials');
-    mongoose_connector.close();
+    // import_csv_data("whynijels.csv", WHYNIJEL_HEADERS, why_nijel, 'Why Nijel');
+    // import_csv_data("testimonials.csv", TESTIMONIAL_HEADERS, testimonials, 'Testimonials');
+    // mongoose_connector.close();
 }
 
 

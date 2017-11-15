@@ -3,10 +3,14 @@
 const ClientDataService = function ($http, $q) {
 
     return {
-        fetchProjects: () => {
+        fetchProjects: (searchQueryString, featuredFlag) => {
             return $http({
                 method: 'GET',
-                url: '/api/projects'
+                url: '/api/projects',
+                params: {
+                    search: searchQueryString,
+                    featured: featuredFlag
+                }
             });
         },
 

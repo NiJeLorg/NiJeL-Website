@@ -20,17 +20,17 @@ md-card
     
     md-toolbar.md-table-toolbar.md-default
         .md-toolbar-tools        
-            md-input-container.table-filter-toolbar
-                label Actions                
-                md-select(ng-model='selectBulkAction', ng-change="favorite(selectBulkAction)")
-                    md-option(ng-value="0") Feature
-                    md-option(ng-value="1") Un Feature
+            //- md-input-container.table-filter-toolbar
+            //-     label Actions                
+            //-     md-select(ng-model='selectBulkAction', ng-change="favorite(selectBulkAction)")
+            //-         md-option(ng-value="0") Feature
+            //-         md-option(ng-value="1") Un Feature
 
             md-input-container.table-filter-toolbar
                 label Type                
                 md-select(ng-model='query.typeFilter')
-                    md-option(ng-value="0") All
-                    md-option(ng-value="1") Featured Projects
+                    md-option(ng-value=0) All
+                    md-option(ng-value=1) Featured Projects
 
     md-table-container
         table(md-table='' md-row-select='' multiple=''  ng-model='selected' md-progress='promise')
@@ -40,14 +40,19 @@ md-card
                     th(md-column='') Client
                     th(md-column='') SDG
                     th(md-column='') Year
+                    th(md-column) Featured
                     th(md-column='') Actions
             tbody(md-body='')
-                tr(md-row='' md-select="project"  md-select-id='name' md-auto-select='' ng-repeat='project in filteredProjects')
+                tr(md-row='' md-select="project"  md-select-id='name' md-auto-select='' ng-repeat='project in projects')
                     td(md-cell='')
-                        a(ng-click='edit($event, item)') {{project.name}}
+                        a(ng-click='edit($event, project)') {{project.name}}
                     td(md-cell='') {{project.client}}
                     td(md-cell='') {{project.relevantSDG}}
                     td(md-cell='') {{project.year}}
+                    td(md-cell)
+                        md-select(ng-model="project.isFeaturedProject", ng-change="featureProject(project)")
+                            md-option(ng-repeat="option in featuredOptions", ng-value="option.value", ng-selected="option.value == project.isFeaturedProject") {{option.label}}
+
                     td(md-cell='')
                         div(layout='row', layout-sm='column',)
                             md-button.md-icon-button.md-accent(aria-label='Edit', ng-click='updateProject($event, project)')
