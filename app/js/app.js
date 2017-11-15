@@ -7,6 +7,7 @@ import ngQuill from 'ng-quill';
 import angular from 'angular';
 import slugify from  './filters/slugify';
 import $ from 'jquery';
+import satellizer from 'satellizer';
 
 // import controllers
 import HomeCtrl from './controllers/home';
@@ -25,7 +26,7 @@ import ClientDataService from './services/ClientDataService';
 import AdminDataService from './services/AdminDataService';
 
 
-const nijelApp = angular.module('nijelApp', [ uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill]);
+const nijelApp = angular.module('nijelApp', [ uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill, satellizer]);
 
 nijelApp.filter('slugify', [slugify]);
 nijelApp.controller('TeamCtrl', TeamCtrl)
@@ -41,10 +42,10 @@ nijelApp.controller('TeamCtrl', TeamCtrl)
     .factory('AdminDataService', AdminDataService);
 
 nijelApp.config(['$stateProvider', '$httpProvider',
-    '$urlRouterProvider', '$locationProvider', '$mdThemingProvider',
+    '$urlRouterProvider', '$locationProvider', '$mdThemingProvider', '$authProvider',
 
     function ($stateProvider, $httpProvider, $urlRouterProvider,
-        $locationProvider, $mdThemingProvider) {
+        $locationProvider, $mdThemingProvider, $authProvider) {
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/');
@@ -98,7 +99,11 @@ nijelApp.config(['$stateProvider', '$httpProvider',
                 controller: 'AdminDashboardCtrl',
                 templateUrl: 'views/admin-dashboard.html'
             });
-
+        
+            $authProvider.google({
+                clientId: '625669686935-svdnupk3m7on72r85mug60jokn7r7a7d.apps.googleusercontent.com',
+                redirectUri: 'http://localhost:3000/admin/dashboard'
+              });
         $locationProvider.html5Mode(true);
 
         $httpProvider.defaults.headers.common['x-access-token'] = localStorage.token;
