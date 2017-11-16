@@ -5,6 +5,7 @@ import ngMaterial from 'angular-material';
 import ngFileUpload from 'ng-file-upload';
 import ngQuill from 'ng-quill';
 import angular from 'angular';
+import slugify from  './filters/slugify';
 import $ from 'jquery';
 // import dataGrid from 'angular-data-grid';
 
@@ -16,6 +17,7 @@ import ProjectCtrl from './controllers/project';
 import ContactUsCtrl from './controllers/contacts';
 import WhyNijelCtrl from './controllers/why-nijel';
 import AdminCtrl from './controllers/admin';
+import NavCtrl from './controllers/nav';
 import AdminDashboardCtrl from './controllers/admin-dashboard';
 import AdminProjectCtrl from './controllers/admin/project';
 import AdminProcessCtrl from './controllers/admin/process';
@@ -30,8 +32,10 @@ import AdminDataService from './services/AdminDataService';
 
 const nijelApp = angular.module('nijelApp', [uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill, require('angular-material-data-table')]);
 
+nijelApp.filter('slugify', [slugify]);
 nijelApp.controller('TeamCtrl', TeamCtrl)
     .controller('HomeCtrl', HomeCtrl)
+    .controller('NavCtrl', NavCtrl)
     .controller('ProjectsCtrl', ProjectsCtrl)
     .controller('ProjectCtrl', ProjectCtrl)
     .controller('ContactUsCtrl', ContactUsCtrl)
@@ -45,7 +49,6 @@ nijelApp.controller('TeamCtrl', TeamCtrl)
     .controller('AdminDashboardCtrl', AdminDashboardCtrl)
     .factory('ClientDataService', ClientDataService)
     .factory('AdminDataService', AdminDataService);
-
 
 nijelApp.config(['$stateProvider', '$httpProvider',
     '$urlRouterProvider', '$locationProvider', '$mdThemingProvider',
@@ -68,7 +71,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
                 templateUrl: 'views/home.html'
             })
             .state('why-nijel', {
-                url: '/why-nijel',
+                url: '/why-nijel/{tab}',
                 controller: 'WhyNijelCtrl',
                 templateUrl: 'views/why-nijel.html'
             })
@@ -156,6 +159,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
     });
     ;
 }]);
+
 
 if (localStorage.navbarToggle) {
     $(document).ready(() => {
