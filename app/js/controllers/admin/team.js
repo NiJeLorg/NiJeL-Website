@@ -1,13 +1,9 @@
 const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
-    $scope.team = getTeam();
+    getTeam();
     //utlility methods
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);
-    };
-
-    $scope.fetchTeam = () => {
-        getTeam();
     };
 
     // TODO Implement update team member

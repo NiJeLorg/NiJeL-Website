@@ -1,6 +1,6 @@
 const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
-    $scope.testimonials = getTestimonials();
+    getTestimonials();
     //utlility methods
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);

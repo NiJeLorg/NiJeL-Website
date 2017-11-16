@@ -1,15 +1,10 @@
 const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
-    $scope.processes = getProcesses();
+    getProcesses();
     //utlility methods
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);
     };
-
-    $scope.fetchProcesses = () => {
-        getProcesses();
-    };
-
 
     // run actions on respective resources
     // TODO implement update process dialog show
