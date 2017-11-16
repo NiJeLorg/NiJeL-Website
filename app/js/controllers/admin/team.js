@@ -30,10 +30,10 @@ const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataSe
                         });
                     }
                 }, (err) => {
-                    console.log(err, 'ERROR')
+                    console.error(err, 'ERROR')
                 });
         }, () => {
-            console.log('Item not deleted!');
+            console.error('Item not deleted!');
         });
     };
 
@@ -42,7 +42,7 @@ const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataSe
             .then((resp) => {
                 $scope.team = resp.data.teamMembers;
             }, (err) => {
-                console.log(err, 'ERROR');
+                console.error(err, 'ERROR');
             });
     }
 
@@ -57,7 +57,7 @@ const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataSe
                             .hideDelay(3000)
                     );
                 }, (err) => {
-                    console.log(err, 'ERROR');
+                    console.error(err, 'ERROR');
                 });
         };
     }

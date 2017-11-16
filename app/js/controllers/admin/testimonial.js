@@ -42,10 +42,9 @@ const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, Admi
                         });
                     }
                 }, (err) => {
-                    console.log(err, 'ERR');
+                    console.error(err, 'ERR');
                 });
         }, () => {
-            console.log('Item not deleted!');
         });
     };
 
@@ -54,7 +53,7 @@ const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, Admi
             .then((resp) => {
                 $scope.testimonials = resp.data.testimonials;
             }, (err) => {
-                console.log(err, 'ERROR');
+                console.error(err, 'ERROR');
             });
     }
 
@@ -69,7 +68,7 @@ const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, Admi
                             .hideDelay(3000)
                     );
                 }, (err) => {
-                    console.log(err, 'ERROR');
+                    console.error(err, 'ERROR');
                 });
         };
     }

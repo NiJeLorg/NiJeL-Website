@@ -15,7 +15,7 @@ const AdminWhyNijelCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDa
             .then((resp) => {
                 $scope.sections = resp.data.sections;
             }, (err) => {
-                console.log(err, 'ERROR');
+                console.error(err, 'ERROR');
             });
     }
 
@@ -40,10 +40,9 @@ const AdminWhyNijelCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDa
                         });
                     }
                 }, (err) => {
-                    console.log(err, 'ERROR')
+                    console.error(err, 'ERROR')
                 });
         }, () => {
-            console.log('Item not deleted!');
         });
     };
 
@@ -76,7 +75,7 @@ const AdminWhyNijelCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDa
                     );
                 }
             }, (err) => {
-                console.log(err, 'ERR');
+                console.error(err, 'ERR');
             });
         };
     }

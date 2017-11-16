@@ -32,10 +32,9 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                         });
                     }
                 }, (err) => {
-                    console.log(err, 'ERROR')
+                    console.error(err, 'ERROR')
                 });
         }, () => {
-            console.log('Item not deleted!');
         });
     };
 
@@ -44,7 +43,7 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
             .then((resp) => {
                 $scope.items = resp.data.sections;
             }, (err) => {
-                console.log(err, 'ERROR');
+                console.error(err, 'ERROR');
             });
     }
 
@@ -68,7 +67,7 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                     );
                 }
             }, (err) => {
-                console.log(err, 'ERR');
+                console.error(err, 'ERR');
             });
         };
     }
