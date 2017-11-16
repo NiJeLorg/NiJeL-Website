@@ -46,20 +46,8 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         // If it is greater than the limit then show a warning dialog
         // IF it is less than equal then feature those projects
         // See if we can attach an icon to identify also featured projects easily
-        alert("You request "+ project.isFeaturedProject);
-
-    }
-
-    $scope.featureProject = (project) => {
-        // Validate that the total number of featured projects is not more than 3
-        // Get currrent total number of feature projects
-        // Add to current selection and check that it is not greater than limit
-        // If it is greater than the limit then show a warning dialog
-        // IF it is less than equal then feature those projects
-        // See if we can attach an icon to identify also featured projects easily
         ClientDataService.fetchProjects('', true)
         .then((resp) => {
-            console.log("Featureing ", project.isFeaturedProject);
             if (resp.data.projects.length == 3 &&  project.isFeaturedProject == true){
                 showAlert("We can only feature a maximum of 3 projects at a time. Please unfeature one of them before proceeding");
             }else{
@@ -73,13 +61,12 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                         );
                     }
                 }, (err) => {
-                    console.log(err, 'ERR');
+                    console.error(err, 'ERR');
                 });
-                // showAlert("Success");
             }
             getProjects();
         }, (err) => {
-            console.log(err, 'ERROR');
+            console.error(err, 'ERROR');
         });
         // alert("You request "+ project.isFeaturedProject);
     }
@@ -88,7 +75,7 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
             .then((resp) => {
                 $scope.projects = resp.data.projects;
             }, (err) => {
-                console.log(err, 'ERROR');
+                console.error(err, 'ERROR');
             });
     }
 
@@ -138,10 +125,10 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                             });
                         }
                     }, (err) => {
-                        console.log(err, 'ERR');
+                        console.error(err, 'ERR');
                     });
         }, () => {
-            console.log('Item not deleted!');
+            // TODO Figure out what to do here
         });
     };
 
@@ -171,7 +158,7 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                         );
                     }
                 }, (err) => {
-                    console.log(err, 'ERROR');
+                    console.error(err, 'ERROR');
                 });
             } else {
                 AdminDataService.createNewProject($scope.newProject)
@@ -185,7 +172,7 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                             );
                         }
                     }, (err) => {
-                        console.log(err, 'ERROR')
+                        console.error(err, 'ERROR')
                     });
             }
         };
@@ -193,8 +180,6 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
 
     function updateProjectDialogController($scope, $mdDialog, $mdToast, dataToPass, Upload) {
         $scope.project = dataToPass;
-        console.log($scope.project, 'scope.project');
-
         $scope.updateProject = (file) => {
             if (file) {
                 file.upload = Upload.upload({
@@ -216,7 +201,7 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                         );
                     }
                 }, (err) => {
-                    console.log(err, 'ERR');
+                    console.error(err, 'ERR');
                 });
             } else {
                 AdminDataService.updateProject($scope.project)
@@ -230,7 +215,7 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                             );
                         }
                     }, (err) => {
-                        console.log(err, 'ERR');
+                        console.error(err, 'ERR');
                     });
             }
         };
