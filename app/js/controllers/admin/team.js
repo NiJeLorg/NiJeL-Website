@@ -1,7 +1,6 @@
 const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
     $scope.team = getTeam();
-    $scope.selected = [];
     //utlility methods
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);

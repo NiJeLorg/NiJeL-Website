@@ -1,7 +1,6 @@
 const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataService, ClientDataService, $sce) {
 
     $scope.processes = getProcesses();
-    $scope.selected = [];
     //utlility methods
     $scope.trustAsHtml = (template) => {
         return $sce.trustAsHtml(template);
