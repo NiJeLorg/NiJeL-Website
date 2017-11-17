@@ -6,9 +6,27 @@ const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataSe
         return $sce.trustAsHtml(template);
     };
 
-    // TODO Implement update team member
+    function getTeam(){
+        ClientDataService.fetchTeamMembers()
+            .then((resp) => {
+                $scope.team = resp.data.teamMembers;
+            }, (err) => {
+                console.error(err, 'ERROR');
+            });
+    }
 
-    $scope.deleteItem = (ev, item, $index, $mdToast) => {
+    $scope.updateTeamMember = (event, teamMember) => {
+        $mdDialog.show({
+            locals: {
+                dataToPass: teamMember
+            },
+            controller: updateTeamMemberDialogController,
+            templateUrl: 'views/admin/update-team-member-dialog.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+        });
+};
+    $scope.deleteTeamMember = (ev, teamMember, $index, $mdToast) => {
         let confirm = $mdDialog.confirm()
             .title('Are you sure, you want to delete this item ?')
             .textContent('Clicking on YES, will delete this item permanently!')
@@ -16,12 +34,12 @@ const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataSe
             .ok('YES')
             .cancel('NO');
         $mdDialog.show(confirm).then(() => {
-            AdminDataService.deleteTeamMember(item)
+            AdminDataService.deleteTeamMember(teamMember)
                 .then((resp) => {
                     if (resp.data.success) {
-                        $scope.items.forEach((elem) => {
-                            if (elem._id === item._id) {
-                                $scope.items.splice($index, 1);
+                        $scope.team.forEach((elem, $index) => {
+                            if (elem._id === teamMember._id) {
+                                $scope.team.splice($index, 1);
                             }
                         });
                     }
@@ -33,37 +51,98 @@ const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataSe
         });
     };
 
-    function getTeam(){
-        ClientDataService.fetchTeamMembers()
-            .then((resp) => {
-                $scope.team = resp.data.teamMembers;
-            }, (err) => {
-                console.error(err, 'ERROR');
-            });
-    }
 
-    function addTeamMemberDialogController($scope, $mdDialog, $mdToast) {
-        $scope.createNewTeamMember = () => {
-            AdminDataService.createNewTeamMember($scope.teamMember)
-                .then((resp) => {
-                    $mdDialog.hide();
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent(resp.data.message)
-                            .hideDelay(3000)
-                    );
+    function addTeamMemberDialogController($scope, $mdDialog, $mdToast, Upload) {
+        $scope.createNewTeamMember = (file) => {
+            if (file) {
+                file.upload = Upload.upload({
+                    url: '/api/team/',
+                    data: {
+                        photo: file,
+                        obj: $scope.teamMember
+                    }
+                });
+
+                file.upload.then((resp) => {
+                    if (resp.data.success) {
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Team Member Successfully added!')
+                                .hideDelay(3000)
+                        );
+                        getWhyNijelSections();
+                    }
                 }, (err) => {
                     console.error(err, 'ERROR');
                 });
+            } else {
+                AdminDataService.createNewTeamMember($scope.teamMember)
+                    .then((resp) => {
+                        if (resp.data.success) {
+                            $mdDialog.hide();
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .textContent('Team Member Successfully added!')
+                                    .hideDelay(3000)
+                            );
+                            getWhyNijelSections();
+                        }
+                    }, (err) => {
+                        console.error(err, 'ERROR')
+                    });
+            }
         };
     }
 
-    // TODO implement team member update dialog
+    function updateTeamMemberDialogController($scope, $mdDialog, $mdToast, dataToPass, Upload) {
+        $scope.teamMember = dataToPass;
+        $scope.updateTeamMember = (file) => {
+            if (file) {
+                file.upload = Upload.upload({
+                    url: ('/api/team/' + $scope.teamMember._id),
+                    method: 'PUT',
+                    data: {
+                        photo: file,
+                        obj: $scope.teamMember
+                    }
+                });
+
+                file.upload.then((resp) => {
+                    if (resp.data.success) {
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Team Member Successfully updated!')
+                                .hideDelay(3000)
+                        );
+                    }
+                }, (err) => {
+                    console.error(err, 'ERR');
+                });
+            } else {
+                AdminDataService.updateTeamMember($scope.teamMember)
+                    .then((resp) => {
+                        if (resp.data.success) {
+                            $mdDialog.hide();
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .textContent('Team Member Successfully updated!')
+                                    .hideDelay(3000)
+                            );
+                        }
+                    }, (err) => {
+                        console.error(err, 'ERR');
+                    });
+            }
+        };
+
+    }
 
     $scope.launchAddTeamMemberModal = (ev) => {
         $mdDialog.show({
             controller: addTeamMemberDialogController,
-            templateUrl: 'views/add-teamMember-dialog.html',
+            templateUrl: 'views/admin/add-teamMember-dialog.html',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
         });

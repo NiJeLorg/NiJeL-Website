@@ -1,17 +1,28 @@
+md-button.md-fab(aria-label='Add Team Member', class='md-fab-bottom-right launchItemModal', ng-click='launchAddTeamMemberModal($event)', style="position:fixed !important;")
+    md-icon.material-icons add
 
-header
-    h1 Team
-    button(class='launchItemModal' ng-click='launchAddTeamMemberModal($event)' ) Add Team Member
+md-card
+    md-toolbar.md-table-toolbar.md-default(ng-hide='selected.length || filter.show', aria-hidden='false', style='')
+        .md-toolbar-tools
+            h2.md-title Team              
+            .flex(flex='')
 
-.items-container.testimonials
-    .item( ng-repeat='member in team')
-        .team-container
-            .item-group
-                h3 Full Names
-                p {{member.fullname}}
-            .item-group
-                h3 Position
-                p {{member.position}}
-            .item-group
-                h3 Bio
-                p(ng-bind-html="trustAsHtml(member.bio)")
+    md-table-container
+        table(md-table='' md-progress='promise')
+            thead(md-head='')
+                tr(md-row='')
+                    th(md-column='') Name
+                    th(md-column='') Position
+                    th(md-column='') Actions
+            tbody(md-body='')
+                tr(md-row='' md-select="teamMember"  md-select-id='name' md-auto-select='' ng-repeat='teamMember in team')
+                    td(md-cell='')
+                        a(ng-click='edit($event, teamMember)') {{teamMember.fullname}}
+                    td(md-cell='') {{teamMember.position}}
+                    td(md-cell='')
+                        div(layout='row', layout-sm='column',)
+                            md-button.md-icon-button.md-accent(aria-label='Edit', ng-click='updateTeamMember($event, teamMember)')
+                                md-icon.material-icons edit
+                            md-button.md-icon-button.md-accent(aria-label='Delete', ng-click='deleteTeamMember($event, teamMember)')
+                                md-icon.material-icons delete
+

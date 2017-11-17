@@ -44,6 +44,9 @@ const AdminDataService = function ($http, $q)  {
         },
         updateProject(project) {
             return $http.put(('/api/projects/' + project._id), project);
+        },
+        updateTeamMember(teamMember) {
+            return $http.put(('/api/team/' + teamMember._id), teamMember);
         }
     };
 };
