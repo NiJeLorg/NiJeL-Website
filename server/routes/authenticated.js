@@ -36,7 +36,7 @@ module.exports = () => {
     apiRouter.route('/whynijel')
         .post(upload.single('photo'), whyNijelCtrl.addWhyNijelSection);
 
-    apiRouter.route('/whynijel/:sectionId')
+    apiRouter.route('/whynijel/:sectionId') .put(upload.single('photo'), whyNijelCtrl.updateWhyNijelSection)
         .delete(whyNijelCtrl.deleteWhyNijelSection);
 
     apiRouter.route('/processes')

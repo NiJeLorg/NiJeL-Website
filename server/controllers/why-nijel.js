@@ -17,7 +17,7 @@ module.exports = {
     },
 
     addWhyNijelSection: (req, res) => {
-        let section = new WhyNijel(req.body.obj);
+        let section = new WhyNijel((req.body.obj || req.body));
 
         if (req.file) {
             cloudinary.uploader.upload(req.file.path, (result) => {
@@ -37,41 +37,51 @@ module.exports = {
         });
     },
 
-    // updateProject: (req, res) => {
-    //     Project.findById(req.params.projectId, (err, project) => {
-    //         if (!err) {
-    //             if (req.body.name) {
-    //                 project.name = req.body.name;
-    //             }
-    //             if (req.body.client) {
-    //                 project.client = req.body.client;
-    //             }
-    //             if (req.body.relevantSDG) {
-    //                 project.relevantSDG = req.body.relevantSDG;
-    //             }
-    //             if (req.body.linkToLiveSite) {
-    //                 project.linkToLiveSite = req.body.linkToLiveSite;
-    //             }
-    //             if (req.body.year) {
-    //                 project.year = req.body.year;
-    //             }
+    updateWhyNijelSection: (req, res) => {
+        WhyNijel.findByIdAndUpdate(req.params.sectionId, (req.body.obj || req.body), (err, section) => {
+            if (!err) {
+                if (req.file) {
+                    cloudinary.uploader.upload(req.file.path, (result) => {
+                        section.coverPhoto = result.secure_url;
+                        section.save((err) => {
+                            if (err) {
+                                res.send(err);
+                            }
+                            res.json({
+                                success: true,
+                                message: 'section successfully updated',
+                                section: section
+                            });
+                        });
+                        if (req.body.obj.coverPhotoId) {
+                            cloudinary.uploader.destroy(req.body.obj.coverPhotoId, (err, result) => {
+                                if (!err) {
+                                    console.log('previous image deleted');
+                                } else {
+                                    console.log('err', err);
+                                }
+                            });
+                        }
+                    });
 
-    //             project.save((err) => {
-    //                 if (err) {
-    //                     res.send(err);
-    //                 }
-    //                 res.json({
-    //                     success: true,
-    //                     message: 'Project successfully updated',
-    //                     project: project
-    //                 });
-    //             });
-    //         } else {
-    //             res.send(err);
-    //         }
-    //     });
+                } else {
+                    section.save((err) => {
+                        if (err) {
+                            res.send(err);
+                        }
+                        res.json({
+                            success: true,
+                            message: 'section successfully updated',
+                            section: section
+                        });
+                    });
+                }
+            } else {
+                res.send(err);
+            }
+        });
+    },
 
-    // },
 
     deleteWhyNijelSection: (req, res) => {
         WhyNijel.remove({
