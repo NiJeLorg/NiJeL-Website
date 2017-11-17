@@ -1,0 +1,33 @@
+
+md-button.md-fab(aria-label='Add Testimonial', class='md-fab-bottom-right launchItemModal', ng-click='launchAddTestimonialModal($event)', style="position:fixed !important;")
+    md-icon.material-icons add
+
+md-card
+    md-toolbar.md-table-toolbar.md-default
+        .md-toolbar-tools
+            h2.md-title Testimonials              
+            .flex(flex='')
+    md-table-container
+        table(md-table=''   md-progress='promise')
+            thead(md-head='')
+                tr(md-row='')
+                    th(md-column='') Reviewer
+                    th(md-column='') Company
+                    th(md-column='') Position
+                    th(md-column) Testimonial
+                    th(md-column='') Actions
+            tbody(md-body='')
+                tr(md-row=''  md-select-id='name'  ng-repeat='testimonial in testimonials')
+                    td(md-cell='') {{testimonial.reviewer}}
+                    td(md-cell='')
+                        a(ng-click='edit($event, testimonial)') {{testimonial.company || 'N/A'}}
+                    td(md-cell='') {{testimonial.position || 'N/A'}}
+                    td(md-cell='') {{testimonial.testimonial}}
+                    
+                    td(md-cell='')
+                        div(layout='row', layout-sm='column',)
+                            md-button.md-icon-button.md-accent(aria-label='Edit', ng-click='updateTestimonial($event, testimonial)')
+                                md-icon.material-icons edit
+                            md-button.md-icon-button.md-accent(aria-label='Delete', ng-click='deleteTestimonial($event, testimonial)')
+                                md-icon.material-icons delete
+

@@ -1,4 +1,4 @@
-nav.main-nav
+nav.main-nav(ng-controller='NavCtrl')
   a(ui-sref='home')
     img.nav-logo(src='assets/NijelLogo.svg')
     img.open-nav-logo(src='assets/Nijel_TwitterIcon2.png')
@@ -6,19 +6,8 @@ nav.main-nav
     md-menu(md-offset='0 -7')
       a(ng-click='$mdMenu.open($event)') Why NiJeL
       md-menu-content(flex)
-        md-menu-item
-          md-button(ui-sref='why-nijel') Our Mission, Vision and Values
-        md-menu-item
-          md-button(ui-sref='why-nijel') Our Process
-        md-menu-item
-          md-button(ui-sref='why-nijel') Technology
-        md-menu-item
-          md-button(ui-sref='why-nijel') Partner with NiJeL
-        md-menu-item
-          md-button(ui-sref='why-nijel') About NiJeL
-
-
-    //- a(ui-sref='why-nijel') Why NiJeL
+        md-menu-item(ng-repeat="title in titles")
+          md-button(ui-sref="why-nijel({tab: '{{title | slugify}}'})") {{title}}
     a(ui-sref='projects') Our Projects
     a(ui-sref='team') Team
     a(ui-sref='contact-us') Contact Us

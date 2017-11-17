@@ -1,10 +1,10 @@
 .dialog-view
-    h2 Add New Team Member
-    form(ng-submit='createNewTeamMember()')
+    h2 Update Team Member
+    form(ng-submit='updateTeamMember(avatar)')
         input(type='text' placeholder='Full Names' ng-model='teamMember.fullname' required)
         input(type='text' placeholder='Position' ng-model='teamMember.position' required)
         fieldset
-          label Select Profile Photo
-           input(type='file' ngf-select ng-model='coverPhoto' name='file' accept='image/*' ngf-max-size='2MB')
+            label Select Profile Photo
+                input(type='file' ngf-select ng-model='avatar' name='file' accept='image/*' ngf-max-size='2MB')
         ng-quill-editor(ng-model='teamMember.bio')
         input(type='submit')

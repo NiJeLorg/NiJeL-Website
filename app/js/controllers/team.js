@@ -18,7 +18,7 @@ const TeamCtrl = function ($scope, $mdDialog, ClientDataService)  {
             controller: teamMemberDialogController,
             templateUrl: 'views/team-member-dialog.html',
             locals: {
-                items: teamMember
+                projects: teamMember
             },
             parent: angular.element(document.body),
             clickOutsideToClose: true,

@@ -30,13 +30,13 @@ module.exports = () => {
     apiRouter.route('/team')
         .post(teamCtrl.addTeamMember);
 
-    apiRouter.route('/team/:teamMemberId')
+    apiRouter.route('/team/:teamMemberId').put(upload.single('photo'), teamCtrl.updateTeamMember)
         .delete(teamCtrl.deleteTeamMember);
 
     apiRouter.route('/whynijel')
         .post(upload.single('photo'), whyNijelCtrl.addWhyNijelSection);
 
-    apiRouter.route('/whynijel/:sectionId')
+    apiRouter.route('/whynijel/:sectionId') .put(upload.single('photo'), whyNijelCtrl.updateWhyNijelSection)
         .delete(whyNijelCtrl.deleteWhyNijelSection);
 
     apiRouter.route('/processes')

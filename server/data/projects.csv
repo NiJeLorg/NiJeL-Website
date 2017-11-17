@@ -1,34 +1,34 @@
-client,coverPhoto,linkToLiveSite,name,relevantSDG,year
-State of Detroit's Child Interactive Web Application,,http://104.131.60.187/,State of Detroit's Child Interactive Web Application,3,2017
-Rudin Center For Transportation,,,ParaTransit Data Analysis and Mapping Project\n,11,2017
-TransitCenter,https://res.cloudinary.com/dlv3unujk/image/upload/v1506084964/jthn9mjlp9erl8utbxxg.png,http://busturnaround.nyc/,Telling the Story of Bus Reliability in NYC – A Web Application for Advocates and the Public,11,2016
-DNAInfo,,,Future Skylines 3D,11,2017
-Global Architectural History Teaching Collaborative (GAHTC) at MIT,,http://gahtc.org/,"GAHTC Course Explorer ",4,2015
-NYU mHealth,,,MapMob Recruitment Tool and Data Consulting,3,2016
-DNAInfo,,,Lyft Entertainment Atlas,Other,2015
-UPrep,,,Data visualization on charter school metrics,4,2017
-DNAInfo,,,My First Apartment,2,2009
-Arizona Association of Food Banks,,,Arizona Food Bank Finder,2,2008
-Arizona Center for Afterschool Excellence,,,STEM Afterschool Map,4,2013
-Community Development Advocates of Detroit,,http://104.131.88.185/,d[COM]munity Map and Directory\n,11,2014
-Community Outreach and Advocacy for Refugees,,,Refugee Resource Map,10,2008
-Conservation International,,http://www.oceanhealthindex.org/region-scores,Conservation International: Ocean Health Index: Scoring Maps,14,2013
-Data Driven Detroit,,http://onedscorecard.datadrivendetroit.org/,OneDScorecard,11,2013
-DNAInfo,,,Chicago Shootings,Other,2015
-DNAInfo,,https://www.dnainfo.com/new-york/20150811/midtown/draw-where-you-think-your-neighborhood-borders-are-on-this-map https://www.dnainfo.com/new-york/20150928/inwood/we-asked-you-draw-your-own-neighborhood-map-heres-what-you-did,Draw Your Neighborhood,Other,2015
-DNAInfo,,https://www.dnainfo.com/new-york/20160301/inwood/how-popular-is-your-favorite-subway-seat-lets-settle-it https://www.dnainfo.com/new-york/20160427/times-square-theater-district/interactive-this-is-where-new-yorkers-sit-stand-ride-on-subway,NYC Train,Other,2015
-HarassMap,,http://harassmap.org/en/what-we-do/the-map/,HarassMap,5,2009
-Fresno Birds,,,Fresno Birds,15,2008
-MIT Civic Data Design Lab,,http://duspexplorer.mit.edu/,CityDigits,Other,2014
-Riverkeeper,,https://www.riverkeeper.org/water-quality/citizen-data/,Water Quality Mapping on the Hudson,6,2013
-Save the Sound,,http://www.soundhealthexplorer.org/,Sound Health Explorer,6,2014
-Tree Foundation,,http://treefoundation.org/projects/church-forests-of-ethiopia/,Church Forests of Ethiopia,15,2013
-UNESCO,,http://uis.unesco.org/,UN Sustainable Development Goals Education 2030,4,2015
-United Nations Population Fund,,http://www.popclimate.net/,POPClimate,13,2012
-Water Org.,,https://water.org/,Microfinance Decisionmaking Dashboard,6,2009
-Patch.com,,https://patch.com/,Patch.com neighborhood story maps,6,2009
-Association for Neighborhood and Housing Development (ANHD),https://res.cloudinary.com/dlv3unujk/image/upload/v1506083904/kq64hlwgcfc7parzeg7f.png,https://www.dapmapnyc.org/,Speculation Alert Mapping Project,11,2016
-University of Chicago,https://res.cloudinary.com/dlv3unujk/image/upload/v1506084982/egnvupvpgu24qcbsrwsk.png,http://hoodmapping.org/,Neighborhood Draw Application for Chicago,11,2016
-Save Harlem Now!,https://res.cloudinary.com/dlv3unujk/image/upload/v1506085028/xux3k7vjqlco6a6grkac.png,Save Harlem Now!,Visualizing the Historic Heritage of Harlem's Built Environment,11,2016
-Duet,https://res.cloudinary.com/dlv3unujk/image/upload/v1506085046/w1bk3p0alnerln1jjelh.png,http://duetaz.org/index.php/giving/map/,DUET Services Map,3,2008
-Arizona Center for Afterschool Excellence,https://res.cloudinary.com/dlv3unujk/image/upload/v1506085081/hg2f1siogqzrtv1321tc.png,http://azafterschool.org/directory/,AZ Afterschool Directory,4,2009
+client,coverPhoto,linkToLiveSite,name,relevantSDG,year,isFeaturedProject,description
+State of Detroit's Child Interactive Web Application,,http://104.131.60.187/,State of Detroit's Child Interactive Web Application,3,2017,,
+Rudin Center For Transportation,,,ParaTransit Data Analysis and Mapping Project\n,11,2017,,
+TransitCenter,https://res.cloudinary.com/dlv3unujk/image/upload/v1506084964/jthn9mjlp9erl8utbxxg.png,http://busturnaround.nyc/,Telling the Story of Bus Reliability in NYC – A Web Application for Advocates and the Public,11,2016,,
+DNAInfo,,,Future Skylines 3D,11,2017,,
+Global Architectural History Teaching Collaborative (GAHTC) at MIT,,http://gahtc.org/,GAHTC Course Explorer ,4,2015,,
+NYU mHealth,,,MapMob Recruitment Tool and Data Consulting,3,2016,,
+DNAInfo,,,Lyft Entertainment Atlas,Other,2015,,
+UPrep,,,Data visualization on charter school metrics,4,2017,,
+DNAInfo,,,My First Apartment,2,2009,,
+Arizona Association of Food Banks,,,Arizona Food Bank Finder,2,2008,,
+Arizona Center for Afterschool Excellence,,,STEM Afterschool Map,4,2013,,
+Community Development Advocates of Detroit,,http://104.131.88.185/,d[COM]munity Map and Directory\n,11,2014,,
+Community Outreach and Advocacy for Refugees,,,Refugee Resource Map,10,2008,,
+Conservation International,,http://www.oceanhealthindex.org/region-scores,Conservation International: Ocean Health Index: Scoring Maps,14,2013,,
+Data Driven Detroit,,http://onedscorecard.datadrivendetroit.org/,OneDScorecard,11,2013,,
+DNAInfo,,,Chicago Shootings,Other,2015,,
+DNAInfo,,https://www.dnainfo.com/new-york/20150811/midtown/draw-where-you-think-your-neighborhood-borders-are-on-this-map https://www.dnainfo.com/new-york/20150928/inwood/we-asked-you-draw-your-own-neighborhood-map-heres-what-you-did,Draw Your Neighborhood,Other,2015,,
+DNAInfo,,https://www.dnainfo.com/new-york/20160301/inwood/how-popular-is-your-favorite-subway-seat-lets-settle-it https://www.dnainfo.com/new-york/20160427/times-square-theater-district/interactive-this-is-where-new-yorkers-sit-stand-ride-on-subway,NYC Train,Other,2015,,
+HarassMap,,http://harassmap.org/en/what-we-do/the-map/,HarassMap,5,2009,,
+Fresno Birds,,,Fresno Birds,15,2008,,
+MIT Civic Data Design Lab,,http://duspexplorer.mit.edu/,CityDigits,Other,2014,,
+Riverkeeper,,https://www.riverkeeper.org/water-quality/citizen-data/,Water Quality Mapping on the Hudson,6,2013,,
+Save the Sound,,http://www.soundhealthexplorer.org/,Sound Health Explorer,6,2014,,
+Tree Foundation,,http://treefoundation.org/projects/church-forests-of-ethiopia/,Church Forests of Ethiopia,15,2013,,
+UNESCO,,http://uis.unesco.org/,UN Sustainable Development Goals Education 2030,4,2015,,
+United Nations Population Fund,,http://www.popclimate.net/,POPClimate,13,2012,,
+Water Org.,,https://water.org/,Microfinance Decisionmaking Dashboard,6,2009,,
+Patch.com,,https://patch.com/,Patch.com neighborhood story maps,6,2009,,
+Association for Neighborhood and Housing Development (ANHD),https://res.cloudinary.com/dlv3unujk/image/upload/v1506083904/kq64hlwgcfc7parzeg7f.png,https://www.dapmapnyc.org/,Speculation Alert Mapping Project,11,2016,,
+University of Chicago,https://res.cloudinary.com/dlv3unujk/image/upload/v1506084982/egnvupvpgu24qcbsrwsk.png,http://hoodmapping.org/,Neighborhood Draw Application for Chicago,11,2016,,
+Save Harlem Now!,https://res.cloudinary.com/dlv3unujk/image/upload/v1506085028/xux3k7vjqlco6a6grkac.png,Save Harlem Now!,Visualizing the Historic Heritage of Harlem's Built Environment,11,2016,,
+Duet,https://res.cloudinary.com/dlv3unujk/image/upload/v1506085046/w1bk3p0alnerln1jjelh.png,http://duetaz.org/index.php/giving/map/,DUET Services Map,3,2008,,
+Arizona Center for Afterschool Excellence,https://res.cloudinary.com/dlv3unujk/image/upload/v1506085081/hg2f1siogqzrtv1321tc.png,http://azafterschool.org/directory/,AZ Afterschool Directory,4,2009,,
