@@ -6,25 +6,29 @@ const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, Admi
         return $sce.trustAsHtml(template);
     };
 
-    $scope.fetchTestimoials = () => {
-        getTestimonials();
-    };
-
+    function getTestimonials() {
+        ClientDataService.fetchTestimonials()
+            .then((resp) => {
+                $scope.testimonials = resp.data.testimonials;
+            }, (err) => {
+                console.error(err, 'ERROR');
+            });
+    }
 
     // run actions on respective resources
-    $scope.updateProject = (event, testimonial) => {
-            $mdDialog.show({
-                locals: {
-                    dataToPass: testimonial
-                },
-                controller: updateTestimonialDialogController,
-                templateUrl: 'views/update-testimonial-dialog.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
-            });
+    $scope.updateTestimonial = (event, testimonial) => {
+        $mdDialog.show({
+            locals: {
+                dataToPass: testimonial
+            },
+            controller: updateTestimonialDialogController,
+            templateUrl: 'views/admin/update-testimonial-dialog.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+        });
     };
 
-    $scope.deleteItem = (ev, item, $index, $mdToast) => {
+    $scope.deleteTestimonial = (ev, testimonial, $index, $mdToast) => {
         let confirm = $mdDialog.confirm()
             .title('Are you sure, you want to delete this item ?')
             .textContent('Clicking on YES, will delete this item permanently!')
@@ -32,12 +36,12 @@ const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, Admi
             .ok('YES')
             .cancel('NO');
         $mdDialog.show(confirm).then(() => {
-            AdminDataService.deleteTestimonial(item)
+            AdminDataService.deleteTestimonial(testimonial)
                 .then((resp) => {
                     if (resp.data.success) {
-                        $scope.items.forEach((elem) => {
-                            if (elem._id === item._id) {
-                                $scope.items.splice($index, 1);
+                        $scope.testimonials.forEach((elem, $index) => {
+                            if (elem._id === testimonial._id) {
+                                $scope.testimonials.splice($index, 1);
                             }
                         });
                     }
@@ -47,15 +51,6 @@ const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, Admi
         }, () => {
         });
     };
-
-    function getTestimonials(){
-        ClientDataService.fetchTestimonials()
-            .then((resp) => {
-                $scope.testimonials = resp.data.testimonials;
-            }, (err) => {
-                console.error(err, 'ERROR');
-            });
-    }
 
     function addTestimonialDialogController($scope, $mdDialog, $mdToast) {
         $scope.createNewTestimonial = () => {
@@ -67,6 +62,7 @@ const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, Admi
                             .textContent(resp.data.message)
                             .hideDelay(3000)
                     );
+                    getTestimonials();
                 }, (err) => {
                     console.error(err, 'ERROR');
                 });
@@ -99,7 +95,7 @@ const AdminTestimonialCtrl = function ($scope, $state, $mdDialog, $mdToast, Admi
     $scope.launchAddTestimonialModal = (ev) => {
         $mdDialog.show({
             controller: addTestimonialDialogController,
-            templateUrl: 'views/add-testimonial-dialog.html',
+            templateUrl: 'views/admin/add-testimonial-dialog.html',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
         });
