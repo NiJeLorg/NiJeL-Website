@@ -3,11 +3,10 @@ md-button.md-fab(aria-label='Add Testimonial', class='md-fab-bottom-right launch
     md-icon.material-icons add
 
 md-card
-    md-toolbar.md-table-toolbar.md-default(ng-hide='selected.length || filter.show', aria-hidden='false', style='')
+    md-toolbar.md-table-toolbar.md-default
         .md-toolbar-tools
             h2.md-title Testimonials              
             .flex(flex='')
-          
     md-table-container
         table(md-table=''   md-progress='promise')
             thead(md-head='')
