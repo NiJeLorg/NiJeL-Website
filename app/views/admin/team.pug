@@ -1,0 +1,17 @@
+
+header
+    h1 Team
+    button(class='launchItemModal' ng-click='launchAddTeamMemberModal($event)' ) Add Team Member
+
+.items-container.testimonials
+    .item( ng-repeat='member in team')
+        .team-container
+            .item-group
+                h3 Full Names
+                p {{member.fullname}}
+            .item-group
+                h3 Position
+                p {{member.position}}
+            .item-group
+                h3 Bio
+                p(ng-bind-html="trustAsHtml(member.bio)")

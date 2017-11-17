@@ -53,6 +53,11 @@ gulp.task('nodemon', () => {
         });
 });
 
+gulp.task('import_data', () => {
+    let data_import = require('./server/data/data_importer');
+   data_import.run_data_import();
+});
+
 gulp.task('watch', () => {
     browserSync.init(null, {
         proxy: 'localhost:3000',

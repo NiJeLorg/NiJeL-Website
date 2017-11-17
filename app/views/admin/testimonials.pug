@@ -1,0 +1,19 @@
+header
+    h1 Testimonials
+    button(class='launchItemModal' ng-click='launchAddTestimonialModal($event)' ) Add Testimonial
+
+.items-container.testimonials
+     .item( ng-repeat='testimonial in testimonials')
+        .testimonials-container
+            .item-group
+                h3 Reviewer
+                p {{testimonial.reviewer}}
+            .item-group
+                h3 Company
+                p {{testimonial.company}}
+            .item-group
+                h3 Position
+                p {{testimonial.position}}
+            .item-group
+                h3 Testimonial
+                p {{testimonial.testimonial}}

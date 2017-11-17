@@ -5,7 +5,11 @@ const Project = require('../models/projects'),
 
 module.exports = {
     getAllProjects: (req, res) => {
-        Project.find((err, projects) => {
+        let projectsFilter = {
+            name: new RegExp('^.*('+req.query.search +').*$', 'i'),
+            isFeaturedProject: req.query.featured || false
+        }
+        Project.find(projectsFilter, (err, projects) => {
             if (err) {
                 res.send(err);
             }

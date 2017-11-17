@@ -10,7 +10,8 @@ const mongoose = require('mongoose'),
             required: true
         },
         description: {
-            type: String
+            type: String,
+            default: ''
         },
         coverPhoto: {
             type: String
@@ -28,7 +29,8 @@ const mongoose = require('mongoose'),
             type: String,
         },
         isFeaturedProject: {
-            type: Boolean
+            type: Boolean,
+            default: false
         },
     });
 

@@ -1,0 +1,13 @@
+.dashboard-view
+  aside
+    img.logo-container(src='assets/NijelLogo.svg')
+
+    .buttons-container
+      button(ui-sref='admin.dashboard.testimonials') Testimonials
+      button(ui-sref='admin.dashboard.projects') All Projects
+      //button(ng-click='fetchFeaturedProjects()') Featured Projects
+      button(ui-sref='admin.dashboard.team') Team
+      button(ui-sref='admin.dashboard.why-nijel') Why NiJeL
+      button(ui-sref='admin.dashboard.processes') Processes
+  section
+    div.ui-view

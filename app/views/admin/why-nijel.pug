@@ -1,0 +1,15 @@
+header
+    h1 Why Nijel
+    button(class='launchItemModal' ng-click='launchAddWhyNijelSectionModal($event)' ) Add Why-Nijel Section
+.items-container.testimonials
+    .item( ng-repeat='section in sections')
+        .why-nijel-container
+            .item-group
+                h3 Title
+                p {{section.title}}
+            .item-group
+                h3 Body Text
+                p(ng-bind-html="trustAsHtml(section.text)")
+            .item-group
+                h3 Section Cover Photo
+                .cover-photo(style='background:url("{{section.coverPhoto}}")' ng-if='section.coverPhoto')

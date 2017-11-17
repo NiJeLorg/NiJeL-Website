@@ -1,0 +1,15 @@
+header
+    h1 Processes
+    button(class='launchItemModal' ng-click='launchAddProcessSectionModal($event)' ) Add Process
+.items-container.testimonials
+    .item( ng-repeat='process in processes')
+        .processes-container
+            .item-group
+                h3 Title
+                p {{process.title}}
+            .item-group
+                h3 Body Text
+                p(ng-bind-html="trustAsHtml(process.text)")
+            .item-group
+                h3 Section Cover Photo
+                .cover-photo(style='background:url("{{process.coverPhoto}}")' ng-if='process.coverPhoto')

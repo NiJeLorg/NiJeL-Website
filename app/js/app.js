@@ -7,6 +7,7 @@ import ngQuill from 'ng-quill';
 import angular from 'angular';
 import slugify from  './filters/slugify';
 import $ from 'jquery';
+// import dataGrid from 'angular-data-grid';
 
 // import controllers
 import HomeCtrl from './controllers/home';
@@ -18,14 +19,18 @@ import WhyNijelCtrl from './controllers/why-nijel';
 import AdminCtrl from './controllers/admin';
 import NavCtrl from './controllers/nav';
 import AdminDashboardCtrl from './controllers/admin-dashboard';
-
+import AdminProjectCtrl from './controllers/admin/project';
+import AdminProcessCtrl from './controllers/admin/process';
+import AdminTestimonialCtrl from './controllers/admin/testimonial';
+import AdminWhyNijelCtrl from './controllers/admin/why-nijel';
+import AdminTeamCtrl from './controllers/admin/team';
 
 // import services
 import ClientDataService from './services/ClientDataService';
 import AdminDataService from './services/AdminDataService';
 
 
-const nijelApp = angular.module('nijelApp', [ uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill]);
+const nijelApp = angular.module('nijelApp', [uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill, require('angular-material-data-table')]);
 
 nijelApp.filter('slugify', [slugify]);
 nijelApp.controller('TeamCtrl', TeamCtrl)
@@ -36,6 +41,11 @@ nijelApp.controller('TeamCtrl', TeamCtrl)
     .controller('ContactUsCtrl', ContactUsCtrl)
     .controller('WhyNijelCtrl', WhyNijelCtrl)
     .controller('AdminCtrl', AdminCtrl)
+    .controller('AdminProjectCtrl', AdminProjectCtrl)
+    .controller('AdminProcessCtrl', AdminProcessCtrl)
+    .controller('AdminTestimonialCtrl', AdminTestimonialCtrl)
+    .controller('AdminWhyNijelCtrl', AdminWhyNijelCtrl)
+    .controller('AdminTeamCtrl', AdminTeamCtrl)
     .controller('AdminDashboardCtrl', AdminDashboardCtrl)
     .factory('ClientDataService', ClientDataService)
     .factory('AdminDataService', AdminDataService);
@@ -44,7 +54,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
     '$urlRouterProvider', '$locationProvider', '$mdThemingProvider',
 
     function ($stateProvider, $httpProvider, $urlRouterProvider,
-        $locationProvider, $mdThemingProvider) {
+              $locationProvider, $mdThemingProvider) {
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/');
@@ -52,6 +62,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
             .accentPalette('pink');
+
 
         $stateProvider
             .state('home', {
@@ -90,13 +101,46 @@ nijelApp.config(['$stateProvider', '$httpProvider',
             })
             .state('admin', {
                 url: '/admin',
-                controller: 'AdminCtrl',
-                templateUrl: 'views/admin.html'
+                templateUrl: 'views/layout.html',
+                data: {
+                    'isAdmin': true
+                },
+                redirectTo: 'admin.authenticate'
             })
-            .state('admin-dashboard', {
-                url: '/admin/dashboard',
+            .state('admin.authenticate', {
+                url: '/authenticate',
+                controller: 'AdminCtrl',
+                templateUrl: 'views/admin/auth.html'
+            })
+            .state('admin.dashboard', {
+                url: '/dashboard',
                 controller: 'AdminDashboardCtrl',
-                templateUrl: 'views/admin-dashboard.html'
+                templateUrl: 'views/admin/dashboard.html'
+            })
+            .state('admin.dashboard.projects', {
+                url: '/projects',
+                controller: 'AdminProjectCtrl',
+                templateUrl: 'views/admin/projects.html',
+            })
+            .state('admin.dashboard.team', {
+                url: '/team',
+                controller: 'AdminTeamCtrl',
+                templateUrl: 'views/admin/team.html',
+            })
+            .state('admin.dashboard.processes', {
+                url: '/processes',
+                controller: 'AdminProcessCtrl',
+                templateUrl: 'views/admin/processes.html',
+            })
+            .state('admin.dashboard.why-nijel', {
+                url: '/why-nijel',
+                controller: 'AdminWhyNijelCtrl',
+                templateUrl: 'views/admin/why-nijel.html',
+            })
+            .state('admin.dashboard.testimonials', {
+                url: '/testimonials',
+                controller: 'AdminTestimonialCtrl',
+                templateUrl: 'views/admin/testimonials.html',
             });
 
         $locationProvider.html5Mode(true);
@@ -104,7 +148,17 @@ nijelApp.config(['$stateProvider', '$httpProvider',
         $httpProvider.defaults.headers.common['x-access-token'] = localStorage.token;
 
     }
-]);
+]).run(['$state', '$transitions', '$rootScope', ($state, $transitions, $rootScope) => {
+    $transitions.onStart({}, function ($transition) {
+        if ($transition.$to().data) {
+            let data = $transition.$to().data;
+            $rootScope.isAdminState = data.isAdmin;
+        } else {
+            $rootScope.isAdminState = false;
+        }
+    });
+    ;
+}]);
 
 
 if (localStorage.navbarToggle) {
