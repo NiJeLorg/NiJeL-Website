@@ -36,12 +36,15 @@ const AdminWhyNijelCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDa
             .targetEvent(ev)
             .ok('YES')
             .cancel('NO');
+        console.log(section);
+        console.log($scope.sections);
         $mdDialog.show(confirm).then(() => {
             AdminDataService.deleteWhyNijelSection(section)
                 .then((resp) => {
                     if (resp.data.success) {
-                        $scope.sections.forEach((elem) => {
+                        $scope.sections.forEach((elem, $index) => {
                             if (elem._id === section._id) {
+                                console.log($index, "asdcasdcsd");
                                 $scope.sections.splice($index, 1);
                             }
                         });
@@ -64,29 +67,46 @@ const AdminWhyNijelCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDa
 
     function addWhyNijelSectionDialogController($scope, $mdDialog, $mdToast, Upload) {
         $scope.createNewWhyNijelSection = (file) => {
-            file.upload = Upload.upload({
-                url: '/api/whynijel',
-                data: {
-                    photo: file,
-                    obj: $scope.section
-                }
-            });
+            if (file) {
+                file.upload = Upload.upload({
+                    url: '/api/whynijel',
+                    data: {
+                        photo: file,
+                        obj: $scope.section
+                    }
+                });
 
-            file.upload.then((resp) => {
-                if (resp.data.success) {
-                    $mdDialog.hide();
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent('Why Nijel Section successfully added!')
-                            .hideDelay(3000)
-                    );
-                }
-            }, (err) => {
-                console.error(err, 'ERR');
-            });
+                file.upload.then((resp) => {
+                    if (resp.data.success) {
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Section Successfully added!')
+                                .hideDelay(3000)
+                        );
+                        getWhyNijelSections();
+                    }
+                }, (err) => {
+                    console.error(err, 'ERROR');
+                });
+            } else {
+                AdminDataService.createNewWhyNijelSection($scope.section)
+                    .then((resp) => {
+                        if (resp.data.success) {
+                            $mdDialog.hide();
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .textContent('Section Successfully added!')
+                                    .hideDelay(3000)
+                            );
+                            getWhyNijelSections();
+                        }
+                    }, (err) => {
+                        console.error(err, 'ERROR')
+                    });
+            }
         };
     }
-
     function updateWhyNijelSectionDialogController($scope, $mdDialog, $mdToast, dataToPass, Upload) {
         $scope.section = dataToPass;
         $scope.updateWhyNijelSection = (file) => {

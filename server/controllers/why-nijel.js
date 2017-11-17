@@ -17,7 +17,7 @@ module.exports = {
     },
 
     addWhyNijelSection: (req, res) => {
-        let section = new WhyNijel(req.body.obj);
+        let section = new WhyNijel((req.body.obj || req.body));
 
         if (req.file) {
             cloudinary.uploader.upload(req.file.path, (result) => {

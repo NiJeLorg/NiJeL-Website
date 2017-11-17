@@ -118,7 +118,7 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                 AdminDataService.deleteProject(project)
                     .then((resp) => {
                         if (resp.data.success) {
-                            $scope.projects.forEach((elem) => {
+                            $scope.projects.forEach((elem, $index) => {
                                 if (elem._id === project._id) {
                                     $scope.projects.splice($index, 1);
                                 }
