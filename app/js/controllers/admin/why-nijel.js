@@ -22,7 +22,7 @@ const AdminWhyNijelCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDa
                 dataToPass: section
             },
             controller: updateWhyNijelSectionDialogController,
-            templateUrl: 'views/admin/update-section-dialog.html',
+            templateUrl: 'views/admin/update-whyNijelSection-dialog.html',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
         });
@@ -36,8 +36,6 @@ const AdminWhyNijelCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDa
             .targetEvent(ev)
             .ok('YES')
             .cancel('NO');
-        console.log(section);
-        console.log($scope.sections);
         $mdDialog.show(confirm).then(() => {
             AdminDataService.deleteWhyNijelSection(section)
                 .then((resp) => {
@@ -107,6 +105,7 @@ const AdminWhyNijelCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDa
             }
         };
     }
+
     function updateWhyNijelSectionDialogController($scope, $mdDialog, $mdToast, dataToPass, Upload) {
         $scope.section = dataToPass;
         $scope.updateWhyNijelSection = (file) => {
