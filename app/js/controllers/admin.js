@@ -1,11 +1,9 @@
-const AdminCtrl = function ($scope, $state, $auth, AdminDataService) {
-    $scope.loginErrorMessage = '';
-    $scope.signupErrorMessage = '';
+const AdminCtrl = function ($scope, $state, AdminDataService) {
     $scope.$parent.isAdminState = $state.is('admin');
 
-    $scope.authenticate = function(provider) {
-        $auth.authenticate(provider);
-      };
+    $scope.authenticate = ()=> {
+
+    };
     // $scope.login = (obj) => {
     //     AdminDataService.login(obj)
     //         .then((resp) => {
