@@ -6,7 +6,7 @@ const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataSe
         return $sce.trustAsHtml(template);
     };
 
-    function getTeam(){
+    function getTeam() {
         ClientDataService.fetchTeamMembers()
             .then((resp) => {
                 $scope.team = resp.data.teamMembers;
@@ -25,7 +25,7 @@ const AdminTeamCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDataSe
             parent: angular.element(document.body),
             clickOutsideToClose: true,
         });
-};
+    };
     $scope.deleteTeamMember = (ev, teamMember, $index, $mdToast) => {
         let confirm = $mdDialog.confirm()
             .title('Are you sure, you want to delete this item ?')

@@ -91,7 +91,7 @@ module.exports = {
             }
         });
     },
-   
+
     deleteTeamMember: (req, res) => {
         Team.remove({
             _id: req.params.teamMemberId
