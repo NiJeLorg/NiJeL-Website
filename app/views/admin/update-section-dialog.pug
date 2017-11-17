@@ -1,0 +1,10 @@
+.dialog-view
+    h2 Update Why NijeL Section
+    form(ng-submit='updateSection(coverPhoto)')
+        input(type='text' placeholder='Heading' ng-model='section.title' required)
+        fieldset
+            label Select Cover Photo
+            input(type='file' ngf-select ng-model='coverPhoto' name='file' accept='image/*' ngf-max-size='2MB')
+        ng-quill-editor(ng-model='section.text')
+        input(type='submit')
+

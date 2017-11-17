@@ -1,15 +1,28 @@
-header
-    h1 Why Nijel
-    button(class='launchItemModal' ng-click='launchAddWhyNijelSectionModal($event)' ) Add Why-Nijel Section
-.items-container.testimonials
-    .item( ng-repeat='section in sections')
-        .why-nijel-container
-            .item-group
-                h3 Title
-                p {{section.title}}
-            .item-group
-                h3 Body Text
-                p(ng-bind-html="trustAsHtml(section.text)")
-            .item-group
-                h3 Section Cover Photo
-                .cover-photo(style='background:url("{{section.coverPhoto}}")' ng-if='section.coverPhoto')
+md-button.md-fab(aria-label='Add Section', class='md-fab-bottom-right launchItemModal', ng-click='launchAddWhyNijelSectionModal($event)', style="position:fixed !important;")
+    md-icon.material-icons add
+
+md-card
+    md-toolbar.md-table-toolbar.md-default(ng-hide='selected.length || filter.show', aria-hidden='false', style='')
+        .md-toolbar-tools
+            h2.md-title Why Nijel              
+            .flex(flex='')
+
+    md-table-container
+        table(md-table='' md-progress='promise')
+            thead(md-head='')
+                tr(md-row='')
+                    th(md-column='') Title
+                    //- th(md-column='') Description
+                    th(md-column='') Actions
+            tbody(md-body='')
+                tr(md-row='' md-select="section"  md-select-id='name' md-auto-select='' ng-repeat='section in sections')
+                    td(md-cell='')
+                        a(ng-click='updateWhyNijelSection($event, section)') {{section.title}}
+                    //- td(md-cell='', ng-bind-html="trustAsHtml(section.text)")
+                    td(md-cell='')
+                        div(layout='row', layout-sm='column',)
+                            md-button.md-icon-button.md-accent(aria-label='Edit', ng-click='updateWhyNijelSection($event, section)')
+                                md-icon.material-icons edit
+                            md-button.md-icon-button.md-accent(aria-label='Delete', ng-click='deleteWhyNijelSection($event, section)')
+                                md-icon.material-icons delete
+
