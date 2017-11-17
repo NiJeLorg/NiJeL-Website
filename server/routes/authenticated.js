@@ -30,7 +30,7 @@ module.exports = () => {
     apiRouter.route('/team')
         .post(teamCtrl.addTeamMember);
 
-    apiRouter.route('/team/:teamMemberId')
+    apiRouter.route('/team/:teamMemberId').put(upload.single('photo'), teamCtrl.updateTeamMember)
         .delete(teamCtrl.deleteTeamMember);
 
     apiRouter.route('/whynijel')

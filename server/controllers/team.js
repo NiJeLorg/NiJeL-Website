@@ -17,78 +17,80 @@ module.exports = {
     },
 
     addTeamMember: (req, res) => {
-        let teamMember = new Team(req.body);
-
-        teamMember.save((err) => {
-            if (err) {
-                res.send(err);
-            } else {
+        let teamMember = new Team((req.body.obj || req.body));
+        if (req.file) {
+            cloudinary.uploader.upload(req.file.path, (result) => {
+                teamMember.avatar = result.secure_url;
+                teamMember.avatarId = result.public_id;
+                teamMember.save((err) => {
+                    if (err) {
+                        res.send(err);
+                    }
+                    res.json({
+                        success: true,
+                        message: 'Team member successfully added',
+                        teamMember: teamMember
+                    });
+                });
+            });
+        } else {
+            teamMember.save((err) => {
+                if (err) {
+                    res.send(err);
+                }
                 res.json({
                     success: true,
                     message: 'Team Member successfully added',
                     teamMember: teamMember
-                })
-            }
-        });
-
-        // cloudinary.uploader.upload(req.file.path, (result) => {
-        //     let project = new Project();
-        //     project.name = req.body.obj.name;
-        //     project.client = req.body.obj.client;
-        //     project.linkToLiveSite = req.body.obj.linkToLiveSite;
-        //     project.relevantSDG = req.body.obj.relevantSDG;
-        //     project.year = req.body.obj.year;
-        //     project.isFeaturedProject = req.body.obj.isFeaturedProject;
-        //     project.coverPhoto = result.secure_url;
-
-        //     project.save((err) => {
-        //         if (err) {
-        //             res.send(err);
-        //         }
-        //         res.json({
-        //             success: true,
-        //             message: 'Project successfully added',
-        //             project: project
-        //         });
-        //     });
-        // });
+                });
+            });
+        }
     },
 
-    // updateProject: (req, res) => {
-    //     Project.findById(req.params.projectId, (err, project) => {
-    //         if (!err) {
-    //             if (req.body.name) {
-    //                 project.name = req.body.name;
-    //             }
-    //             if (req.body.client) {
-    //                 project.client = req.body.client;
-    //             }
-    //             if (req.body.relevantSDG) {
-    //                 project.relevantSDG = req.body.relevantSDG;
-    //             }
-    //             if (req.body.linkToLiveSite) {
-    //                 project.linkToLiveSite = req.body.linkToLiveSite;
-    //             }
-    //             if (req.body.year) {
-    //                 project.year = req.body.year;
-    //             }
+    updateTeamMember: (req, res) => {
+        Team.findByIdAndUpdate(req.params.teamMemberId, (req.body.obj || req.body), (err, teamMember) => {
+            if (!err) {
+                if (req.file) {
+                    cloudinary.uploader.upload(req.file.path, (result) => {
+                        teamMember.avatar = result.secure_url;
+                        teamMember.save((err) => {
+                            if (err) {
+                                res.send(err);
+                            }
+                            res.json({
+                                success: true,
+                                message: 'Team Member successfully updated',
+                                teamMember: teamMember
+                            });
+                        });
+                        if (req.body.obj.avatarId) {
+                            cloudinary.uploader.destroy(req.body.obj.avatarId, (err, result) => {
+                                if (!err) {
+                                    console.log('previous image deleted');
+                                } else {
+                                    console.log('err', err);
+                                }
+                            });
+                        }
+                    });
 
-    //             project.save((err) => {
-    //                 if (err) {
-    //                     res.send(err);
-    //                 }
-    //                 res.json({
-    //                     success: true,
-    //                     message: 'Project successfully updated',
-    //                     project: project
-    //                 });
-    //             });
-    //         } else {
-    //             res.send(err);
-    //         }
-    //     });
-
-    // },
+                } else {
+                    teamMember.save((err) => {
+                        if (err) {
+                            res.send(err);
+                        }
+                        res.json({
+                            success: true,
+                            message: 'Team member successfully updated',
+                            teamMember: teamMember
+                        });
+                    });
+                }
+            } else {
+                res.send(err);
+            }
+        });
+    },
 
     deleteTeamMember: (req, res) => {
         Team.remove({
