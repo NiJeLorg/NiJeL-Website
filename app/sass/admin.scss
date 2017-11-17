@@ -19,3 +19,26 @@
         width: 100%;
     }
 }
+.md-button.md-default-theme.md-fab, .md-button.md-fab {
+	background-color: #F26648;
+}
+
+.md-button.md-default-theme.md-fab:not([disabled]).md-focused, .md-button.md-fab:not([disabled]).md-focused, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover {
+	background-color: #C15239
+}
+
+.md-button.md-default-theme.md-accent, .md-button.md-accent {
+	color: #F26648;
+}
+
+.md-button.md-default-theme.md-accent:not([disabled]) md-icon, .md-button.md-accent:not([disabled]) md-icon {
+	color: #F26648;
+}
+
+md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {
+	background-color: #F26648;
+}
+
+md-checkbox.md-default-theme.md-checked .md-ink-ripple, md-checkbox.md-checked .md-ink-ripple {
+	color: #F26648;
+}
