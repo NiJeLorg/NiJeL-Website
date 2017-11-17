@@ -107,7 +107,7 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
             });
     };
 
-    $scope.deleteItem = (ev, item, $index, $mdToast) => {
+    $scope.deleteProject = (ev, project, $index, $mdToast) => {
         let confirm = $mdDialog.confirm()
             .title('Are you sure, you want to delete this item ?')
             .textContent('Clicking on YES, will delete this item permanently!')
@@ -115,12 +115,12 @@ const AdminProjectCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
             .ok('YES')
             .cancel('NO');
         $mdDialog.show(confirm).then(() => {
-                AdminDataService.deleteProject(item)
+                AdminDataService.deleteProject(project)
                     .then((resp) => {
                         if (resp.data.success) {
-                            $scope.items.forEach((elem) => {
-                                if (elem._id === item._id) {
-                                    $scope.items.splice($index, 1);
+                            $scope.projects.forEach((elem) => {
+                                if (elem._id === project._id) {
+                                    $scope.projects.splice($index, 1);
                                 }
                             });
                         }
