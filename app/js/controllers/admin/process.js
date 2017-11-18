@@ -36,7 +36,7 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
     function getProcesses(){
         ClientDataService.fetchProcessesSections()
             .then((resp) => {
-                $scope.items = resp.data.sections;
+                $scope.processes = resp.data.sections;
             }, (err) => {
                 console.error(err, 'ERROR');
             });
