@@ -1,5 +1,6 @@
 .project-info
-    .cover-photo-holder(style='background:url({{project.coverPhoto}}); background-size:cover; background-position: center, center')
+    .cover-photo-holder(style='background:url({{project.coverPhoto}}); background-size:cover; background-position-y: 24%' ng-if='project.coverPhoto')
+    .cover-photo-holder.default-cover-photo(ng-if='!project.coverPhoto')
     .project-details
       .group
         h1.project-title {{project.name}}
