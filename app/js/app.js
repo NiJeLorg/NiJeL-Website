@@ -48,7 +48,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
         $locationProvider, $mdThemingProvider) {
 
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise('/');
+        // $urlRouterProvider.otherwise('/');
 
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')

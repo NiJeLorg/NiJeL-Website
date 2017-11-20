@@ -38,14 +38,14 @@ module.exports = () => {
     apiRouter.route('/processes')
         .get(processesCtrl.getAllProcessesSections);
 
-    apiRouter.get('/auth/google',
-        passportGoogle.authenticate('google', {
-            scope: ['profile', 'email']
-        }));
+    // apiRouter.get('/auth/google',
+    //     passportGoogle.authenticate('google', {
+    //         scope: ['profile', 'email']
+    //     }));
 
-    apiRouter.get('/auth/google/callback', passportGoogle.authenticate('google', {
-        failureRedirect: '/'
-    }), (req, res) => {
-        res.redirect('/');
-    });
+    // apiRouter.get('/auth/google/callback', passportGoogle.authenticate('google', {
+    //     failureRedirect: '/'
+    // }), (req, res) => {
+    //     res.redirect('/');
+    // });
 };

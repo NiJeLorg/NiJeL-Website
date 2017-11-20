@@ -2,14 +2,11 @@ const mongoose = require('mongoose'),
     bcrypt = require('bcrypt-nodejs'),
     Schema = mongoose.Schema,
     UserSchema = new Schema({
-        userId: {
-            type: String
-        },
-        name: {
-            type: String
-        },
-        email: {
-            type: String,
+        google: {
+            id: String,
+            token: String,
+            email: String,
+            name: String,
         },
     });
 
