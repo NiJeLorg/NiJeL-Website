@@ -2,7 +2,9 @@
     .cover-photo-holder {
         width: 100%;
         height: 450px;
-        background-size: cover;
+    }
+    .default-cover-photo {
+        background: url('../assets/section-bg.png')
     }
     .project-details {
         padding: 40px;
