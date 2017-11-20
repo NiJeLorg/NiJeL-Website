@@ -14,8 +14,11 @@ const morgan = require('morgan'),
     path = require('path'),
     apiRouter = require('./server/apiRouter'),
     publicRoutes = require('./server/routes/public'),
-    cloudinary = require('cloudinary'),
     authenticatedRoutes = require('./server/routes/authenticated'),
+    authRoutes = require('./server/routes/auth'),
+    cloudinary = require('cloudinary'),
+    passport = require('passport'),
+    session = require('express-session'),
     auth = require('./server/controllers/auth'),
     c = console,
     nijelApp = express(),
@@ -42,19 +45,26 @@ cloudinary.config({
 // log all reques to the console
 nijelApp.use(morgan('dev'));
 
-
 nijelApp.use(methodOverride('X-HTTP-Method-Override'));
-
 
 nijelApp.use(bodyParser.urlencoded({
     extended: true,
     limit: '500mb',
     parameterLimit: 5000
 }));
+
 nijelApp.use(bodyParser.json({
     limit: '500mb'
 }));
 
+nijelApp.use(session({
+    secret: process.env.SUPERSECRET,
+    resave: true,
+    saveUninitialized: true
+}));
+
+nijelApp.use(passport.initialize());
+nijelApp.use(passport.session());
 
 // serve static files
 nijelApp.use(express.static(path.resolve('./public')));
@@ -64,11 +74,10 @@ nijelApp.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')));
 
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
+// nijelApp.use('/auth', authRoutes);
 
 // call other routes
 publicRoutes();
-
-apiRouter.use(auth.authenticateUser);
 
 authenticatedRoutes();
 

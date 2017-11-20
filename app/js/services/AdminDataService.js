@@ -3,11 +3,8 @@
 const AdminDataService = function ($http, $q)  {
 
     return {
-        signup(user) {
-            return $http.post('/api/users', user);
-        },
         login(user) {
-            return $http.post('/api/login', user);
+            return $http.get('/api/google');
         },
         createNewTestimonial(testimonial) {
             return $http.post('/api/testimonials', testimonial);

@@ -1,8 +1,11 @@
 const AdminCtrl = function ($scope, $state, AdminDataService) {
     $scope.$parent.isAdminState = $state.is('admin');
 
-    $scope.authenticate = ()=> {
-
+    $scope.authenticate = () => {
+        AdminDataService.login()
+            .then((success) => {
+                console.log(success)
+            });
     };
     // $scope.login = (obj) => {
     //     AdminDataService.login(obj)

@@ -1,7 +1,8 @@
 .center-child-horizontal
     img.nav-logo(src='assets/NijelLogo.svg')
 .admin-view
-  a.login-button(href="#" ng-click="authenticate()")
+  a(href='/auth/google') Google Login
+  a.login-button(href='#' ng-click='authenticate()')
     span.login-icon
       span.logo
         img(src='assets/google.png')

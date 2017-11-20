@@ -42,10 +42,10 @@ nijelApp.controller('TeamCtrl', TeamCtrl)
     .factory('AdminDataService', AdminDataService);
 
 nijelApp.config(['$stateProvider', '$httpProvider',
-    '$urlRouterProvider', '$locationProvider', '$mdThemingProvider', '$authProvider',
+    '$urlRouterProvider', '$locationProvider', '$mdThemingProvider',
 
     function ($stateProvider, $httpProvider, $urlRouterProvider,
-        $locationProvider, $mdThemingProvider, $authProvider) {
+        $locationProvider, $mdThemingProvider) {
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/');

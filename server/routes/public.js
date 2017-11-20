@@ -7,7 +7,8 @@ const apiRouter = require('../apiRouter'),
     whyNijelCtrl = require('../controllers/why-nijel'),
     processesCtrl = require('../controllers/processes'),
     nijelTweets = require('../controllers/nijel_tweets'),
-    userCtrl = require('../controllers/user');
+    userCtrl = require('../controllers/user'),
+    passportGoogle = require('../auth/auth');
 
 module.exports = () => {
     apiRouter.route('/nijel-tweets')
@@ -33,7 +34,18 @@ module.exports = () => {
 
     apiRouter.route('/whynijel')
         .get(whyNijelCtrl.getAllWhyNijelSections);
-    
+
     apiRouter.route('/processes')
         .get(processesCtrl.getAllProcessesSections);
+
+    apiRouter.get('/auth/google',
+        passportGoogle.authenticate('google', {
+            scope: ['profile', 'email']
+        }));
+
+    apiRouter.get('/auth/google/callback', passportGoogle.authenticate('google', {
+        failureRedirect: '/'
+    }), (req, res) => {
+        res.redirect('/');
+    });
 };
