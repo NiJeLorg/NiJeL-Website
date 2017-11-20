@@ -11,33 +11,21 @@ module.exports = (passport) => {
         done(null, user);
     });
 
-
     passport.use(new GoogleStrategy({
         clientID: process.env.GOGGLE_CLIENT_ID,
         clientSecret: process.env.GOGGLE_CLIENT_SECRET,
         callbackURL: process.env.GOOGLE_CALLBACKURL
     }, (token, refreshToken, profile, done) => {
-        process.nextTick(() => {
-            User.findOne({
-                'google.id': profile.id
-            }, (err, user) => {
-                if (err) {
-                    return done(err);
-                }
-                if (user) {
-                    return done(null, user);
-                } else {
-                    let newUser = new User();
-                    newUser.google.id = profile.id;
-                    newUser.google.name = profile.displayName;
-                    newUser.save((err) => {
-                        if (err) {
-                            throw err;
-                        }
-                        return done(null, newUser);
-                    });
-                }
-            });
+        User.findOrCreate({
+            userId: profile.id
+        }, {
+            userId: profile.id,
+            email: profile.emails[0].value,
+            displayName: profile.displayName
+        }, (err, user) => {
+            if (err)
+                return done(err);
+            done(null, user);
         });
     }));
 };

@@ -1,11 +1,8 @@
-const AdminCtrl = function ($scope, $state, AdminDataService) {
+const AdminCtrl = function ($scope, $state, $window, AdminDataService) {
     $scope.$parent.isAdminState = $state.is('admin');
 
     $scope.authenticate = () => {
-        AdminDataService.login()
-            .then((success) => {
-                console.log(success)
-            });
+        $window.location.href = '/auth/google';
     };
 };
 

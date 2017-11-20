@@ -79,14 +79,7 @@ nijelApp.use(express.static(path.resolve('./public')));
 // serve favicon
 nijelApp.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')));
 
-// nijelApp.get('/auth/google', passport.authenticate('google', {
-//     scope: ['https://www.googleapis.com/auth/plus.login']
-// }));
-
-// nijelApp.get('/auth/google/callback', passport.authenticate('google', {
-//     successRedirect: '/admin/dashboard',
-//     failureRedirect: '/'
-// }));
+require('./server/routes/auth')(nijelApp, passport);
 
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
