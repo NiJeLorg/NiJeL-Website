@@ -35,8 +35,6 @@ mongoose.connect(process.env.DATABASE_URL, {
     console.log(err, 'ERR');
 });
 
-// require('./server/config/passport')(passport);
-
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -83,7 +81,6 @@ require('./server/routes/auth')(nijelApp, passport);
 
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
-// nijelApp.use('/auth', authRoutes);
 
 // call other routes
 publicRoutes();
@@ -91,7 +88,6 @@ publicRoutes();
 authenticatedRoutes();
 
 // for all requests other than those listed above send index.html page
-
 nijelApp.get('*', (req, res) => {
     res.sendFile('index.html', {
         root: './public'
