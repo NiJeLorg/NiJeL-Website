@@ -1,0 +1,9 @@
+.dialog-view
+    h2 Add New Process Section
+    form(ng-submit='updateNewProcessesSection(coverPhoto)')
+        input(type='text' placeholder='Heading' ng-model='section.title' required)
+        fieldset
+            label Select Cover Photo
+            input(type='file' ngf-select ng-model='coverPhoto' name='file' accept='image/*' ngf-max-size='2MB')
+        ng-quill-editor(ng-model='section.text')
+        input(type='submit')
