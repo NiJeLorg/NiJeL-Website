@@ -6,8 +6,26 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         return $sce.trustAsHtml(template);
     };
 
-    // run actions on respective resources
-    // TODO implement update process dialog show
+    function getProcesses(){
+        ClientDataService.fetchProcessesSections()
+            .then((resp) => {
+                $scope.processes = resp.data.sections;
+            }, (err) => {
+                console.error(err, 'ERROR');
+            });
+    }
+
+    $scope.updateProcess = () => {
+        $mdDialog.show({
+            locals: {
+                dataToPass: process
+            },
+            controller: updateProcessDialogController,
+            templateUrl: 'views/admin/update-process-dialog.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+        });
+    }
 
     $scope.deleteItem = (ev, item, $index, $mdToast) => {
         let confirm = $mdDialog.confirm()
@@ -33,40 +51,77 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         });
     };
 
-    function getProcesses(){
-        ClientDataService.fetchProcessesSections()
-            .then((resp) => {
-                $scope.processes = resp.data.sections;
-            }, (err) => {
-                console.error(err, 'ERROR');
-            });
-    }
 
     function addProcessesSectionDialogController($scope, $mdDialog, $mdToast, Upload) {
         $scope.createNewProcessesSection = (file) => {
-            file.upload = Upload.upload({
-                url: '/api/processes',
-                data: {
-                    photo: file,
-                    obj: $scope.section
-                }
-            });
+            if (file) {
+                file.upload = Upload.upload({
+                    url: '/api/processes/',
+                    data: {
+                        photo: file,
+                        obj: $scope.section
+                    }
+                });
 
-            file.upload.then((resp) => {
-                if (resp.data.success) {
-                    $mdDialog.hide();
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .textContent('Process Section successfully added!')
-                            .hideDelay(3000)
+                file.upload.then((resp) => {
+                    if (resp.data.success) {
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Process Section successfully added!')
+                                .hideDelay(3000)
                     );
+                    getProcesses();  
                 }
             }, (err) => {
                 console.error(err, 'ERR');
             });
+        } else {
+            AdminDataService.createNewProcessesSection($scope.section)
+                .then((resp) => {
+                    if(resp.data.success) {
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('New Process Successfully created!')
+                                .hideDelay(3000)
+                        );
+                        getProcesses();
+                    }
+                }, (err) => {
+                    console.error(err, 'ERROR')
+                });
+            }
         };
     }
 
+    function updateProcessDialogController($scope, $mdDialog, $mdToast, dataToPass, Upload) {
+        scope.section = dataToPass
+        $scope.updateProcess = (file) => {
+            if (file) {
+                file.upload = Upload.upload({
+                    url: ('/api/processes/' + ),
+                    data: {
+                        photo: file,
+                        obj: $scope.section
+                    }
+                });
+
+                file.upload.then((resp) => {
+                    if (resp.data.success) {
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Process Section successfully added!')
+                                .hideDelay(3000)
+                    );
+                    getProcesses();  
+                }
+            }, (err) => {
+                console.error(err, 'ERR');
+            });
+        }
+    }
 
     $scope.launchAddProcessSectionModal = (ev) => {
         $mdDialog.show({
