@@ -42,6 +42,6 @@ module.exports = () => {
     apiRouter.route('/processes')
         .post(upload.single('photo'), processesCtrl.addProcessSection);
 
-    apiRouter.route('/processes/:sectionId')
+    apiRouter.route('/processes/:sectionId').put(upload.single('photo'), processesCtrl.updateProcessSection)
         .delete(processesCtrl.deleteProcessSection);
 };

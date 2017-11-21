@@ -19,9 +19,10 @@ module.exports = {
     addProcessSection: (req, res) => {
         let section = new Processes(req.body.obj);
 
-        if (req.file.path) {
+        if (req.file) {
             cloudinary.uploader.upload(req.file.path, (result) => {
                 section.coverPhoto = result.secure_url;
+                section.coverPhotoId=result.public_id;
                 section.save((err) => {
                     if (err) {
                         res.send(err);
@@ -34,66 +35,66 @@ module.exports = {
                     }
                 });
             });
+        } else {
+            section.save((err) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json({
+                        success: true,
+                        message: 'Process section successfully added',
+                        section: section
+                    });
+                }
+            });
         }
-
-        // cloudinary.uploader.upload(req.file.path, (result) => {
-        //     let project = new Project();
-        //     project.name = req.body.obj.name;
-        //     project.client = req.body.obj.client;
-        //     project.linkToLiveSite = req.body.obj.linkToLiveSite;
-        //     project.relevantSDG = req.body.obj.relevantSDG;
-        //     project.year = req.body.obj.year;
-        //     project.isFeaturedProject = req.body.obj.isFeaturedProject;
-        //     project.coverPhoto = result.secure_url;
-
-        //     project.save((err) => {
-        //         if (err) {
-        //             res.send(err);
-        //         }
-        //         res.json({
-        //             success: true,
-        //             message: 'Project successfully added',
-        //             project: project
-        //         });
-        //     });
-        // });
     },
 
-    // updateProject: (req, res) => {
-    //     Project.findById(req.params.projectId, (err, project) => {
-    //         if (!err) {
-    //             if (req.body.name) {
-    //                 project.name = req.body.name;
-    //             }
-    //             if (req.body.client) {
-    //                 project.client = req.body.client;
-    //             }
-    //             if (req.body.relevantSDG) {
-    //                 project.relevantSDG = req.body.relevantSDG;
-    //             }
-    //             if (req.body.linkToLiveSite) {
-    //                 project.linkToLiveSite = req.body.linkToLiveSite;
-    //             }
-    //             if (req.body.year) {
-    //                 project.year = req.body.year;
-    //             }
+    updateProcessSection: (req, res) =>  {
+        Processes.findByIdAndUpdate(req.params.sectionId, (req.body.obj || req.body), (err, section) => {
+            if (!err) {
+                if (req.file) {
+                    cloudinary.uploader.upload(req.file.path, (result) => {
+                        section.coverPhoto = result.secure_url;
+                        section.save((err) => {
+                            if (err) {
+                                res.send(err);
+                            } 
+                            res.json({
+                                success: true,
+                                message: 'Process section successfully added',
+                                section: section
+                            });
+                        });
+                        if(req.body.obj.coverPhotoId) {
+                            cloudinary.uploader.destroy(req.body.obj.coverPhotoId, (err, result) => {
+                                if (!err) {
+                                    console.log('previous image deleted');
+                                } else {
+                                    console.log('err', err);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    section.save((err) => {
+                        if (err) {
+                            res.send(err);
+                        } 
+                        res.json({
+                            success: true,
+                            message: 'Process section successfully added',
+                            section: section
+                        });
+                    });
+                }
+            } else {
+                res.send(err);
+            }
+        });
+    },
 
-    //             project.save((err) => {
-    //                 if (err) {
-    //                     res.send(err);
-    //                 }
-    //                 res.json({
-    //                     success: true,
-    //                     message: 'Project successfully updated',
-    //                     project: project
-    //                 });
-    //             });
-    //         } else {
-    //             res.send(err);
-    //         }
-    //     });
-
-    // },
+    
 
     deleteProcessSection: (req, res) => {
         Processes.remove({

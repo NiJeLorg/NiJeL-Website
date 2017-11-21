@@ -50,6 +50,9 @@ const AdminDataService = function ($http, $q)  {
         },
         updateTeamMember(teamMember) {
             return $http.put(('/api/team/' + teamMember._id), teamMember);
+        },
+        updateProcessSection(section) {
+            return $http.put(('/api/processes/' + section._id), section);
         }
     };
 };
