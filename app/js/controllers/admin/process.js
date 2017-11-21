@@ -27,7 +27,7 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         });
     }
 
-    $scope.deleteItem = (ev, item, $index, $mdToast) => {
+    $scope.deleteItem = (ev, section, $index, $mdToast) => {
         let confirm = $mdDialog.confirm()
             .title('Are you sure, you want to delete this item ?')
             .textContent('Clicking on YES, will delete this item permanently!')
@@ -38,9 +38,9 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
             AdminDataService.deleteProcessSection(section)
                 .then((resp) => {
                     if (resp.data.success) {
-                        $scope.items.forEach((elem) => {
+                        $scope.sections.forEach((elem, $index) => {
                             if (elem._id === section._id) {
-                                $scope.items.splice($index, 1);
+                                $scope.sections.splice($index, 1);
                             }
                         });
                     }
@@ -50,13 +50,12 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         }, () => {
         });
     };
-
-
+    
     function addProcessesSectionDialogController($scope, $mdDialog, $mdToast, Upload) {
-        $scope.createNewProcessesSection = (file) => {
+        $scope.createNewProcessSection = (file) => {
             if (file) {
                 file.upload = Upload.upload({
-                    url: '/api/processes/',
+                    url: '/api/processes',
                     data: {
                         photo: file,
                         obj: $scope.section
@@ -70,13 +69,13 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                             $mdToast.simple()
                                 .textContent('Process Section successfully added!')
                                 .hideDelay(3000)
-                    );
-                    getProcesses();  
-                }
-            }, (err) => {
-                console.error(err, 'ERR');
-            });
-        } else {
+                        );
+                        getProcesses();  
+                    }
+                }, (err) => {
+                    console.error(err, 'ERR');
+                });
+            } else {
             AdminDataService.createNewProcessSection($scope.section)
                 .then((resp) => {
                     if(resp.data.success) {
@@ -96,7 +95,7 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
     }
 
     function updateProcessDialogController($scope, $mdDialog, $mdToast, dataToPass, Upload) {
-        scope.section = dataToPass
+        $scope.section = dataToPass
         $scope.updateProcess = (file) => {
             if (file) {
                 file.upload = Upload.upload({
@@ -140,7 +139,7 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
     $scope.launchAddProcessSectionModal = (ev) => {
         $mdDialog.show({
             controller: addProcessesSectionDialogController,
-            templateUrl: 'views/add-processSection-dialog.html',
+            templateUrl: 'views/admin/add-processSection-dialog.html',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
         });

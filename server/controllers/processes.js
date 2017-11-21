@@ -17,35 +17,32 @@ module.exports = {
     },
 
     addProcessSection: (req, res) => {
-        let section = new Processes(req.body.obj);
-
+        let section = new Processes(req.body.obj || req.body);
         if (req.file) {
             cloudinary.uploader.upload(req.file.path, (result) => {
                 section.coverPhoto = result.secure_url;
                 section.coverPhotoId=result.public_id;
                 section.save((err) => {
                     if (err) {
-                        res.send(err);
-                    } else {
-                        res.json({
-                            success: true,
-                            message: 'Process section successfully added',
-                            section: section
-                        });
+                       res.send(err);
                     }
+                    res.json({
+                        success: true,
+                        message: 'Process section successfully added',
+                        section: section
+                    });
                 });
             });
         } else {
             section.save((err) => {
                 if (err) {
                     res.send(err);
-                } else {
-                    res.json({
-                        success: true,
-                        message: 'Process section successfully added',
-                        section: section
-                    });
                 }
+                res.json({
+                    success: true,
+                    message: 'Process section successfully added',
+                    section: section
+                });
             });
         }
     },
