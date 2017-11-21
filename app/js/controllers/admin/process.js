@@ -9,16 +9,16 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
     function getProcesses(){
         ClientDataService.fetchProcessesSections()
             .then((resp) => {
-                $scope.processes = resp.data.sections;
+                $scope.sections = resp.data.sections;
             }, (err) => {
                 console.error(err, 'ERROR');
             });
     }
 
-    $scope.updateProcess = () => {
+    $scope.updateProcess = (event, section) => {
         $mdDialog.show({
             locals: {
-                dataToPass: process
+                dataToPass: section
             },
             controller: updateProcessDialogController,
             templateUrl: 'views/admin/update-process-dialog.html',
@@ -35,11 +35,11 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
             .ok('YES')
             .cancel('NO');
         $mdDialog.show(confirm).then(() => {
-            AdminDataService.deleteProcessSection(item)
+            AdminDataService.deleteProcessSection(section)
                 .then((resp) => {
                     if (resp.data.success) {
                         $scope.items.forEach((elem) => {
-                            if (elem._id === item._id) {
+                            if (elem._id === section._id) {
                                 $scope.items.splice($index, 1);
                             }
                         });
@@ -77,7 +77,7 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                 console.error(err, 'ERR');
             });
         } else {
-            AdminDataService.createNewProcessesSection($scope.section)
+            AdminDataService.createNewProcessSection($scope.section)
                 .then((resp) => {
                     if(resp.data.success) {
                         $mdDialog.hide();
@@ -100,7 +100,7 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
         $scope.updateProcess = (file) => {
             if (file) {
                 file.upload = Upload.upload({
-                    url: ('/api/processes/' + ),
+                    url: ('/api/processes/' + $scope.section._id ),
                     data: {
                         photo: file,
                         obj: $scope.section
@@ -115,12 +115,26 @@ const AdminProcessCtrl = function ($scope, $state, $mdDialog, $mdToast, AdminDat
                                 .textContent('Process Section successfully added!')
                                 .hideDelay(3000)
                     );
-                    getProcesses();  
                 }
             }, (err) => {
                 console.error(err, 'ERR');
             });
-        }
+            } else {
+                AdminDataService.updateProcessSection($scope.section)
+                    .then((resp) => {
+                        if (resp.data.success) {
+                            $mdDialog.hide();
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .textContent('Process Successfully updated!')
+                                    .hideDelay(3000)
+                            );
+                        }
+                    }, (err) => {
+                        console.error(err, 'ERR');
+                    });
+                }
+        };
     }
 
     $scope.launchAddProcessSectionModal = (ev) => {
