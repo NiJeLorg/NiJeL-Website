@@ -12,12 +12,15 @@ const morgan = require('morgan'),
     request = require('request'),
     favicon = require('serve-favicon'),
     path = require('path'),
+    compression = require('compression'),
     apiRouter = require('./server/apiRouter'),
     publicRoutes = require('./server/routes/public'),
     cloudinary = require('cloudinary'),
     authenticatedRoutes = require('./server/routes/authenticated'),
     auth = require('./server/controllers/auth'),
+    bunyan = require('bunyan'),
     c = console,
+    debug = require('debug'),
     nijelApp = express(),
     port = process.env.PORT;
 
@@ -27,9 +30,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE_URL, {
     useMongoClient: true
 }).then(() => {
-    console.log('successful connection to the DB');
+    debug('successful connection to the DB');
 }, (err) => {
-    console.log(err, 'ERR');
+    debug(err, 'ERR');
 });
 
 cloudinary.config({
@@ -40,6 +43,7 @@ cloudinary.config({
 
 
 // log all reques to the console
+nijelApp.use(compression());
 nijelApp.use(morgan('dev'));
 
 
@@ -81,5 +85,5 @@ nijelApp.get('*', (req, res) => {
 
 // start the server
 nijelApp.listen(port || 3000, () => {
-    c.log('server running on port ' + port);
+    debug('server running on port ' + port);
 });
