@@ -5,8 +5,9 @@ const Project = require('../models/projects'),
 
 module.exports = {
     getAllProjects: (req, res) => {
+        let search_str = req.query.search || '';
         let projectsFilter = {
-            name: new RegExp('^.*('+req.query.search +').*$', 'i'),
+            name: new RegExp('^.*('+search_str +').*$', 'i'),
             isFeaturedProject: req.query.featured || false
         }
         Project.find(projectsFilter, (err, projects) => {
