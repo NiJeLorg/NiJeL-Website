@@ -101,8 +101,6 @@ nijelApp.config(['$stateProvider', '$httpProvider',
             });
 
         $locationProvider.html5Mode(true);
-        $httpProvider.defaults.headers.common['x-access-token'] = localStorage.token;
-
     }
 ]);
 

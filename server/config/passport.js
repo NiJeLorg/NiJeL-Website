@@ -1,14 +1,16 @@
+'use strict';
+
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     jwt = require('jsonwebtoken'),
     User = require('../models/user');
 
 module.exports = (passport) => {
 
-    passport.serializeUser(function (user, done) {
+    passport.serializeUser((user, done) => {
         done(null, user);
     });
 
-    passport.deserializeUser(function (user, done) {
+    passport.deserializeUser((user, done) => {
         done(null, user);
     });
 
@@ -20,17 +22,19 @@ module.exports = (passport) => {
 
         const createToken = (user) => {
             return jwt.sign(user, process.env.SUPERSECRET, {
-                expiresIn: '24h'
+                expiresIn: '2d'
             });
         };
 
-        if (profile._json.domain && profile._json.domain === 'nijel.org') {
+        let data = profile._json;
+
+        if (data.domain && data.domain === 'nijel.org') {
             User.findOrCreate({
-                userId: profile.id
+                userId: data.id
             }, {
-                userId: profile.id,
-                email: profile.emails[0].value,
-                displayName: profile.displayName
+                userId: data.id,
+                email: data.emails[0].value,
+                displayName: data.displayName
             }, (err, user) => {
                 if (err)
                     return done(err);
@@ -39,6 +43,10 @@ module.exports = (passport) => {
                     user,
                     token
                 });
+            });
+        } else {
+            return done(null, false, {
+                message: 'User is not a valid Nijel.org user'
             });
         }
     }));

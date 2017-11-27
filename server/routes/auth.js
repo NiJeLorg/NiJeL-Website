@@ -1,13 +1,23 @@
+const express = require('express'),
+    Router = express.Router();
+
 module.exports = (app, passport) => {
+    const scope = ['https://www.googleapis.com/auth/userinfo.email',
+        'https://www.googleapis.com/auth/plus.login',
+        'https://www.googleapis.com/auth/userinfo.profile'
+    ];
 
-    app.get('/auth/google', passport.authenticate('google', {
-        scope:[
-            'profile', 'email'
-        ]
-    }));
+    Router.route('/auth/google')
+        .get(passport.authenticate('google', {
+            scope
+        }));
 
-    app.get('/auth/google/callback', passport.authenticate('google', {
-        successRedirect: '/admin/dashboard',
-        failureRedirect: '/admin'
-    }));
+    Router.route('/auth/google/callback')
+        .get(passport.authenticate('google', {
+            failureRedirect: '/admin'
+        }), (req, res) => {
+            return res.redirect('/admin/dashboard');
+        });
+
+    app.use(Router);
 };
