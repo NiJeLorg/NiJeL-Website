@@ -7,7 +7,7 @@ const apiRouter = require('../apiRouter'),
     whyNijelCtrl = require('../controllers/why-nijel'),
     processesCtrl = require('../controllers/processes'),
     nijelTweets = require('../controllers/nijel_tweets'),
-    userCtrl = require('../controllers/user');
+    userCtrl = require('../controllers/user'),
     servicesCtrl = require('../controllers/services');
 
 module.exports = () => {

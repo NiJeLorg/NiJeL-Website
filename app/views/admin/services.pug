@@ -1,2 +1,26 @@
-md-button.md-fab(aria-label='Add Service', class='md-fab-bottom-right launchItemModal', ng-click='launchAddProcessSectionModal($event)', style="position:fixed !important;")
+md-button.md-fab(aria-label='Add Service', class='md-fab-bottom-right launchItemModal', ng-click='launchAddServiceModal($event)', style="position:fixed !important;")
     md-icon.material-icons add
+
+md-card
+    md-toolbar.md-table-toolbar.md-default
+        .md-toolbar-tools
+            h2.md-title Services              
+            .flex(flex='')
+    md-table-container
+        table(md-table=''   md-progress='promise')
+            thead(md-head='')
+                tr(md-row='')
+                    th(md-column='') Title
+                    th(md-column='') Description
+                    th(md-column='') Actions
+            tbody(md-body='')
+                tr(md-row=''  md-select-id='name'  ng-repeat='service in services')
+                    td(md-cell='')
+                        a(md-cell='') {{service.title}}
+                    td(md-cell='' ng-bind-html="trustAsHtml(service.description)")
+                    td(md-cell='')
+                        div(layout='row', layout-sm='column',)
+                            md-button.md-icon-button.md-accent(aria-label='Edit', ng-click='updateService($event, service)')
+                                md-icon.material-icons edit
+                            md-button.md-icon-button.md-accent(aria-label='Delete', ng-click='deleteService($event, service)')
+                                md-icon.material-icons delete
