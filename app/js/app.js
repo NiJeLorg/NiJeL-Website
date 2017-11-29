@@ -24,6 +24,7 @@ import AdminProcessCtrl from './controllers/admin/process';
 import AdminTestimonialCtrl from './controllers/admin/testimonial';
 import AdminWhyNijelCtrl from './controllers/admin/why-nijel';
 import AdminTeamCtrl from './controllers/admin/team';
+import AdminServiceCtrl from './controllers/admin/services';
 
 // import services
 import ClientDataService from './services/ClientDataService';
@@ -46,6 +47,7 @@ nijelApp.controller('TeamCtrl', TeamCtrl)
     .controller('AdminTestimonialCtrl', AdminTestimonialCtrl)
     .controller('AdminWhyNijelCtrl', AdminWhyNijelCtrl)
     .controller('AdminTeamCtrl', AdminTeamCtrl)
+    .controller('AdminServiceCtrl', AdminServiceCtrl)
     .controller('AdminDashboardCtrl', AdminDashboardCtrl)
     .factory('ClientDataService', ClientDataService)
     .factory('AdminDataService', AdminDataService);
@@ -141,6 +143,11 @@ nijelApp.config(['$stateProvider', '$httpProvider',
                 url: '/testimonials',
                 controller: 'AdminTestimonialCtrl',
                 templateUrl: 'views/admin/testimonials.html',
+            })
+            .state('admin.dashboard.services', {
+                url: '/services',
+                controller: 'AdminServiceCtrl',
+                templateUrl: 'views/admin/services.html',
             });
 
         $locationProvider.html5Mode(true);

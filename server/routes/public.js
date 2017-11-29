@@ -8,6 +8,7 @@ const apiRouter = require('../apiRouter'),
     processesCtrl = require('../controllers/processes'),
     nijelTweets = require('../controllers/nijel_tweets'),
     userCtrl = require('../controllers/user');
+    servicesCtrl = require('../controllers/services');
 
 module.exports = () => {
     apiRouter.route('/nijel-tweets')
@@ -36,4 +37,6 @@ module.exports = () => {
     
     apiRouter.route('/processes')
         .get(processesCtrl.getAllProcessesSections);
+    apiRouter.route('/services')
+        .get(servicesCtrl.getAllServices);
 };

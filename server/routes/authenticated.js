@@ -6,6 +6,7 @@ const apiRouter = require('../apiRouter'),
     teamCtrl = require('../controllers/team'),
     whyNijelCtrl = require('../controllers/why-nijel'),
     processesCtrl = require('../controllers/processes'),
+    servicesCtrl = require('../controllers/services'),
     multer = require('multer'),
     upload = multer({
         dest: './uploads/'
@@ -36,12 +37,21 @@ module.exports = () => {
     apiRouter.route('/whynijel')
         .post(upload.single('photo'), whyNijelCtrl.addWhyNijelSection);
 
-    apiRouter.route('/whynijel/:sectionId') .put(upload.single('photo'), whyNijelCtrl.updateWhyNijelSection)
+    apiRouter.route('/whynijel/:sectionId') 
+        .put(upload.single('photo'), whyNijelCtrl.updateWhyNijelSection)
         .delete(whyNijelCtrl.deleteWhyNijelSection);
 
     apiRouter.route('/processes')
         .post(upload.single('photo'), processesCtrl.addProcessSection);
 
-    apiRouter.route('/processes/:sectionId').put(upload.single('photo'), processesCtrl.updateProcessSection)
+    apiRouter.route('/processes/:sectionId')
+        .put(upload.single('photo'), processesCtrl.updateProcessSection)
         .delete(processesCtrl.deleteProcessSection);
+    
+    apiRouter.route('/services')
+        .post(servicesCtrl.addService);
+
+    apiRouter.route('/services/:serviceId')
+        .put(servicesCtrl.updateService)
+        .delete(servicesCtrl.deleteService);
 };
