@@ -1,0 +1,6 @@
+.dialog-view
+    h2 Update Service
+    form(ng-submit='updateService()')
+        input(type='text' placeholder='Title' ng-model='service.title' required)
+        ng-quill-editor(ng-model='service.description', name='description')
+        input(type='submit')
