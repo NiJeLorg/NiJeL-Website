@@ -8,13 +8,16 @@
     section
       .projects-container
         h2 2008 - 2010
-        p(ng-repeat='project in earlyProjects') {{project.name}}
+        p(ng-repeat='project in earlyProjects') 
+          a(ui-sref="project({id: project._id})") {{project.name}}
       .projects-container
         h2 2011 - 2014
-        p(ng-repeat='project in midProjects') {{project.name}}
+        p(ng-repeat='project in midProjects')
+          a(ui-sref="project({id: project._id})") {{project.name}}
       .projects-container
         h2 2015 - 2017
-        p(ng-repeat='project in lateProjects') {{project.name}}
+        p(ng-repeat='project in lateProjects')
+          a(ui-sref="project({id: project._id})") {{project.name}}
 
 
 
