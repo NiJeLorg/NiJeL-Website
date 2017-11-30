@@ -9,6 +9,7 @@ import slugify from  './filters/slugify';
 import $ from 'jquery';
 // import dataGrid from 'angular-data-grid';
 
+
 // import controllers
 import HomeCtrl from './controllers/home';
 import TeamCtrl from './controllers/team';
@@ -151,9 +152,6 @@ nijelApp.config(['$stateProvider', '$httpProvider',
             });
 
         $locationProvider.html5Mode(true);
-
-        $httpProvider.defaults.headers.common['x-access-token'] = localStorage.token;
-
     }
 ]).run(['$state', '$transitions', '$rootScope', ($state, $transitions, $rootScope) => {
     $transitions.onStart({}, function ($transition) {
@@ -187,5 +185,4 @@ if (localStorage.navbarToggle) {
             'display': 'none'
         });
     });
-
 }

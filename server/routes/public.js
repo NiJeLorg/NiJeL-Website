@@ -34,7 +34,7 @@ module.exports = () => {
 
     apiRouter.route('/whynijel')
         .get(whyNijelCtrl.getAllWhyNijelSections);
-    
+
     apiRouter.route('/processes')
         .get(processesCtrl.getAllProcessesSections);
     apiRouter.route('/services')

@@ -12,10 +12,13 @@ const morgan = require('morgan'),
     request = require('request'),
     favicon = require('serve-favicon'),
     path = require('path'),
+    cookieParser = require('cookie-parser'),
     apiRouter = require('./server/apiRouter'),
     publicRoutes = require('./server/routes/public'),
-    cloudinary = require('cloudinary'),
     authenticatedRoutes = require('./server/routes/authenticated'),
+    cloudinary = require('cloudinary'),
+    passport = require('passport'),
+    session = require('express-session'),
     auth = require('./server/controllers/auth'),
     c = console,
     nijelApp = express(),
@@ -38,19 +41,31 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-
 // log all reques to the console
 nijelApp.use(morgan('dev'));
 
+require('./server/config/passport')(passport);
 
-nijelApp.use(methodOverride('X-HTTP-Method-Override'));
+nijelApp.use(session({
+    secret: process.env.SUPERSECRET,
+    resave: true,
+    saveUninitialized: true
+}));
 
+nijelApp.use(cookieParser());
+
+nijelApp.use(passport.initialize());
+
+nijelApp.use(passport.session());
+
+nijelApp.use(methodOverride());
 
 nijelApp.use(bodyParser.urlencoded({
     extended: true,
     limit: '500mb',
     parameterLimit: 5000
 }));
+
 nijelApp.use(bodyParser.json({
     limit: '500mb'
 }));
@@ -62,13 +77,13 @@ nijelApp.use(express.static(path.resolve('./public')));
 // serve favicon
 nijelApp.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')));
 
+require('./server/routes/auth')(nijelApp, passport);
+
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
 
 // call other routes
 publicRoutes();
-
-apiRouter.use(auth.authenticateUser);
 
 authenticatedRoutes();
 
