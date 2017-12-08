@@ -30,7 +30,7 @@ module.exports = (passport) => {
 
         if (data.domain && data.domain === 'nijel.org') {
             User.findOrCreate({
-                userId: data.id
+                email: data.emails[0].value
             }, {
                 userId: data.id,
                 email: data.emails[0].value,
