@@ -77,10 +77,11 @@ nijelApp.use(express.static(path.resolve('./public')));
 // serve favicon
 nijelApp.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')));
 
-require('./server/routes/auth')(nijelApp, passport);
+require('./server/routes/auth')(nijelApp);
 
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
+
 
 // call other routes
 publicRoutes();

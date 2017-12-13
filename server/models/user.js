@@ -4,7 +4,8 @@ const mongoose = require('mongoose'),
     UserSchema = new Schema({
         userId: String,
         email: String,
-        displayName: String
+        displayName: String,
+        google: String
     });
 
 UserSchema.statics.findOrCreate = require('find-or-create');

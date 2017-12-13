@@ -16,43 +16,43 @@ const apiRouter = require('../apiRouter'),
 module.exports = () => {
 
     apiRouter.route('/projects')
-        .post(auth.validate, upload.single('photo'), projectCtrl.addProject);
+        .post(auth.ensureAuthenticated, upload.single('photo'), projectCtrl.addProject);
 
     apiRouter.route('/projects/:projectId')
-        .put(auth.validate, upload.single('photo'), projectCtrl.updateProject)
+        .put(auth.ensureAuthenticated, upload.single('photo'), projectCtrl.updateProject)
         .delete(projectCtrl.deleteProject);
 
     apiRouter.route('/testimonials')
-        .post(auth.validate, testimonialCtrl.addTestimonial);
+        .post(auth.ensureAuthenticated, testimonialCtrl.addTestimonial);
 
     apiRouter.route('/testimonials/:testimonialId')
-        .put(auth.validate, testimonialCtrl.updateTestimonial)
-        .delete(auth.validate, testimonialCtrl.deleteTestimonial);
+        .put(auth.ensureAuthenticated, testimonialCtrl.updateTestimonial)
+        .delete(auth.ensureAuthenticated, testimonialCtrl.deleteTestimonial);
 
     apiRouter.route('/team')
-        .post(auth.validate, teamCtrl.addTeamMember);
+        .post(auth.ensureAuthenticated, teamCtrl.addTeamMember);
 
-    apiRouter.route('/team/:teamMemberId').put(auth.validate, upload.single('photo'), teamCtrl.updateTeamMember)
-        .delete(auth.validate, teamCtrl.deleteTeamMember);
+    apiRouter.route('/team/:teamMemberId').put(auth.ensureAuthenticated, upload.single('photo'), teamCtrl.updateTeamMember)
+        .delete(auth.ensureAuthenticated, teamCtrl.deleteTeamMember);
 
     apiRouter.route('/whynijel')
-        .post(auth.validate, upload.single('photo'), whyNijelCtrl.addWhyNijelSection);
+        .post(auth.ensureAuthenticated, upload.single('photo'), whyNijelCtrl.addWhyNijelSection);
 
     apiRouter.route('/whynijel/:sectionId') 
-        .put(auth.valiauth.validatedate, upload.single('photo'), whyNijelCtrl.updateWhyNijelSection)
-        .delete(auth.validate, whyNijelCtrl.deleteWhyNijelSection);
+        .put(auth.ensureAuthenticated, upload.single('photo'), whyNijelCtrl.updateWhyNijelSection)
+        .delete(auth.ensureAuthenticated, whyNijelCtrl.deleteWhyNijelSection);
 
     apiRouter.route('/processes')
         .post(upload.single('photo'), processesCtrl.addProcessSection);
 
     apiRouter.route('/processes/:sectionId')
-        .put(auth.validate, upload.single('photo'), processesCtrl.updateProcessSection)
-        .delete(auth.validate, processesCtrl.deleteProcessSection);
+        .put(auth.ensureAuthenticated, upload.single('photo'), processesCtrl.updateProcessSection)
+        .delete(auth.ensureAuthenticated, processesCtrl.deleteProcessSection);
     
     apiRouter.route('/services')
-        .post(auth.validate, servicesCtrl.addService);
+        .post(auth.ensureAuthenticated, servicesCtrl.addService);
 
     apiRouter.route('/services/:serviceId')
-        .put(auth.validate, servicesCtrl.updateService)
-        .delete(auth.validate, servicesCtrl.deleteService);
+        .put(auth.ensureAuthenticated, servicesCtrl.updateService)
+        .delete(auth.ensureAuthenticated, servicesCtrl.deleteService);
 };
