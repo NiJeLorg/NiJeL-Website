@@ -4,6 +4,7 @@ import angularAria from 'angular-aria';
 import ngMaterial from 'angular-material';
 import ngFileUpload from 'ng-file-upload';
 import ngQuill from 'ng-quill';
+import ngSanitize from 'angular-sanitize';
 import angular from 'angular';
 import slugify from  './filters/slugify';
 import $ from 'jquery';
@@ -33,7 +34,7 @@ import ClientDataService from './services/ClientDataService';
 import AdminDataService from './services/AdminDataService';
 
 
-const nijelApp = angular.module('nijelApp', [uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill, require('angular-material-data-table'), satellizer]);
+const nijelApp = angular.module('nijelApp', [uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill, ngSanitize, require('angular-material-data-table'), satellizer]);
 
 nijelApp.filter('slugify', [slugify]);
 nijelApp.controller('TeamCtrl', TeamCtrl)

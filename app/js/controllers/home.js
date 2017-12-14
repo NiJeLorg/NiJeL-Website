@@ -2,10 +2,12 @@ import moment from 'moment';
 import $ from 'jquery';
 
 
-const HomeCtrl = function($scope, ClientDataService, $document) {
+const HomeCtrl = function($scope, ClientDataService, $document, $sce) {
 
     $scope.isAdminState = false;
-
+    $scope.tweetAsHtml = (text) => {
+        return $sce.trustAsHtml(text);
+    }
     let testimonialIndex;
     $scope.tweets = [];
 
@@ -43,6 +45,9 @@ const HomeCtrl = function($scope, ClientDataService, $document) {
             if (resp.data.success) {
                 JSON.parse(resp.data.tweets).forEach((tweet, index) => {
                     tweet.created_at = moment(tweet.created_at).format("MMM Do");
+
+                    tweet.text = tweet.text.replace(/(@[^ ]+)/g, '<a class="user">$1</a>').
+                              replace(/(#[^ ]+)/g, '<span class="hash">$1</span>');
                     $scope.tweets.push(tweet);
                 });
             }
