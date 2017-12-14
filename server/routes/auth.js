@@ -35,31 +35,23 @@ module.exports = (app) => {
                 }
                 // Step 3a. Link user accounts.
                 if (req.header('Authorization')) {
-                    User.findOne({google: profile.sub}, function (err, existingUser) {
-                        let token = req.header('Authorization').split(' ')[1];
-                        let payload = jwt.decode(token, process.env.SUPERSECRET);
-                        User.findById(payload.sub, function (err, user) {
+                    User.findOne({ google: profile.sub }, function(err, existingUser) {
+                        if (existingUser) {
+                            return res.status(409).send({ message: 'There is already a Google account that belongs to you' });
+                        }
+                        var token = req.header('Authorization').split(' ')[1];
+                        var payload = jwt.decode(token,  process.env.GOGGLE_CLIENT_SECRET);
+                        User.findById(payload.sub, function(err, user) {
                             if (!user) {
-                                user = new User();
-                                user.email = profile.email;
-                                user.google = profile.sub;
-                                user.displayName = profile.name;
-                                user.save(function() {
-                                    let token = createJWT(user);
-                                    return res.send({token: token,  user: user});
-                                });
+                                return res.status(400).send({ message: 'User not found' });
                             }
-                            else if (existingUser && !existingUser._id.equals(user._id)) {
-                                user.remove();
-                                existingUser.save(function() {
-                                    let token = createJWT(existingUser);
-                                    return res.send({ token: token, user: existingUser });
-                                });
-                            }else{
-                                let token = createJWT(existingUser);
-                                return res.send({ token: token, user: existingUser });
-                            }
-
+                            user.google = profile.sub;
+                            user.email =  profile.email;
+                            user.displayName = user.displayName || profile.name;
+                            user.save(function() {
+                                var token = createJWT(user);
+                                res.send({ token: token });
+                            });
                         });
                     });
                 } else {
@@ -70,15 +62,15 @@ module.exports = (app) => {
                         }
                         var user = new User();
                         user.google = profile.sub;
-                        // user.picture = profile.picture.replace('sz=50', 'sz=200');
+                        user.email =  profile.email;
                         user.displayName = profile.name;
                         user.save(function(err) {
                             var token = createJWT(user);
                             res.send({ token: token });
                         });
                     });
-
                 }
+
             });
         });
     });
