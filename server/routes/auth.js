@@ -1,6 +1,5 @@
-const express = require('express'),
-    request = require('request'),
-    jwt = require('jwt-simple');
+const request = require('request'),
+    jwt = require('jwt-simple'),
     moment = require('moment'),
     User = require('../models/user');
 
@@ -39,8 +38,8 @@ module.exports = (app) => {
                         if (existingUser) {
                             return res.status(409).send({ message: 'There is already a Google account that belongs to you' });
                         }
-                        var token = req.header('Authorization').split(' ')[1];
-                        var payload = jwt.decode(token,  process.env.GOGGLE_CLIENT_SECRET);
+                        let token = req.header('Authorization').split(' ')[1];
+                        let payload = jwt.decode(token,  process.env.GOGGLE_CLIENT_SECRET);
                         User.findById(payload.sub, function(err, user) {
                             if (!user) {
                                 return res.status(400).send({ message: 'User not found' });
@@ -49,7 +48,7 @@ module.exports = (app) => {
                             user.email =  profile.email;
                             user.displayName = user.displayName || profile.name;
                             user.save(function() {
-                                var token = createJWT(user);
+                                let token = createJWT(user);
                                 res.send({ token: token });
                             });
                         });
@@ -60,12 +59,12 @@ module.exports = (app) => {
                         if (existingUser) {
                             return res.send({ token: createJWT(existingUser) });
                         }
-                        var user = new User();
+                        let user = new User();
                         user.google = profile.sub;
                         user.email =  profile.email;
                         user.displayName = profile.name;
                         user.save(function(err) {
-                            var token = createJWT(user);
+                            let token = createJWT(user);
                             res.send({ token: token });
                         });
                     });

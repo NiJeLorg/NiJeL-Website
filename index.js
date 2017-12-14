@@ -1,5 +1,5 @@
 'use strict';
-var env = process.env.NODE_ENV || 'development';
+let env = process.env.NODE_ENV || 'development';
 if (env === 'development') {
     require('dotenv').load();
 }
@@ -8,8 +8,6 @@ const morgan = require('morgan'),
     express = require('express'),
     methodOverride = require('method-override'),
     bodyParser = require('body-parser'),
-    multer = require('multer'),
-    request = require('request'),
     favicon = require('serve-favicon'),
     path = require('path'),
     cookieParser = require('cookie-parser'),
@@ -17,19 +15,14 @@ const morgan = require('morgan'),
     publicRoutes = require('./server/routes/public'),
     authenticatedRoutes = require('./server/routes/authenticated'),
     cloudinary = require('cloudinary'),
-    passport = require('passport'),
     session = require('express-session'),
-    auth = require('./server/controllers/auth'),
     c = console,
     nijelApp = express(),
+    mongoose = require('mongoose'),
     port = process.env.PORT;
 
-let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-
-mongoose.connect(process.env.DATABASE_URL, {
-    useMongoClient: true
-}).then(() => {
+mongoose.connect(process.env.DATABASE_URL, { useMongoClient: true }).then(() => {
     console.log('successful connection to the DB');
 }, (err) => {
     console.log(err, 'ERR');
@@ -44,7 +37,6 @@ cloudinary.config({
 // log all reques to the console
 nijelApp.use(morgan('dev'));
 
-require('./server/config/passport')(passport);
 
 nijelApp.use(session({
     secret: process.env.SUPERSECRET,
@@ -54,10 +46,6 @@ nijelApp.use(session({
 
 nijelApp.use(cookieParser());
 
-nijelApp.use(passport.initialize());
-
-nijelApp.use(passport.session());
-
 nijelApp.use(methodOverride());
 
 nijelApp.use(bodyParser.urlencoded({
@@ -66,10 +54,7 @@ nijelApp.use(bodyParser.urlencoded({
     parameterLimit: 5000
 }));
 
-nijelApp.use(bodyParser.json({
-    limit: '500mb'
-}));
-
+nijelApp.use(bodyParser.json({limit: '500mb'}));
 
 // serve static files
 nijelApp.use(express.static(path.resolve('./public')));
@@ -77,11 +62,11 @@ nijelApp.use(express.static(path.resolve('./public')));
 // serve favicon
 nijelApp.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')));
 
+// Add google auth routes
 require('./server/routes/auth')(nijelApp);
 
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
-
 
 // call other routes
 publicRoutes();
