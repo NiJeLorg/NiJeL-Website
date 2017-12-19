@@ -5,9 +5,12 @@ import $ from 'jquery';
 const HomeCtrl = function($scope, ClientDataService, $document, $sce) {
 
     $scope.isAdminState = false;
-    $scope.tweetAsHtml = (text) => {
+    $scope.targetAttr = "";
+    $scope.trustAsHtml = (text) => {
         return $sce.trustAsHtml(text);
     }
+
+
     let testimonialIndex;
     $scope.tweets = [];
 
@@ -45,9 +48,10 @@ const HomeCtrl = function($scope, ClientDataService, $document, $sce) {
             if (resp.data.success) {
                 JSON.parse(resp.data.tweets).forEach((tweet, index) => {
                     tweet.created_at = moment(tweet.created_at).format("MMM Do");
+                     // replace #hashtags and @mentions
+                    tweet.text = tweet.text.replace( /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim, '$1<a href="https://twitter.com/search?q=%23$2"' + $scope.targetAttr + ' target="_blank">#$2</a>').
+                                replace(/(^|\s)\@(\w*[a-zA-Z_]+\w*)/gim, '$1<a href="https://twitter.com/$2"' + $scope.targetAttr + 'target="_blank" >@$2</a>');
 
-                    tweet.text = tweet.text.replace(/(@[^ ]+)/g, '<a class="user">$1</a>').
-                              replace(/(#[^ ]+)/g, '<span class="hash">$1</span>');
                     $scope.tweets.push(tweet);
                 });
             }

@@ -64,6 +64,6 @@
         img(src='assets/twitter-icon.png')
       .tweet
         .content
-          p(ng-bind-html='tweetAsHtml(tweet.text)')
+          p(ng-bind-html="trustAsHtml(tweet.text)")
         .date-posted
           p {{tweet.created_at}}
