@@ -10,6 +10,20 @@ Client-facing website to display our work and describe who we are as a company, 
 1. Check that you are on the master branch using `git status`.
 1. Run `npm install` to install project dependencies.
 
+### Configuration
+Create a .env file at the root of the application and make sure to fill in the following configs
+
+    PORT = <?>
+    DATABASE_URL = <?>
+    SUPERSECRET = <?>
+    CLOUDINARY_CLOUD_NAME = <?>
+    CLOUDINARY_API_KEY =  <?>
+    CLOUDINARY_API_SECRET =  <?>
+    TWITTER_BEARER_TOKEN = <?>
+    GOGGLE_CLIENT_ID = <?>
+    GOGGLE_CLIENT_SECRET = <?>
+    GOOGLE_CALLBACKURL = <?>
+
 ### Data Importation
 
 To import the data run the following command.

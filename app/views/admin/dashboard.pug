@@ -5,10 +5,11 @@
     .buttons-container
       button(ui-sref='admin.dashboard.testimonials') Testimonials
       button(ui-sref='admin.dashboard.projects') All Projects
-      //button(ng-click='fetchFeaturedProjects()') Featured Projects
+      //button(ng-click='logout()') Featured Projects
       button(ui-sref='admin.dashboard.team') Team
       button(ui-sref='admin.dashboard.why-nijel') Why NiJeL
       button(ui-sref='admin.dashboard.processes') Processes
       button(ui-sref='admin.dashboard.services') Services
+      button(ng-click='logout()') Logout
   section
     div.ui-view

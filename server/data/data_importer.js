@@ -28,10 +28,10 @@ function import_csv_data(local_file_path, headers, model, model_label) {
     }).on("end", function () {
         model.remove({}, function (err) {
             if (err) throw err;
-        });
-        model.create(data, function (err) {
+        }).then(model.create(data, function (err) {
             if (err) throw err;
-        });
+        }));
+
         console.info('Successfully imported ' + data.length + ' ' + model_label);
     });
 }
@@ -42,10 +42,10 @@ function import_csv_data(local_file_path, headers, model, model_label) {
 function run_data_import() {
     console.log(configs.DATABASE_URL);
     mongoose_connector.connect(configs.DATABASE_URL);
-    // import_csv_data("teams.csv", TEAM_HEADERS, team, 'Teams');
+    import_csv_data("teams.csv", TEAM_HEADERS, team, 'Teams');
     import_csv_data("projects.csv", PROJECTS_HEADERS, project, 'Projects');
-    // import_csv_data("whynijels.csv", WHYNIJEL_HEADERS, why_nijel, 'Why Nijel');
-    // import_csv_data("testimonials.csv", TESTIMONIAL_HEADERS, testimonials, 'Testimonials');
+    import_csv_data("whynijels.csv", WHYNIJEL_HEADERS, why_nijel, 'Why Nijel');
+    import_csv_data("testimonials.csv", TESTIMONIAL_HEADERS, testimonials, 'Testimonials');
     // mongoose_connector.close();
 }
 
