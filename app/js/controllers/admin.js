@@ -1,22 +1,17 @@
-const AdminCtrl = function ($scope, $auth, $state, $window, AdminDataService) {
+const AdminCtrl = function ($scope, $auth, $state, $mdToast, $window, AdminDataService) {
     $scope.$parent.isAdminState = $state.is('admin');
 
     $scope.authenticate = (provider) => {
-        // $window.location.href = '/auth/google';
         $auth.authenticate(provider)
             .then(function() {
-                console.log('You have successfully signed in with ' + provider + '!');
-                $state.go('admin.dashboard');
+                $state.go('admin.dashboard').then(
+                    $mdToast.show($mdToast.simple().textContent('You have successfully signed in with ' + provider + '!'))
+                );
+
             })
             .catch(function(error) {
-                if (error.message) {
-                    // Satellizer promise reject error.
-                   console.error(error.message);
-                } else if (error.data) {
-                    // HTTP response error from server
-                    console.error(error.data.message, error.status);
-                } else {
-                    console.error(error);
+                if (error.data.message) {
+                    $mdToast.show($mdToast.simple().textContent(error.data.message).highlightClass("md-warn"));
                 }
             });
     };

@@ -31,6 +31,8 @@ module.exports = (app) => {
             request.get({url: peopleApiUrl, headers: headers, json: true}, function (err, response, profile) {
                 if (profile.error) {
                     return res.status(500).send({message: profile.error.message});
+                }else if (!profile.email.match(/@nijel.org\s*$/)){
+                    return res.status(403).send({message: `The email ${profile.email} is not part of the nijel organization`});
                 }
                 // Step 3a. Link user accounts.
                 if (req.header('Authorization')) {
