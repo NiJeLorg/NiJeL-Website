@@ -30,6 +30,8 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "cloudinary": "^1.9.0",
+    "compression": "^1.7.1",
+    "debug": "^3.1.0",
     "cookie-parser": "^1.4.3",
     "d3": "^4.9.1",
     "dotenv": "^4.0.0",
