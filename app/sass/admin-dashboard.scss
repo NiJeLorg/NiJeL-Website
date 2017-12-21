@@ -35,7 +35,15 @@ section {
     background: #F26648;
     box-sizing: border-box;
     padding: 4%;
-    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .nav-admin-logo {
+        width: 250px;
+        height: auto;
+        justify-content: center;
+    }
 }
 
 .logo-container {

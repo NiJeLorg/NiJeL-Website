@@ -7,7 +7,9 @@ import ngQuill from 'ng-quill';
 import angular from 'angular';
 import slugify from  './filters/slugify';
 import $ from 'jquery';
+import satellizer from 'satellizer';
 // import dataGrid from 'angular-data-grid';
+
 
 // import controllers
 import HomeCtrl from './controllers/home';
@@ -24,13 +26,14 @@ import AdminProcessCtrl from './controllers/admin/process';
 import AdminTestimonialCtrl from './controllers/admin/testimonial';
 import AdminWhyNijelCtrl from './controllers/admin/why-nijel';
 import AdminTeamCtrl from './controllers/admin/team';
+import AdminServiceCtrl from './controllers/admin/services';
 
 // import services
 import ClientDataService from './services/ClientDataService';
 import AdminDataService from './services/AdminDataService';
 
 
-const nijelApp = angular.module('nijelApp', [uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill, require('angular-material-data-table')]);
+const nijelApp = angular.module('nijelApp', [uiRouter, angularAria, angularAnimate, ngMaterial, ngFileUpload, ngQuill, require('angular-material-data-table'), satellizer]);
 
 nijelApp.filter('slugify', [slugify]);
 nijelApp.controller('TeamCtrl', TeamCtrl)
@@ -46,15 +49,40 @@ nijelApp.controller('TeamCtrl', TeamCtrl)
     .controller('AdminTestimonialCtrl', AdminTestimonialCtrl)
     .controller('AdminWhyNijelCtrl', AdminWhyNijelCtrl)
     .controller('AdminTeamCtrl', AdminTeamCtrl)
+    .controller('AdminServiceCtrl', AdminServiceCtrl)
     .controller('AdminDashboardCtrl', AdminDashboardCtrl)
     .factory('ClientDataService', ClientDataService)
     .factory('AdminDataService', AdminDataService);
 
 nijelApp.config(['$stateProvider', '$httpProvider',
-    '$urlRouterProvider', '$locationProvider', '$mdThemingProvider',
+    '$urlRouterProvider', '$locationProvider', '$mdThemingProvider','$authProvider',
 
     function ($stateProvider, $httpProvider, $urlRouterProvider,
-              $locationProvider, $mdThemingProvider) {
+              $locationProvider, $mdThemingProvider, $authProvider) {
+
+
+        /**
+         * Helper auth functions
+         */
+        let skipIfLoggedIn = ['$q', '$auth','$state', function($q, $auth,$state) {
+            let deferred = $q.defer();
+            if ($auth.isAuthenticated()) {
+                $state.go('admin.dashboard');
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise;
+        }];
+
+        let loginRequired = ['$q', '$auth','$state', function($q, $auth, $state) {
+            let deferred = $q.defer();
+            if ($auth.isAuthenticated()) {
+                deferred.resolve();
+            } else {
+                $state.go('admin.authenticate');
+            }
+            return deferred.promise;
+        }];
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise('/');
@@ -62,8 +90,19 @@ nijelApp.config(['$stateProvider', '$httpProvider',
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
             .accentPalette('pink');
+        $authProvider.google({
+            clientId: '261811817799-7v2f4or792sv94rl8rjrn85e853334st.apps.googleusercontent.com',
+            redirectUri: window.location.origin + '/admin/dashboard',
+            requiredUrlParams: ['scope'],
+            optionalUrlParams: ['display'],
+            scope: ['profile', 'email'],
+            scopePrefix: 'openid',
+            scopeDelimiter: ' ',
+            display: 'popup',
+            oauthType: '2.0',
+            popupOptions: { width: 452, height: 633 }
 
-
+        });
         $stateProvider
             .state('home', {
                 url: '/',
@@ -106,16 +145,23 @@ nijelApp.config(['$stateProvider', '$httpProvider',
                     'isAdmin': true
                 },
                 redirectTo: 'admin.authenticate'
+
             })
             .state('admin.authenticate', {
                 url: '/authenticate',
                 controller: 'AdminCtrl',
-                templateUrl: 'views/admin/auth.html'
+                templateUrl: 'views/admin/auth.html',
+                resolve: {
+                    skipIfLoggedIn: skipIfLoggedIn
+                }
             })
             .state('admin.dashboard', {
                 url: '/dashboard',
                 controller: 'AdminDashboardCtrl',
-                templateUrl: 'views/admin/dashboard.html'
+                templateUrl: 'views/admin/dashboard.html',
+                resolve: {
+                    loginRequired: loginRequired
+                }
             })
             .state('admin.dashboard.projects', {
                 url: '/projects',
@@ -141,12 +187,14 @@ nijelApp.config(['$stateProvider', '$httpProvider',
                 url: '/testimonials',
                 controller: 'AdminTestimonialCtrl',
                 templateUrl: 'views/admin/testimonials.html',
+            })
+            .state('admin.dashboard.services', {
+                url: '/services',
+                controller: 'AdminServiceCtrl',
+                templateUrl: 'views/admin/services.html',
             });
 
         $locationProvider.html5Mode(true);
-
-        $httpProvider.defaults.headers.common['x-access-token'] = localStorage.token;
-
     }
 ]).run(['$state', '$transitions', '$rootScope', ($state, $transitions, $rootScope) => {
     $transitions.onStart({}, function ($transition) {
@@ -180,5 +228,4 @@ if (localStorage.navbarToggle) {
             'display': 'none'
         });
     });
-
 }
