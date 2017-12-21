@@ -90,7 +90,6 @@ nijelApp.config(['$stateProvider', '$httpProvider',
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
             .accentPalette('pink');
-        $authProvider.baseUrl = 'http://localhost:3000';
         $authProvider.google({
             clientId: '261811817799-7v2f4or792sv94rl8rjrn85e853334st.apps.googleusercontent.com',
             redirectUri: window.location.origin + '/admin/dashboard',
