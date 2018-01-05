@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 const HomeCtrl = function($scope, ClientDataService, $document) {
 
-    $scope.isAdminState = false;
+    $scope.tab = 'our-process';
 
     let testimonialIndex;
     $scope.tweets = [];
@@ -50,6 +50,8 @@ const HomeCtrl = function($scope, ClientDataService, $document) {
             console.log(err, 'ERR');
         });
 
+    
+        
 
     $(window).scroll((e) => {
         if ($(document).scrollTop() >= 80) {
