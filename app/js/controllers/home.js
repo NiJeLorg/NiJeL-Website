@@ -3,7 +3,8 @@ import $ from 'jquery';
 
 
 const HomeCtrl = function($scope, ClientDataService, $document) {
-
+    
+    $scope.isAdminState = false;
     $scope.tab = 'our-process';
 
     let testimonialIndex;
