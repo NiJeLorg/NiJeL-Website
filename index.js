@@ -1,5 +1,5 @@
 'use strict';
-var env = process.env.NODE_ENV || 'development';
+let env = process.env.NODE_ENV || 'development';
 if (env === 'development') {
     require('dotenv').load();
 }
@@ -8,28 +8,28 @@ const morgan = require('morgan'),
     express = require('express'),
     methodOverride = require('method-override'),
     bodyParser = require('body-parser'),
-    multer = require('multer'),
-    request = require('request'),
     favicon = require('serve-favicon'),
     path = require('path'),
+    compression = require('compression'),
+    cookieParser = require('cookie-parser'),
     apiRouter = require('./server/apiRouter'),
     publicRoutes = require('./server/routes/public'),
-    cloudinary = require('cloudinary'),
     authenticatedRoutes = require('./server/routes/authenticated'),
-    auth = require('./server/controllers/auth'),
+    cloudinary = require('cloudinary'),
+    session = require('express-session'),
     c = console,
+    debug = require('debug'),
     nijelApp = express(),
+    mongoose = require('mongoose'),
     port = process.env.PORT;
 
-let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-
 mongoose.connect(process.env.DATABASE_URL, {
     useMongoClient: true
 }).then(() => {
-    console.log('successful connection to the DB');
+    debug('successful connection to the DB');
 }, (err) => {
-    console.log(err, 'ERR');
+    debug(err, 'ERR');
 });
 
 cloudinary.config({
@@ -38,23 +38,28 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-
 // log all reques to the console
+nijelApp.use(compression());
 nijelApp.use(morgan('dev'));
 
 
-nijelApp.use(methodOverride('X-HTTP-Method-Override'));
+nijelApp.use(session({
+    secret: process.env.SUPERSECRET,
+    resave: true,
+    saveUninitialized: true
+}));
 
+nijelApp.use(cookieParser());
+
+nijelApp.use(methodOverride());
 
 nijelApp.use(bodyParser.urlencoded({
     extended: true,
     limit: '500mb',
     parameterLimit: 5000
 }));
-nijelApp.use(bodyParser.json({
-    limit: '500mb'
-}));
 
+nijelApp.use(bodyParser.json({limit: '500mb'}));
 
 // serve static files
 nijelApp.use(express.static(path.resolve('./public')));
@@ -62,13 +67,14 @@ nijelApp.use(express.static(path.resolve('./public')));
 // serve favicon
 nijelApp.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')));
 
+// Add google auth routes
+require('./server/routes/auth')(nijelApp);
+
 // api Router for all api requests
 nijelApp.use('/api', apiRouter);
 
 // call other routes
 publicRoutes();
-
-apiRouter.use(auth.authenticateUser);
 
 authenticatedRoutes();
 
@@ -81,5 +87,5 @@ nijelApp.get('*', (req, res) => {
 
 // start the server
 nijelApp.listen(port || 3000, () => {
-    c.log('server running on port ' + port);
+    debug('server running on port ' + port);
 });
