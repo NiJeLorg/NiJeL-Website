@@ -5,11 +5,11 @@ import $ from 'jquery';
 const HomeCtrl = function($scope, ClientDataService, $document, $sce) {
 
     $scope.isAdminState = false;
+    $scope.processTab = 'our-process';
     $scope.targetAttr = "";
     $scope.trustAsHtml = (text) => {
         return $sce.trustAsHtml(text);
     }
-
 
     let testimonialIndex;
     $scope.tweets = [];
@@ -59,6 +59,8 @@ const HomeCtrl = function($scope, ClientDataService, $document, $sce) {
             console.log(err, 'ERR');
         });
 
+    
+        
 
     $(window).scroll((e) => {
         if ($(document).scrollTop() >= 80) {
