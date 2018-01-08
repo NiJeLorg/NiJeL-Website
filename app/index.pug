@@ -4,7 +4,7 @@ html
     div(class="box")
       div(ng-if ="!isAdminState", class="row header")
         include shared-views/nav
-      div(ng-class="!isAdminState ? 'main' : ''")
+      div(ng-class="!isAdminState ? 'main' : ''", class="container")
         ui-view(class='main-view' ng-cloak)
           div(ngif="!isAdminState")
           include shared-views/footer
