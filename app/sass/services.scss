@@ -1,0 +1,13 @@
+.services-view {
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 30px;
+    md-tabs md-ink-bar {
+        background: #f2654e;
+    }
+    md-content {
+        h1 {
+            font-family: 'La Belle Aurore', cursive;
+        }
+    }
+}

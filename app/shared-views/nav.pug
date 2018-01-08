@@ -8,7 +8,7 @@ nav.main-nav(ng-controller='NavCtrl')
       md-menu-content(flex)
         md-menu-item(ng-repeat="title in titles")
           md-button(ui-sref="why-nijel({tab: '{{title | slugify}}'})") {{title}}
-    md-menu()
+    md-menu
       a(ng-click='$mdMenu.open($event)') Services
       md-menu-content(flex)
         md-menu-item(ng-repeat="serviceTitle in serviceTitles")

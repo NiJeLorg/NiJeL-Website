@@ -1,2 +1,6 @@
-//- .services-view
-//-     md-tabs
+.services-view
+  md-tabs( md-dynamic-height md-border-bottom md-no-pagination="true")
+    md-tab(ng-repeat="service in services" label='{{service.title}}' md-active="isActive(service.title | slugify)"  id="{{service.title | slugify}}")
+     md-content.md-padding
+        h1.md-display-2 {{service.title}}
+        p(ng-bind-html='trustAsHtml(service.description)')

@@ -140,7 +140,7 @@ nijelApp.config(['$stateProvider', '$httpProvider',
             .state('services', {
                 url: '/services/{serviceTab}',
                 controller: 'ServicesCtrl',
-                templateUrl: 'views/serviceshtml'
+                templateUrl: 'views/services.html'
             })
             .state('404', {
                 url: '/404',
