@@ -1,8 +1,9 @@
-.why-nijel-view
-  md-tabs(md-dynamic-height md-border-bottom)
-     md-tab(label='{{section.title}}' md-active="isActive(section.title | slugify)"  id="{{section.title | slugify}}" ng-repeat='section in sections')
-       md-content.md-padding
-         h1.md-display-2 {{section.title}}
-         .image-container
-            img(src='assets/mapdots.png')
-         p(ng-bind-html='trustAsHtml(section.text)')
+div.container
+    .why-nijel-view
+      md-tabs(md-dynamic-height md-border-bottom)
+         md-tab(label='{{section.title}}' md-active="isActive(section.title | slugify)"  id="{{section.title | slugify}}" ng-repeat='section in sections')
+           md-content.md-padding
+             h1.md-display-2 {{section.title}}
+             .image-container
+                img(src='assets/mapdots.png')
+             p(ng-bind-html='trustAsHtml(section.text)')

@@ -1,5 +1,6 @@
 .featured-projects-view {
-    background: #F8F5EF;
+    display: flex;
+    flex-direction: column;
     h1 {
         font-family: 'La Belle Aurore';
         font-size: 48px;
@@ -15,8 +16,6 @@
         padding: 40px 0;
         section {
             display: flex;
-            width: 80%;
-            margin: 0 auto;
             .projects-container {
                 flex-basis: 33.33%;
             }
@@ -27,10 +26,8 @@
         }
     }
     #toolbar {
-        position: relative;
-        left: 80px;
+        display: flex;
         a {
-            display: inline-block;
             background: #17152c;
             color: #fff;
             padding: 10px;

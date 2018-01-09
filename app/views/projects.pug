@@ -1,23 +1,24 @@
-.featured-projects-view
-  h1.view-title Our Projects
-  #toolbar
-    a(href='#' id='all' class='button active') All Projects
-    a(href='#' id='year' class='button') Projects By Year
-  .projects-holder
-  .list-projects
-    section
-      .projects-container
-        h2 2008 - 2010
-        p(ng-repeat='project in earlyProjects') 
-          a(ui-sref="project({id: project._id})") {{project.name}}
-      .projects-container
-        h2 2011 - 2014
-        p(ng-repeat='project in midProjects')
-          a(ui-sref="project({id: project._id})") {{project.name}}
-      .projects-container
-        h2 2015 - 2017
-        p(ng-repeat='project in lateProjects')
-          a(ui-sref="project({id: project._id})") {{project.name}}
+div.container
+  .featured-projects-view
+    h1.view-title Our Projects
+    #toolbar
+      a(href='#' id='all' class='button active') All Projects
+      a(href='#' id='year' class='button') Projects By Year
+    .projects-holder
+    .list-projects
+      section
+        .projects-container
+          h2 2008 - 2010
+          p(ng-repeat='project in earlyProjects')
+            a(ui-sref="project({id: project._id})") {{project.name}}
+        .projects-container
+          h2 2011 - 2014
+          p(ng-repeat='project in midProjects')
+            a(ui-sref="project({id: project._id})") {{project.name}}
+        .projects-container
+          h2 2015 - 2017
+          p(ng-repeat='project in lateProjects')
+            a(ui-sref="project({id: project._id})") {{project.name}}
 
 
 
