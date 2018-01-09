@@ -55,6 +55,13 @@ const ClientDataService = function ($http, $q) {
                 url: '/api/processes'
             });
         },
+
+        fetchServices: () => {
+            return $http({
+                method: 'GET',
+                url: '/api/services'
+            });
+        },
     };
 };
 

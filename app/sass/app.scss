@@ -102,6 +102,7 @@ p {
     transition: height 400ms;
     -webkit-transition: height 400ms;
     z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 12px 0px !important;
     .nav-logo {
         width: 160px;
         height: auto;
@@ -114,11 +115,7 @@ p {
         transition: opacity 400ms;
         -webkit-transition: opacity 400ms;
     }
-    .nav-admin-logo {
-        width: 160px;
-        height: auto;
-        justify-content: center;
-    }
+        
 }
 
 .nav-links {

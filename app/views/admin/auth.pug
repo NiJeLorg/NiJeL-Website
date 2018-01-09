@@ -1,21 +1,9 @@
 .center-child-horizontal
     img.nav-logo(src='assets/NijelLogo.svg')
 .admin-view
-    .sub-view
-        .form-container
-            h2 SIGN-UP
-            form(ng-submit='signup(signupUser)')
-                input(type="text" placeholder='E-mail' ng-model='signupUser.email' required)
-                input(type='password' ng-model='signupUser.password' placeholder='Password' required)
-                input(type='password' ng-model='signupUser.confirmPassword' placeholder='Confirm Password' required)
-                input(type="submit")
-                p(ng-model='signupErrorMessage' ng-show='signupErrorMessage') {{signupErrorMessage}}
-
-    .sub-view
-        .form-container
-            h2 LOGIN
-            form(ng-submit='login(loginUser)')
-                input(type="text" placeholder='E-mail' ng-model='loginUser.email' required)
-                input(type='password' placeholder='Password' ng-model='loginUser.password' required)
-                input(type="submit")
-                p(ng-model='loginErrorMessage' ng-show='loginErrorMessage') {{loginErrorMessage}}
+  a.login-button(href='#' ng-click="authenticate('google')")
+    span.login-icon
+      span.logo
+        img(src='assets/google.png')
+    span.login-text
+      span SIGN IN WITH GOOGLE

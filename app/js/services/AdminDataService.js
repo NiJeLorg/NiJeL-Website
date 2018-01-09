@@ -3,11 +3,8 @@
 const AdminDataService = function ($http, $q)  {
 
     return {
-        signup(user) {
-            return $http.post('/api/users', user);
-        },
-        login(user) {
-            return $http.post('/api/login', user);
+        login() {
+            return $http.get('/auth/google');
         },
         createNewTestimonial(testimonial) {
             return $http.post('/api/testimonials', testimonial);
@@ -24,6 +21,9 @@ const AdminDataService = function ($http, $q)  {
         createNewProcessSection(section) {
             return $http.post('/api/processes', section);
         },
+        createNewService(service) {
+            return $http.post('/api/services', service);
+        },
         deleteTestimonial(testimonial) {
             return $http.delete(('/api/testimonials/' + testimonial._id));
         },
@@ -39,6 +39,9 @@ const AdminDataService = function ($http, $q)  {
         deleteTeamMember(teamMember) {
             return $http.delete(('/api/team/' + teamMember._id));
         },
+        deleteService(service) {
+            return $http.delete(('/api/services/' + service._id));
+        },
         updateTestimonial(testimonial) {
             return $http.put(('/api/testimonials/' + testimonial._id), testimonial);
         },
@@ -50,6 +53,12 @@ const AdminDataService = function ($http, $q)  {
         },
         updateTeamMember(teamMember) {
             return $http.put(('/api/team/' + teamMember._id), teamMember);
+        },
+        updateProcessSection(section) {
+            return $http.put(('/api/processes/' + section._id), section);
+        },
+        updateService(service) {
+            return $http.put(('/api/services/' + service._id), service);
         }
     };
 };

@@ -5,7 +5,7 @@
       h2.title Our Process...
       p  starts with a thorough assessment of how your organization works and communicates. We listen to our partners, working directly with organizational staff to get a deep understanding of their current data situation and future data and application needs. We call this process "data therapy," and it is critical to determining what technologies would be useful and appropriate for your organization.
       .read-more-container
-        button.read-more(ui-sref='why-nijel') Read More
+        button.read-more(ui-sref='why-nijel({tab: processTab})') Read More
     img(src="assets/NIJEL_CORE_AREAS.svg", alt="NiJeL Core Areas")
   .work-section.section
     h2.title Our Work...
@@ -64,6 +64,6 @@
         img(src='assets/twitter-icon.png')
       .tweet
         .content
-          p {{tweet.text}}
+          p(ng-bind-html="trustAsHtml(tweet.text)")
         .date-posted
           p {{tweet.created_at}}
