@@ -12,6 +12,17 @@ const NavCtrl = function ($scope, ClientDataService, $sce) {
         }, (err) => {
             console.error(err, 'ERROR');
         });
+    
+    ClientDataService.fetchServices()
+        .then((resp)=> {
+            $scope.serviceTitles = [];
+            resp.data.services.forEach( (service) => {
+                $scope.serviceTitles.push(service.title)
+            });
+        }, (err) => {
+            console.error(err, 'ERROR')
+        });
+
 };
 
 export default NavCtrl;

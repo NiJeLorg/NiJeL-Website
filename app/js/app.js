@@ -19,6 +19,7 @@ import ProjectsCtrl from './controllers/projects';
 import ProjectCtrl from './controllers/project';
 import ContactUsCtrl from './controllers/contacts';
 import WhyNijelCtrl from './controllers/why-nijel';
+import ServicesCtrl from './controllers/services';
 import AdminCtrl from './controllers/admin';
 import NavCtrl from './controllers/nav';
 import AdminDashboardCtrl from './controllers/admin-dashboard';
@@ -44,6 +45,7 @@ nijelApp.controller('TeamCtrl', TeamCtrl)
     .controller('ProjectCtrl', ProjectCtrl)
     .controller('ContactUsCtrl', ContactUsCtrl)
     .controller('WhyNijelCtrl', WhyNijelCtrl)
+    .controller('ServicesCtrl', ServicesCtrl)
     .controller('AdminCtrl', AdminCtrl)
     .controller('AdminProjectCtrl', AdminProjectCtrl)
     .controller('AdminProcessCtrl', AdminProcessCtrl)
@@ -134,6 +136,11 @@ nijelApp.config(['$stateProvider', '$httpProvider',
                 url: '/contact-us',
                 controller: 'ContactUsCtrl',
                 templateUrl: 'views/contact-us.html'
+            })
+            .state('services', {
+                url: '/services/{serviceTab}',
+                controller: 'ServicesCtrl',
+                templateUrl: 'views/services.html'
             })
             .state('404', {
                 url: '/404',
